@@ -1,1 +1,2 @@
-export * from './ping.controller';
+export * from './property.controller';
+export * from './comment.controller';
