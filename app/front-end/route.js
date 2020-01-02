@@ -8,4 +8,8 @@ const userValidate = require("./user/validate");
 
 router.post("/login", userValidate.login, user.login);
 
+// city
+const city = require("./city");
+router.get("/city", city.list);
+
 module.exports = router;

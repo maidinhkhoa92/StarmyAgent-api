@@ -3,23 +3,11 @@ const timestamp = require("mongoose-timestamp-plugin");
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-  email: {
+  name: {
     type: String,
-    unique: true
+    required: true
   },
-  password: String,
-  type: {
-    type: String,
-    enum: ["agent", "agency"],
-    required: true,
-    default: "agent"
-  },
-  agent: [{ type: Schema.Types.ObjectId, ref: "user" }],
-  status: {
-    type: Boolean,
-    required: true,
-    default: true
-  }
+  banner: String
 });
 
 schema.plugin(timestamp, {
@@ -29,6 +17,4 @@ schema.plugin(timestamp, {
   disableUpdated: false
 });
 
-const user = mongoose.model("user", schema);
-
-module.exports = user;
+module.exports = mongoose.model("city", schema);
