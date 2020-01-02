@@ -1,19 +1,24 @@
-'use strict';
+"use strict";
 
 // Dependencies
-const Mongoose = require('mongoose');
+const Mongoose = require("mongoose");
 
 // Configurations
-const parameters = require('./parameters.json');
+const APP_CONFIG = require("./APP_CONFIG");
 
-Mongoose.connect(`mongodb://${parameters.database.username}:${parameters.database.password}@cluster0-shard-00-00-0mjj1.mongodb.net:27017,cluster0-shard-00-01-0mjj1.mongodb.net:27017,cluster0-shard-00-02-0mjj1.mongodb.net:27017/${parameters.database.db}?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`,{
-  useMongoClient: true
-});
+Mongoose.connect(
+  `mongodb+srv://${APP_CONFIG.database.username}:${APP_CONFIG.database.password}@${APP_CONFIG.database.host}/${APP_CONFIG.database.db}?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  }
+);
 
 const db = Mongoose.connection;
-db.on('error', console.error.bind(console, 'Connection error'));
-db.once('open', () => {
-  console.log('Connection with database succeeded');
+db.on("error", console.error.bind(console, "Connection error"));
+db.once("open", () => {
+  console.log("Connection with database succeeded");
 });
 
 module.exports = db;

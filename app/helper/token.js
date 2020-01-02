@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const error = require('./error');
+const APP_CONFIG = require('../config/APP_CONFIG');
+const ERRORS = require('../config/ERRORS');
 
 module.exports = function (req, res, next) {
   var token = req.headers['x-access-token'] || req.headers['authorization'];
@@ -8,15 +9,15 @@ module.exports = function (req, res, next) {
     if (token.startsWith('Bearer ')) {
       token = token.slice(7, token.length);
     }
-    jwt.verify(token, 'token_token_miracles', function (err, decoded) {
+    jwt.verify(token, APP_CONFIG.token, function (err, decoded) {
       if (err) {
-        error(res.boom, { code: 9998 });
+        res.status(403).send({ msg: ERRORS[9998] });
       } else {
         req.decoded = decoded;
         next();
       }
     });
   } else {
-    error(res.boom, { code: 9997 });
+    res.status(403).send({ msg: ERRORS[9997] });
   }
 }

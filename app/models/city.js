@@ -8,34 +8,18 @@ const schema = new Schema({
     unique: true
   },
   password: String,
-  fname: String,
-  lName: String,
-  telephone: String,
-  agents: [{ type: Schema.Types.ObjectId, ref: "user" }],
-  city: { type: Schema.Types.ObjectId, ref: "city" },
-  card: {
-    type: String,
-    number: Number,
-    expired: String,
-    code: Number
-  },
-  company: {
-    owner: String,
-    name: String,
-    numberAgent: Number
-  },
   type: {
     type: String,
     enum: ["agent", "agency"],
     required: true,
     default: "agent"
   },
+  agent: [{ type: Schema.Types.ObjectId, ref: "user" }],
   status: {
     type: Boolean,
     required: true,
     default: true
-  },
-
+  }
 });
 
 schema.plugin(timestamp, {
@@ -45,4 +29,6 @@ schema.plugin(timestamp, {
   disableUpdated: false
 });
 
-module.exports = mongoose.model("user", schema);
+const user = mongoose.model("user", schema);
+
+module.exports = user;

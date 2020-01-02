@@ -1,23 +1,11 @@
-const error = require('./error.json');
-module.exports = function (boom, Error) {
-  switch (Error.code) {
-    case 11000:
-      const message = error[duplicator(Error.message)]
-      boom.conflict(message);
-      break;
-    default:
-      const result = error[Error.code];
-      boom[result.method](result.msg);
-      break;
-  }
-}
+const ERRORS = require('../config/ERRORS');
 
-const duplicator = (error_message) => {
-  if (error_message.includes("username_1")) {
-    return 1;
-  }
-  if (error_message.includes("email_1")) {
-    return 1;
-  }
-  return 0;
+module.exports = (err, req, res, next) => {
+    let code = 99999;
+
+    if( err.code ) {
+        code = err.code
+    }
+
+    res.status(400).send({msg: ERRORS[code]})
 }
