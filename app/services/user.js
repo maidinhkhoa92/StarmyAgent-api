@@ -19,7 +19,7 @@ const register = body => {
         subject: "Your new account",
         text: "Your link: " + APP_CONFIG.registerWebAppUrl
       };
-      transporter.sendMail(mailOptions, function(error, info) {
+      transporter.sendMail(mailOptions, function(error) {
         if (err) {
           reject(error);
           return;
@@ -71,7 +71,7 @@ const login = (email, password) => {
         });
       })
       .catch(() => {
-        res.status(403).send({ msg: ERRORS[9999] });
+        reject({ msg: ERRORS[9999] });
       });
   });
 };

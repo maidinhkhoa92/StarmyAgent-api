@@ -3,35 +3,24 @@ const timestamp = require('mongoose-timestamp-plugin');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-	email: {
+	title: {
 		type: String,
-		unique: true
+		required: true
 	},
-	password: String,
-	digit: Array,
-	typeOfUser: {
+	description: String,
+	date: Date,
+	lName: String,
+	fName: String,
+	agent: { type: Schema.Types.ObjectId, ref: "user" },
+	property: { type: Schema.Types.ObjectId, ref: "property" },
+	rate: {
+		sum: Number,
+		options: Array
+	},
+	type: {
 		type: String,
-		enum: ['director', 'staff', 'family'],
-		required: true,
-		default: 'family',
-	},
-	active: {
-		type: String,
-		enum: ['Pass confirmed', 'Digit confirmed', 'New'],
-		required: true,
-		default: 'New',
-	},
-	profile: Object,
-	directorId: { type: Schema.Types.ObjectId, ref: 'user' },
-	status: {
-		type: Boolean,
-		required: true,
-		default: true,
-	},
-	completed: {
-		type: Boolean,
-		required: true,
-		default: false,
+		enum: ['Seller', 'Buyer', 'Renter', 'Tenant'],
+		required: true
 	},
 })
 

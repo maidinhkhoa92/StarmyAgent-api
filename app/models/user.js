@@ -35,7 +35,15 @@ const schema = new Schema({
     required: true,
     default: true
   },
-
+  banner: String,
+  photo: String,
+  social: {
+    website: String,
+    facebook: String,
+    linkedin: String,
+    twitter: String,
+    youtube: String
+  }
 });
 
 schema.plugin(timestamp, {

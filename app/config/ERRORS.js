@@ -13,5 +13,6 @@ module.exports = {
   "9998": "Token is not valid",
   "9999": "Nombre de usuario o contraseña incorrecta",
   "10000": "No data",
+  "11000": "This account exists",
   "99999": "Not Found"
 };

@@ -7,6 +7,7 @@ const user = require("./user");
 const userValidate = require("./user/validate");
 
 router.post("/login", userValidate.login, user.login);
+router.post("/agency/register", userValidate.registerAgency, user.register);
 
 // city
 const city = require("./city");

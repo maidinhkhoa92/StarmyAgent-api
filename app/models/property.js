@@ -7,12 +7,19 @@ const schema = new Schema({
     type: String,
     required: true
   },
+  description: String,
+  price: Number,
   type: {
     type: String,
     enum: ["rent", "sale"],
     required: true,
     default: "rent"
-  }
+  },
+  bedRoom: Number,
+  bathRoom: Number,
+  area: Number,
+  city: { type: Schema.Types.ObjectId, ref: "city" },
+  district: Number
 });
 
 schema.plugin(timestamp, {
