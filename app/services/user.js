@@ -8,6 +8,9 @@ const APP_CONFIG = require("../config/APP_CONFIG");
 
 const register = body => {
   return new Promise((resolve, reject) => {
+    if (body.password) {
+      body.password = bcrypt.hashSync(body.password, bcrypt.genSaltSync(8), null);
+    }
     user.create(body, function(err, data) {
       if (err) {
         reject(err);
@@ -45,7 +48,12 @@ const login = (email, password) => {
           return;
         }
 
-        if (User.status === false) {
+        if (!User.status) {
+          reject({ code: 6 });
+          return;
+        }
+
+        if (User.disabled) {
           reject({ code: 6 });
           return;
         }
@@ -75,6 +83,8 @@ const login = (email, password) => {
       });
   });
 };
+
+
 
 const convertData = (data, password = true) => {
   var result = data;

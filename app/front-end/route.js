@@ -7,7 +7,12 @@ const user = require("./user");
 const userValidate = require("./user/validate");
 
 router.post("/login", userValidate.login, user.login);
+// agency interface
 router.post("/agency/register", userValidate.registerAgency, user.register);
+router.post("/agency/agent", userValidate.addingAgent, user.register);
+
+// agent interface
+router.post("/agent/register", userValidate.registerAgent, user.register);
 
 // city
 const city = require("./city");

@@ -8,10 +8,10 @@ const schema = new Schema({
     unique: true
   },
   password: String,
-  fname: String,
+  fName: String,
   lName: String,
   telephone: String,
-  agents: [{ type: Schema.Types.ObjectId, ref: "user" }],
+  agency: { type: Schema.Types.ObjectId, ref: "user" },
   city: { type: Schema.Types.ObjectId, ref: "city" },
   card: {
     type: String,
@@ -43,7 +43,12 @@ const schema = new Schema({
     linkedin: String,
     twitter: String,
     youtube: String
-  }
+  },
+  disabled: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
 });
 
 schema.plugin(timestamp, {

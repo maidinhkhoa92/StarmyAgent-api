@@ -5,6 +5,7 @@ module.exports.login = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(401).send({ errors: errors.array() });
+    return;
   }
 
   const { email, password } = req.body;
@@ -17,9 +18,11 @@ module.exports.login = async (req, res, next) => {
 };
 
 module.exports.register = async (req, res, next) => {
+  console.log(req.body)
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(401).send({ errors: errors.array() });
+    return;
   }
 
   try {

@@ -6,6 +6,6 @@ module.exports = (err, req, res, next) => {
     if( err.code ) {
         code = err.code
     }
-
+    console.log(err)
     res.status(400).send({msg: ERRORS[code]})
 }
