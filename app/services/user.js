@@ -5,11 +5,16 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const transporter = require("../helper/nodemailer");
 const APP_CONFIG = require("../config/APP_CONFIG");
+const _ = require("lodash");
 
 const register = body => {
   return new Promise((resolve, reject) => {
     if (body.password) {
-      body.password = bcrypt.hashSync(body.password, bcrypt.genSaltSync(8), null);
+      body.password = bcrypt.hashSync(
+        body.password,
+        bcrypt.genSaltSync(8),
+        null
+      );
     }
     user.create(body, function(err, data) {
       if (err) {
@@ -84,7 +89,60 @@ const login = (email, password) => {
   });
 };
 
+const update = (id, body) => {
+  return new Promise((resolve, reject) => {
+    const query = {
+      _id: id
+    };
+    if (body.password) {
+      body.password = bcrypt.hashSync(
+        body.password,
+        bcrypt.genSaltSync(8),
+        null
+      );
+    }
+    user.findOneAndUpdate(query, body, { new: true }, function(err, data) {
+      if (err) {
+        reject(err);
+      }
 
+      resolve(convertData(data));
+    });
+  });
+};
+
+const list = (searchQuery, paged, limit) => {
+  return new Promise((resolve, reject) => {
+    let options = {};
+
+    if (limit) {
+      limit = parseInt(limit);
+      options.limit = limit;
+    }
+
+    if (paged) {
+      limit = parseInt(paged);
+      options.page = paged;
+    }
+
+    user.paginate(searchQuery, options, (err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      if (result.docs === null) {
+        reject({ code: 10000 });
+        return;
+      }
+      resolve({
+        ...result,
+        docs: _.map(result.docs, item => {
+          return convertData(item);
+        })
+      });
+    });
+  });
+};
 
 const convertData = (data, password = true) => {
   var result = data;
@@ -105,5 +163,7 @@ const convertData = (data, password = true) => {
 
 module.exports = {
   register,
-  login
+  login,
+  update,
+  list
 };

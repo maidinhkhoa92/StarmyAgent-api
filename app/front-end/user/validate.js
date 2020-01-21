@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, query } = require("express-validator");
 
 module.exports.login = [
   body("email")
@@ -125,3 +125,35 @@ module.exports.registerAgent = [
     .equals("agent")
     .withMessage("This user must be agent")
 ];
+
+module.exports.changeAgentStatus = [
+  body("disabled")
+    .isIn([false, true])
+    .not()
+    .isEmpty()
+    .withMessage("Status is required"),
+];
+
+module.exports.updateAgent = [
+  body("fName")
+    .not()
+    .isEmpty()
+    .withMessage("First name is required"),
+  body("lName")
+    .not()
+    .isEmpty()
+    .withMessage("Last name is required"),
+  body("telephone")
+    .not()
+    .isEmpty()
+    .withMessage("Telephone is required"),
+  body("email")
+    .isEmail()
+    .withMessage("Invalid format email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
+];
+
+module.exports.getAgent = [
+]

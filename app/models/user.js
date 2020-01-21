@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const timestamp = require("mongoose-timestamp-plugin");
+const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
@@ -56,6 +57,6 @@ schema.plugin(timestamp, {
   updatedName: "updated_at",
   disableCreated: false,
   disableUpdated: false
-});
+}).plugin(mongoosePaginate);
 
 module.exports = mongoose.model("user", schema);
