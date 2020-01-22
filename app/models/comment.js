@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const timestamp = require('mongoose-timestamp-plugin');
+const mongoosePaginate = require("mongoose-paginate-v2");
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
@@ -7,15 +8,15 @@ const schema = new Schema({
 		type: String,
 		required: true
 	},
-	description: String,
+	description: { type: String, default: ''},
 	date: Date,
-	lName: String,
-	fName: String,
+	lName: { type: String, default: ''},
+	fName: { type: String, default: ''},
 	agent: { type: Schema.Types.ObjectId, ref: "user" },
 	property: { type: Schema.Types.ObjectId, ref: "property" },
 	rate: {
 		sum: Number,
-		options: Array
+		options: { type: Array, default: [0,0,0,0,0]}
 	},
 	type: {
 		type: String,
@@ -29,7 +30,7 @@ schema.plugin(timestamp, {
 	updatedName: 'updated_at',
 	disableCreated: false,
 	disableUpdated: false
-});
+}).plugin(mongoosePaginate);
 
 const user = mongoose.model('comment', schema);
 
