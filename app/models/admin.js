@@ -42,6 +42,6 @@ schema.plugin(timestamp, {
 	disableUpdated: false
 });
 
-const user = mongoose.model('user', schema);
+const user = mongoose.model('admin', schema);
 
 module.exports = user;

@@ -64,7 +64,7 @@ module.exports.list = async (req, res, next) => {
         agency: id
       }
     }
-    console.log(id, type, paged, limit)
+    
     const data = await user.list(query, paged, limit);
     res.status(200).send(data);
   } catch (err) {

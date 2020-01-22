@@ -89,7 +89,7 @@ module.exports.addingAgent = [
     .isIn([false])
     .not()
     .isEmpty()
-    .withMessage("Status is required"),
+    .withMessage("Status is required")
 ];
 
 module.exports.registerAgent = [
@@ -129,9 +129,10 @@ module.exports.registerAgent = [
 module.exports.changeAgentStatus = [
   body("disabled")
     .isIn([false, true])
+    .withMessage("Disabled must be false or true")
     .not()
     .isEmpty()
-    .withMessage("Status is required"),
+    .withMessage("Status is required")
 ];
 
 module.exports.updateAgent = [
@@ -152,8 +153,51 @@ module.exports.updateAgent = [
     .withMessage("Invalid format email")
     .not()
     .isEmpty()
-    .withMessage("Email is required"),
+    .withMessage("Email is required")
 ];
 
-module.exports.getAgent = [
-]
+module.exports.getAgent = [];
+
+module.exports.agentAddCard = [
+  body("card.type")
+    .not()
+    .isEmpty()
+    .withMessage("Card type is required"),
+  body("card.number")
+    .not()
+    .isEmpty()
+    .withMessage("Number is required"),
+  body("card.expired")
+    .not()
+    .isEmpty()
+    .withMessage("Expired date is required"),
+  body("card.code")
+    .not()
+    .isEmpty()
+    .withMessage("Code is required")
+];
+
+module.exports.agentUpdating = [
+  body("agentCertificateDate")
+    .not()
+    .isEmpty()
+    .withMessage("Cert date is required"),
+  body("languages")
+    .isArray()
+    .withMessage("Languages must be array")
+    .not()
+    .isEmpty()
+    .withMessage("languages is required"),
+  body("services")
+    .isArray()
+    .withMessage("Services must be array")
+    .not()
+    .isEmpty()
+    .withMessage("Services is required"),
+  body("description").isString(),
+  body("social.website").isString(),
+  body("social.facebook").isString(),
+  body("social.linkedin").isString(),
+  body("social.twitter").isString(),
+  body("social.youtube").isString()
+];

@@ -16,11 +16,19 @@ router.get("/agency/agent", Token, userValidate.getAgent, user.list);
 
 // agent interface
 router.post("/agent/register", userValidate.registerAgent, user.register);
+router.patch("/agent/:id", Token, userValidate.agentAddCard, user.update);
+router.put("/agent/:id", Token, userValidate.agentUpdating, user.update);
 
 // Payment
 const payment = require("./payment");
 const paymentValidate = require("./payment/validate");
 router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payment.create);
+
+// Property
+const property = require("./property");
+const propertyValidate = require("./property/validate");
+router.post("/agency/property", Token, propertyValidate.create, property.create);
+router.get("/agency/property", Token, propertyValidate.get, property.list);
 
 // city
 const city = require("./city");

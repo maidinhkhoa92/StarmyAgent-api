@@ -101,6 +101,7 @@ const update = (id, body) => {
         null
       );
     }
+    
     user.findOneAndUpdate(query, body, { new: true }, function(err, data) {
       if (err) {
         reject(err);
