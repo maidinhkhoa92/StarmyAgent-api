@@ -8,7 +8,7 @@ const schema = new Schema({
     type: String,
     unique: true
   },
-  password: { type: String, required: true, default: "" },
+  password: { type: String, default: "" },
   fName: { type: String, default: "" },
   lName: { type: String, default: "" },
   telephone: { type: String, default: "" },
