@@ -194,6 +194,16 @@ module.exports.agentUpdating = [
     .not()
     .isEmpty()
     .withMessage("Services is required"),
+  body("email")
+    .isEmail()
+    .withMessage("Invalid email")
+    .not()
+    .isEmpty()
+    .withMessage("Telephone is required"),
+  body("telephone")
+    .not()
+    .isEmpty()
+    .withMessage("Telephone is required"),
   body("description").isString(),
   body("social.website").isString(),
   body("social.facebook").isString(),
