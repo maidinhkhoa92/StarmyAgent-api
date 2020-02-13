@@ -12,6 +12,7 @@ const schema = new Schema({
 	date: Date,
 	lName: { type: String, default: ''},
 	fName: { type: String, default: ''},
+	email: { type: String, default: ''},
 	agent: { type: Schema.Types.ObjectId, ref: "user" },
 	property: { type: Schema.Types.ObjectId, ref: "property" },
 	rate: {

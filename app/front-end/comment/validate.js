@@ -18,6 +18,10 @@ module.exports.create = [
     .not()
     .isEmpty()
     .withMessage("First name is required"),
+  body("email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
   body("agent")
     .not()
     .isEmpty()

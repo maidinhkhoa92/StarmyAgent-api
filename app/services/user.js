@@ -7,7 +7,7 @@ const transporter = require("../helper/nodemailer");
 const APP_CONFIG = require("../config/APP_CONFIG");
 const _ = require("lodash");
 
-const register = body => {
+module.exports.register = body => {
   return new Promise((resolve, reject) => {
     if (body.password) {
       body.password = bcrypt.hashSync(
@@ -39,7 +39,7 @@ const register = body => {
   });
 };
 
-const login = (email, password) => {
+module.exports.login = (email, password) => {
   return new Promise((resolve, reject) => {
     user
       .findOne({ email: email }, function(error, User) {
@@ -89,7 +89,7 @@ const login = (email, password) => {
   });
 };
 
-const update = (id, body) => {
+module.exports.update = (id, body) => {
   return new Promise((resolve, reject) => {
     const query = {
       _id: id
@@ -112,7 +112,7 @@ const update = (id, body) => {
   });
 };
 
-const list = (searchQuery, paged, limit) => {
+module.exports.list = (searchQuery, paged, limit) => {
   return new Promise((resolve, reject) => {
     let options = {};
 
@@ -145,6 +145,18 @@ const list = (searchQuery, paged, limit) => {
   });
 };
 
+module.exports.detail = (id) => {
+  return new Promise((resolve, reject) => {
+    user.findById(id, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    })
+  });
+};
+
 const convertData = (data, password = true) => {
   var result = data;
   if (data === null || data === undefined) {
@@ -160,11 +172,4 @@ const convertData = (data, password = true) => {
   delete result._id;
   delete result.__v;
   return result;
-};
-
-module.exports = {
-  register,
-  login,
-  update,
-  list
 };

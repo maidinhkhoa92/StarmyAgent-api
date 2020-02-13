@@ -1,7 +1,7 @@
 const Property = require("../models/property");
 const _ = require("lodash");
 
-const create = (body) => {
+module.exports.create = (body) => {
   return new Promise((resolve, reject) => {
     Property.create(body, (err, data) => {
       if (err) {
@@ -13,7 +13,7 @@ const create = (body) => {
   });
 };
 
-const list = (query, paged, limit) => {
+module.exports.list = (query, paged, limit) => {
   return new Promise((resolve, reject) => {
     let options = {};
 
@@ -46,6 +46,34 @@ const list = (query, paged, limit) => {
   });
 };
 
+module.exports.detail = (id) => {
+  return new Promise((resolve, reject) => {
+    Property.findById(id, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    })
+  });
+};
+
+module.exports.update = (id, body) => {
+  return new Promise((resolve, reject) => {
+    const query = {
+      _id: id
+    };
+    
+    Property.findOneAndUpdate(query, body, { new: true }, function(err, data) {
+      if (err) {
+        reject(err);
+      }
+
+      resolve(convertData(data));
+    });
+  });
+};
+
 const convertData = (data) => {
   var result = data;
   if (data === null || data === undefined) {
@@ -58,9 +86,4 @@ const convertData = (data) => {
   delete result._id;
   delete result.__v;
   return result;
-};
-
-module.exports = {
-  create,
-  list
 };

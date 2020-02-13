@@ -28,20 +28,29 @@ router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payme
 const property = require("./property");
 const propertyValidate = require("./property/validate");
 router.post("/agent/property", Token, propertyValidate.create, property.create);
+router.put("/agent/property/:id", Token, propertyValidate.create, property.update);
 router.get("/agent/property", Token, propertyValidate.get, property.list);
 
 // Comment
 const comment = require("./comment");
 const commentValidate = require("./comment/validate");
 router.post("/comment", commentValidate.create, comment.create);
-router.get("/comment", commentValidate.get, comment.list);
+router.get("/comment", comment.list);
 
 // city
 const city = require("./city");
 router.get("/city", city.list);
 
-// Agent
-const agent = require("./agent");
-router.get("/agent", agent.list);
+/*
+  ***** Guest Router ******
+*/
+// Agents
+const guestAgents = require("./guest/agents");
+router.get("/agent", guestAgents.list);
+router.get("/agent/:id", guestAgents.detail);
+
+// Properties
+const guestProperties = require("./guest/properties");
+router.get("/property", guestProperties.list);
 
 module.exports = router;
