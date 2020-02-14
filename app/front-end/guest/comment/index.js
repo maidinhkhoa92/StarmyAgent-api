@@ -1,5 +1,5 @@
-const comment = require("../../services/comment");
-const address = require("../../services/address");
+const comment = require("../../../services/comment");
+const address = require("../../../services/address");
 const { validationResult } = require("express-validator");
 
 module.exports.create = async (req, res, next) => {

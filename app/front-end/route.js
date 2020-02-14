@@ -38,12 +38,6 @@ router.post("/agent/address", Token, addressValidate.create, address.create);
 router.put("/agent/address/:id", Token, addressValidate.create, address.update);
 router.get("/agent/address", Token, property.list);
 
-// Comment
-const comment = require("./comment");
-const commentValidate = require("./comment/validate");
-router.post("/comment", commentValidate.create, comment.create);
-router.get("/comment", comment.list);
-
 // city
 const city = require("./city");
 router.get("/city", city.list);
@@ -51,6 +45,13 @@ router.get("/city", city.list);
 /*
   ***** Guest Router ******
 */
+
+// Comment
+const guestComment = require("./guest/comment");
+const guestCommentValidate = require("./guest/comment/validate");
+router.post("/comment", guestCommentValidate.create, guestComment.create);
+router.get("/comment", guestComment.list);
+
 // Agents
 const guestAgents = require("./guest/agents");
 router.get("/agent", guestAgents.list);
@@ -63,5 +64,20 @@ router.get("/property", guestProperties.list);
 // Address
 const guestAddresses = require("./guest/address");
 router.get("/address", guestAddresses.list);
+
+// Contact 
+const guestContact = require("./guest/contact");
+const guestContactValidate = require("./guest/contact/validate");
+router.post("/contact", guestContactValidate.create, guestContact.create);
+
+// Contact 
+const guestOffer = require("./guest/offer");
+const guestOfferValidate = require("./guest/offer/validate");
+router.post("/offer", guestOfferValidate.create, guestOffer.create);
+
+// Contact 
+const guestRequest = require("./guest/request");
+const guestRequestValidate = require("./guest/request/validate");
+router.post("/request", guestRequestValidate.create, guestRequest.create);
 
 module.exports = router;
