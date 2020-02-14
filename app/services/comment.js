@@ -1,7 +1,7 @@
 const Comment = require("../models/comment");
 const _ = require("lodash");
 
-const create = (body) => {
+const create = body => {
   return new Promise((resolve, reject) => {
     Comment.create(body, (err, data) => {
       if (err) {
@@ -28,25 +28,25 @@ const list = (query, paged, limit) => {
     }
 
     Comment.paginate(query, options, (err, result) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      if (result.docs === null) {
-        reject({ code: 10000 });
-        return;
-      }
-      resolve({
-        ...result,
-        docs: _.map(result.docs, item => {
-          return convertData(item);
-        })
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (result.docs === null) {
+          reject({ code: 10000 });
+          return;
+        }
+        resolve({
+          ...result,
+          docs: _.map(result.docs, item => {
+            return convertData(item);
+          })
+        });
       });
-    });
   });
 };
 
-const convertData = (data) => {
+const convertData = data => {
   var result = data;
   if (data === null || data === undefined) {
     return null;

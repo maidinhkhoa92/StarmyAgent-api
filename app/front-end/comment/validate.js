@@ -26,10 +26,10 @@ module.exports.create = [
     .not()
     .isEmpty()
     .withMessage("Agent is required"),
-  body("property")
+  body("address")
     .not()
     .isEmpty()
-    .withMessage("Agent is required"),
+    .withMessage("Address is required"),
   body("type")
     .isIn(["Seller", "Buyer", "Renter", "Tenant"])
     .withMessage("Type must be 'Seller', 'Buyer', 'Renter', 'Tenant'")
@@ -40,11 +40,11 @@ module.exports.create = [
     .isNumeric()
     .not()
     .isEmpty()
-    .withMessage("Agent is required"),
+    .withMessage("Total is required"),
   body("rate.options")
     .not()
     .isEmpty()
-    .withMessage("Agent is required")
+    .withMessage("Rating is required")
 ];
 
 module.exports.get = [

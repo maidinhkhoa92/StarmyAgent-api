@@ -14,7 +14,7 @@ const schema = new Schema({
 	fName: { type: String, default: ''},
 	email: { type: String, default: ''},
 	agent: { type: Schema.Types.ObjectId, ref: "user" },
-	property: { type: Schema.Types.ObjectId, ref: "property" },
+	address: { type: Schema.Types.ObjectId, ref: "address" },
 	rate: {
 		sum: Number,
 		options: { type: Array, default: [0,0,0,0,0]}

@@ -1,4 +1,4 @@
-const property = require("../../services/property");
+const Address = require("../../services/address");
 const { validationResult } = require("express-validator");
 
 module.exports.update = async (req, res, next) => {
@@ -10,15 +10,15 @@ module.exports.update = async (req, res, next) => {
 
   try {
     const { id : agent_id } = req.decoded;
-    const { id : property_id } = req.params;
+    const { id : address_id } = req.params;
     
-    const Property = await property.detail(property_id);
+    const item = await Address.detail(address_id);
     
-    if((Property.agent).toString() !== agent_id) {
+    if((item.agent).toString() !== agent_id) {
       throw ({code: 10001})
     }
 
-    const data = await property.update(property_id, req.body);
+    const data = await Address.update(address_id, req.body);
     
     res.status(200).send(data);
   } catch (err) {
@@ -36,7 +36,7 @@ module.exports.create = async (req, res, next) => {
   try {
     const { id } = req.decoded;
     req.body.agent = id;
-    const data = await property.create(req.body);
+    const data = await Address.create(req.body);
     res.status(200).send(data);
   } catch (err) {
     next(err);
@@ -61,7 +61,7 @@ module.exports.list = async (req, res, next) => {
       }
     }
     
-    const data = await property.list(query, paged, limit);
+    const data = await Address.list(query, paged, limit);
     res.status(200).send(data);
   } catch (err) {
     next(err);

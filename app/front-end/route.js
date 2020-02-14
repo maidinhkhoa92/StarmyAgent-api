@@ -31,6 +31,13 @@ router.post("/agent/property", Token, propertyValidate.create, property.create);
 router.put("/agent/property/:id", Token, propertyValidate.create, property.update);
 router.get("/agent/property", Token, propertyValidate.get, property.list);
 
+// Property
+const address = require("./address");
+const addressValidate = require("./address/validate");
+router.post("/agent/address", Token, addressValidate.create, address.create);
+router.put("/agent/address/:id", Token, addressValidate.create, address.update);
+router.get("/agent/address", Token, property.list);
+
 // Comment
 const comment = require("./comment");
 const commentValidate = require("./comment/validate");
@@ -52,5 +59,9 @@ router.get("/agent/:id", guestAgents.detail);
 // Properties
 const guestProperties = require("./guest/properties");
 router.get("/property", guestProperties.list);
+
+// Address
+const guestAddresses = require("./guest/address");
+router.get("/address", guestAddresses.list);
 
 module.exports = router;

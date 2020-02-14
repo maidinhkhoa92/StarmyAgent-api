@@ -1,4 +1,5 @@
 const comment = require("../../services/comment");
+const address = require("../../services/address");
 const { validationResult } = require("express-validator");
 
 module.exports.create = async (req, res, next) => {
@@ -9,6 +10,11 @@ module.exports.create = async (req, res, next) => {
   }
 
   try {
+    const updateAddressBody = {
+      highlight: true
+    };
+    await address.update(req.body.address, updateAddressBody);
+
     const data = await comment.create(req.body);
     res.status(200).send(data);
   } catch (err) {
@@ -26,8 +32,8 @@ module.exports.list = async (req, res, next) => {
   try {
     let query = {};
     const { paged, limit, agent } = req.query;
-    
-    if(agent) {
+
+    if (agent) {
       query.agent = agent;
     }
 
