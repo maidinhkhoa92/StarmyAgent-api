@@ -1,4 +1,4 @@
-const { body, query } = require("express-validator");
+const { body } = require("express-validator");
 
 module.exports.login = [
   body("email")
@@ -199,7 +199,7 @@ module.exports.agentUpdating = [
     .withMessage("Invalid email")
     .not()
     .isEmpty()
-    .withMessage("Telephone is required"),
+    .withMessage("Email is required"),
   body("telephone")
     .not()
     .isEmpty()
@@ -210,4 +210,33 @@ module.exports.agentUpdating = [
   body("social.linkedin").isString(),
   body("social.twitter").isString(),
   body("social.youtube").isString()
+];
+
+module.exports.agentPhotoUpdating = [
+  body("photo")
+    .not()
+    .isEmpty()
+    .withMessage("Photo is required")
+];
+
+module.exports.agentBannerUpdating = [
+  body("banner")
+    .not()
+    .isEmpty()
+    .withMessage("Banner is required")
+];
+
+module.exports.agentConfirm = [
+  body("email")
+    .isEmail()
+    .withMessage("Invalid email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 chars long")
+    .not()
+    .isEmpty()
+    .withMessage("Password is required")
 ];

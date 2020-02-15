@@ -71,3 +71,32 @@ module.exports.list = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.confirm = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    const { email, password } = req.body;
+    const query = {
+      email: email
+    }
+    const Agent = await user.find(query);
+
+    if(Agent.status) {
+      throw ({code: 10})
+    }
+
+    const params = {
+      password: password,
+      status: true
+    }
+    const data = await user.update(Agent.id, params)
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -16,8 +16,11 @@ router.get("/agency/agent", Token, userValidate.getAgent, user.list);
 
 // agent interface
 router.post("/agent/register", userValidate.registerAgent, user.register);
+router.post("/agent/confirm", userValidate.agentConfirm, user.confirm);
 router.patch("/agent/:id", Token, userValidate.agentAddCard, user.update);
 router.put("/agent/:id", Token, userValidate.agentUpdating, user.update);
+router.patch("/agent/photo/:id", Token, userValidate.agentPhotoUpdating, user.update);
+router.patch("/agent/banner/:id", Token, userValidate.agentBannerUpdating, user.update);
 
 // Payment
 const payment = require("./payment");

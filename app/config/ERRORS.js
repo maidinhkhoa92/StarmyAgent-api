@@ -9,6 +9,7 @@ module.exports = {
   "7": "!Revisa que coincida tu PIN !",
   "8": "La cuenta no existe",
   "9": "El dígito no coincide",
+  "10": "This account has been active",
   "9997": "No token",
   "9998": "Token is not valid",
   "9999": "Nombre de usuario o contraseña incorrecta",

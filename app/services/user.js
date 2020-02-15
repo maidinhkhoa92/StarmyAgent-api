@@ -101,7 +101,7 @@ module.exports.update = (id, body) => {
         null
       );
     }
-    
+
     user.findOneAndUpdate(query, body, { new: true }, function(err, data) {
       if (err) {
         reject(err);
@@ -145,7 +145,7 @@ module.exports.list = (searchQuery, paged, limit) => {
   });
 };
 
-module.exports.detail = (id) => {
+module.exports.detail = id => {
   return new Promise((resolve, reject) => {
     user.findById(id, (err, res) => {
       if (err) {
@@ -153,7 +153,19 @@ module.exports.detail = (id) => {
         return;
       }
       resolve(convertData(res));
-    })
+    });
+  });
+};
+
+module.exports.find = query => {
+  return new Promise((resolve, reject) => {
+    user.findOne(query, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    });
   });
 };
 
