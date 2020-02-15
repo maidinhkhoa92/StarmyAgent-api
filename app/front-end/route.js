@@ -39,7 +39,7 @@ const address = require("./address");
 const addressValidate = require("./address/validate");
 router.post("/agent/address", Token, addressValidate.create, address.create);
 router.put("/agent/address/:id", Token, addressValidate.create, address.update);
-router.get("/agent/address", Token, property.list);
+router.get("/agent/address", Token, address.list);
 
 // city
 const city = require("./city");
