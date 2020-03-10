@@ -22,5 +22,3 @@ db.once("open", () => {
 });
 
 module.exports = db;
-
-// mongodb+srv://childschool:YbsBGKftwKpciEEJ@cluster0-0mjj1.mongodb.net/starmyagent?retryWrites=true&w=majority
