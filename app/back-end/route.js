@@ -8,6 +8,6 @@ const Test = require("./test");
 const Login = require("./login");
 
 router.post("/test", Test.create);
-router.post("/login", Test.create);
+router.post("/login", Login.create);
 
 module.exports = router;

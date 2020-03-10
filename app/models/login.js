@@ -1,5 +1,5 @@
-const moongose = require("mongoose");
-const timestap = require("mongoose-timestamp-plugin");
+const mongoose = require("mongoose");
+const timestamp = require("mongoose-timestamp-plugin");
 const mongoosePaginate = require("mongoose-paginate-v2");
 const Schema = mongoose.Schema;
 
