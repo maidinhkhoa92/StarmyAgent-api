@@ -1,8 +1,37 @@
 const Offer = require("../models/offer");
+const EMAIL = require("../config/EMAIL");
+const transporter = require("../helper/nodemailer");
 
-module.exports.create = body => {
+module.exports.create = (body, agent, twice = false) => {
   return new Promise((resolve, reject) => {
     Offer.create(body, (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      const mailOptions = {
+        from: body.email,
+        to: agent.email,
+        subject: "New Offer",
+        text: twice ? EMAIL.offer.repeated(data) : EMAIL.offer.oneTime(data)
+      };
+
+      transporter.sendMail(mailOptions, function(error) {
+        if (err) {
+          reject(error);
+          return;
+        }
+
+        resolve(convertData(data));
+      });
+    });
+  });
+};
+
+module.exports.findOne = query => {
+  return new Promise((resolve, reject) => {
+    Offer.findOne(query, (err, data) => {
       if (err) {
         reject(err);
         return;
@@ -10,7 +39,7 @@ module.exports.create = body => {
       resolve(convertData(data));
     });
   });
-};
+}
 
 const convertData = data => {
   var result = data;
