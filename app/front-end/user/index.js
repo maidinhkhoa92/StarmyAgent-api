@@ -100,3 +100,42 @@ module.exports.confirm = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.forgotPassword = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    const { email } = req.body;
+
+    const data = await user.forgotPassword(email);
+    
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.resetPassword = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    const { password } = req.body;
+    const { email } = req.decoded;
+
+    const User = await user.find({ email });
+
+    const data = await user.update(User.id, {password});
+    
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+};

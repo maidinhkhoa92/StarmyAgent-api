@@ -240,3 +240,21 @@ module.exports.agentConfirm = [
     .isEmpty()
     .withMessage("Password is required")
 ];
+
+module.exports.forgotPassword = [
+  body("email")
+    .isEmail()
+    .withMessage("Invalid email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
+];
+
+module.exports.resetPassword = [
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 chars long")
+    .not()
+    .isEmpty()
+    .withMessage("Password is required")
+];

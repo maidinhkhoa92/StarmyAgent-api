@@ -7,6 +7,9 @@ const user = require("./user");
 const userValidate = require("./user/validate");
 
 router.post("/login", userValidate.login, user.login);
+router.post("/forgot-password", userValidate.forgotPassword, user.forgotPassword);
+router.post("/reset-password", Token, userValidate.resetPassword, user.resetPassword);
+
 // agency interface
 router.post("/agency/register", userValidate.registerAgency, user.register);
 router.post("/agency/agent", Token, userValidate.addingAgent, user.register);

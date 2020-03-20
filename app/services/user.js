@@ -169,6 +169,40 @@ module.exports.find = query => {
   });
 };
 
+module.exports.forgotPassword = email => {
+  return new Promise((resolve, reject) => {
+    user.findOne({ email: email }, function(err, data) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      if (!data) {
+        reject({ code: 8 });
+        return;
+      }
+
+      const token = jwt.sign({ email: data.email }, APP_CONFIG.token);
+      const link = APP_CONFIG.resetPasswordUrl + token;
+
+      let mailOptions = {
+        from: "info@starmyagent.com",
+        to: data.email,
+        subject: 'Reset password',
+        html: `Reset link: ${link}`
+      };
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(convertData(data));
+      });
+    });
+  });
+};
+
 const convertData = (data, password = true) => {
   var result = data;
   if (data === null || data === undefined) {

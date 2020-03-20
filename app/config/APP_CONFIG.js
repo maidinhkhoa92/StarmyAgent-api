@@ -21,5 +21,6 @@ module.exports = {
   },
   registerWebAppUrl: "https://starmy-agent.web.app/register",
   uploadUrl: "http://127.0.0.1:8081/",
+  resetPasswordUrl: "http://localhost:9000/reset-password/",
   token: "token_starmyurget"
 };
