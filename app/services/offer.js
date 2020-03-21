@@ -13,7 +13,7 @@ module.exports.create = (body, agent, twice = false) => {
       const mailOptions = {
         from: body.email,
         to: agent.email,
-        subject: "New Offer",
+        subject: EMAIL.offer.title,
         text: twice ? EMAIL.offer.repeated(data) : EMAIL.offer.oneTime(data)
       };
 
@@ -39,7 +39,7 @@ module.exports.findOne = query => {
       resolve(convertData(data));
     });
   });
-}
+};
 
 const convertData = data => {
   var result = data;

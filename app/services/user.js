@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const transporter = require("../helper/nodemailer");
 const APP_CONFIG = require("../config/APP_CONFIG");
 const _ = require("lodash");
+const EMAIL = require("../config/EMAIL");
 
 module.exports.register = body => {
   return new Promise((resolve, reject) => {
@@ -22,10 +23,10 @@ module.exports.register = body => {
         return;
       }
       const mailOptions = {
-        from: "admin@gmail.com",
+        from: APP_CONFIG.adminEmail,
         to: data.email,
-        subject: "Your new account",
-        text: "Your link: " + APP_CONFIG.registerWebAppUrl
+        subject: EMAIL.register.title,
+        text: EMAIL.register.message({ link: APP_CONFIG.registerWebAppUrl })
       };
       transporter.sendMail(mailOptions, function(error) {
         if (err) {
@@ -186,10 +187,10 @@ module.exports.forgotPassword = email => {
       const link = APP_CONFIG.resetPasswordUrl + token;
 
       let mailOptions = {
-        from: "info@starmyagent.com",
+        from: APP_CONFIG.adminEmail,
         to: data.email,
-        subject: 'Reset password',
-        html: `Reset link: ${link}`
+        subject: EMAIL.resetPassword.title,
+        html: EMAIL.resetPassword.message({ link })
       };
       transporter.sendMail(mailOptions, function(error, info) {
         if (error) {

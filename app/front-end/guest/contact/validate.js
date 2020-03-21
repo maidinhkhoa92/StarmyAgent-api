@@ -23,3 +23,19 @@ module.exports.create = [
     .isEmpty()
     .withMessage("Agent is required")
 ];
+
+module.exports.sendEmail = [
+  body("content").isString(),
+  body("fullName")
+    .not()
+    .isEmpty()
+    .withMessage("First name is required"),
+  body("email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
+  body("telephone")
+    .not()
+    .isEmpty()
+    .withMessage("Telephone is required")
+];

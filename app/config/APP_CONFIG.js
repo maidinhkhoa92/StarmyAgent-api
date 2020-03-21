@@ -13,6 +13,7 @@ module.exports = {
       pass: "gldulrloiyijkrct"
     }
   },
+  adminEmail: "maidinhkhoa92@gmail.com",
   firebase: {
     apiKey: "AIzaSyDNzZis7J30BJSm479iLYAvDKh_co4EFOs",
     authDomain: "https://accounts.google.com/o/oauth2/auth",

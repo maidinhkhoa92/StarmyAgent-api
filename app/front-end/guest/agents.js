@@ -10,10 +10,14 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { paged, limit, city } = req.query;
+    const { paged, limit, city, services } = req.query;
 
     if (city) {
       query.city = city;
+    }
+
+    if (services) {
+      query.services = { "$in" : [services]}
     }
     
     query.type = 'agent';
