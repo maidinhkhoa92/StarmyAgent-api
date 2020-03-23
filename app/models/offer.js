@@ -10,7 +10,7 @@ const schema = new Schema({
 	telephone: { type: String, default: ''},
 	address: { type: String, default: ''},
     message: { type: String, default: ''},
-	agent: { type: Schema.Types.ObjectId, ref: "user" },
+	agent: { type: Schema.Types.ObjectId },
 	type: {
 		type: String,
 		enum: ['rent', 'sale'],

@@ -5,8 +5,10 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
   email: { type: String, unique: true },
-  password: String
+  password: { type: String, unique: true }
 });
+
+
 
 schema
   .plugin(timestamp, {
