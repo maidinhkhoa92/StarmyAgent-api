@@ -14,7 +14,7 @@ const list = (paged = 1, limit = 10) => {
       query = query.skip(skiped);
     }
 
-    query.exec(function(err, data) {
+    query.sort('name').exec(function(err, data) {
       if (err) {
         reject(err);
       }

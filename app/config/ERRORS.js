@@ -15,6 +15,6 @@ module.exports = {
   "9999": "Nombre de usuario o contraseña incorrecta",
   "10000": "No data",
   "10001": "No permission",
-  "11000": "This account exists",
+  "11000": "La cuenta ya existe",
   "99999": "Not Found"
 };
