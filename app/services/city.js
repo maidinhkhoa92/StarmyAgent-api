@@ -1,7 +1,7 @@
 const city = require("../models/city");
 const _ = require("lodash");
 
-const list = (paged = 1, limit = 10) => {
+module.exports.list = (paged = 1, limit = 10) => {
   return new Promise((resolve, reject) => {
     var query = city.find();
     
@@ -35,6 +35,18 @@ const list = (paged = 1, limit = 10) => {
   });
 };
 
+module.exports.detail = query => {
+  return new Promise((resolve, reject) => {
+    city.findOne(query, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    });
+  });
+};
+
 const convertData = (data) => {
   var result = data;
   if (data === null || data === undefined) {
@@ -47,8 +59,4 @@ const convertData = (data) => {
   delete result._id;
   delete result.__v;
   return result;
-};
-
-module.exports = {
-  list
 };

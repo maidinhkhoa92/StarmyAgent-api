@@ -1,4 +1,5 @@
 const user = require("../../services/user");
+const City = require("../../services/city");
 const { validationResult } = require("express-validator");
 
 module.exports.list = async (req, res, next) => {
@@ -13,7 +14,8 @@ module.exports.list = async (req, res, next) => {
     const { paged, limit, city, services } = req.query;
 
     if (city) {
-      query.city = city;
+      cityRespond = await City.detail({name: city})
+      query.city = cityRespond.id
     }
 
     if (services) {
