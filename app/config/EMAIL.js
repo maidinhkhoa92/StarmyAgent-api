@@ -16,6 +16,17 @@ module.exports = {
 			Content: ${body.content}
 		`
   },
+  newAgency: {
+    title: "New agency contacted",
+    message: body => `
+      City: ${body.city}
+      Name of manager: ${body.managerName}
+      Agency name: ${body.agencyName}
+      Amounts of agents: ${body.amount}
+      Telephone: ${body.telephone}
+      Email: ${body.email}
+		`
+  },
   offer: {
     title: "New Offer",
     oneTime: body => `

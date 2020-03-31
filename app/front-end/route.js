@@ -76,6 +76,7 @@ const guestContact = require("./guest/contact");
 const guestContactValidate = require("./guest/contact/validate");
 router.post("/contact", guestContactValidate.create, guestContact.create);
 router.post("/send-email", guestContactValidate.sendEmail, guestContact.sendEmail)
+router.post("/new-agency", guestContactValidate.newAgency, guestContact.newAgency)
 
 // Contact 
 const guestOffer = require("./guest/offer");

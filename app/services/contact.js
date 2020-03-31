@@ -34,6 +34,25 @@ module.exports.sendEmail = body => {
   });
 };
 
+module.exports.newAgency = body => {
+  return new Promise((resolve, reject) => {
+    const mailOptions = {
+      from: body.email,
+      to: APP_CONFIG.adminEmail,
+      subject: EMAIL.newAgency.title,
+      text: EMAIL.newAgency.message(body)
+    };
+    transporter.sendMail(mailOptions, function(error) {
+      if (error) {
+        reject(error);
+        return;
+      }
+
+      resolve({ status: 200 });
+    });
+  });
+};
+
 const convertData = data => {
   var result = data;
   if (data === null || data === undefined) {

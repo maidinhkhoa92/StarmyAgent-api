@@ -39,3 +39,31 @@ module.exports.sendEmail = [
     .isEmpty()
     .withMessage("Telephone is required")
 ];
+
+module.exports.newAgency = [
+  body("city")
+    .isString()
+    .not()
+    .isEmpty()
+    .withMessage("City is required"),
+  body("managerName")
+    .not()
+    .isEmpty()
+    .withMessage("Manager Name is required"),
+  body("agencyName")
+    .not()
+    .isEmpty()
+    .withMessage("Agency Name is required"),
+  body("amount")
+    .not()
+    .isEmpty()
+    .withMessage("Amount is required"),
+  body("email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
+  body("telephone")
+    .not()
+    .isEmpty()
+    .withMessage("Telephone is required")
+];
