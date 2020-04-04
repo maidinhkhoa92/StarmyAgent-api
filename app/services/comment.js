@@ -24,7 +24,7 @@ const create = body => {
         from: APP_CONFIG.adminEmail,
         to: data.email,
         subject: EMAIL.comment.title,
-        text: EMAIL.comment.message(token)
+        html: EMAIL.comment.message(token)
       };
       transporter.sendMail(mailOptions, function(error) {
         if (err) {
