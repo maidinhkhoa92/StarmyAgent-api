@@ -24,6 +24,12 @@ const schema = new Schema({
 		enum: ['Seller', 'Buyer', 'Renter', 'Tenant'],
 		required: true
 	},
+	status: {
+		type: String,
+		enum: ['pending', 'draft', 'public'],
+		required: true,
+		default: 'pending'
+	},
 })
 
 schema.plugin(timestamp, {

@@ -1,3 +1,5 @@
+const APP_CONFIG = require('./APP_CONFIG');
+
 module.exports = {
   register: {
     title: "Your new account",
@@ -46,5 +48,12 @@ module.exports = {
             Address: ${body.address},
             Message: ${body.message},
         `
+  },
+  comment: {
+    title: 'New confirm comment',
+    message: token => `
+      <p>Hola, gracias por tu reseña, ya para terminar valídala y habrás terminado. Un saludo</p>
+      <a href="${APP_CONFIG.site_url}/review/${token}">Validar reseña</a>
+    `
   }
 };

@@ -6,5 +6,5 @@ module.exports = (err, req, res, next) => {
     if( err.code ) {
         code = err.code
     }
-    res.status(400).send({msg: ERRORS[code]})
+    res.status(400).send({message: ERRORS[code]})
 }

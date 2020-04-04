@@ -11,13 +11,13 @@ module.exports = function (req, res, next) {
     }
     jwt.verify(token, APP_CONFIG.token, function (err, decoded) {
       if (err) {
-        res.status(403).send({ msg: ERRORS[9998] });
+        res.status(403).send({ message: ERRORS[9998] });
       } else {
         req.decoded = decoded;
         next();
       }
     });
   } else {
-    res.status(403).send({ msg: ERRORS[9997] });
+    res.status(403).send({ message: ERRORS[9997] });
   }
 }

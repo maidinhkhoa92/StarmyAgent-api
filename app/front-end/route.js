@@ -56,6 +56,7 @@ router.get("/city", city.list);
 const guestComment = require("./guest/comment");
 const guestCommentValidate = require("./guest/comment/validate");
 router.post("/comment", guestCommentValidate.create, guestComment.create);
+router.put("/comment", Token, guestComment.update);
 router.get("/comment", guestComment.list);
 
 // Agents
