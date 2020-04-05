@@ -52,7 +52,7 @@ module.exports = {
   comment: {
     title: 'New confirm comment',
     message: token => `
-      <p>Hola, gracias por tu reseña, ya para terminar valídala y habrás terminado. Un saludo</p>
+      <p>Hola, gracias por tu reseña, ya para terminar valídala a través de tu mail. Un saludo</p>
       <a href="${APP_CONFIG.site_url}/review/${token}">Validar reseña</a>
     `
   }

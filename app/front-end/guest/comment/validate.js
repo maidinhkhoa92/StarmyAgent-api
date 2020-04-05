@@ -1,11 +1,6 @@
 const { body, query } = require("express-validator");
 
 module.exports.create = [
-  body("title")
-    .not()
-    .isEmpty()
-    .withMessage("Title is required"),
-  body("description").isString(),
   body("date")
     .not()
     .isEmpty()
