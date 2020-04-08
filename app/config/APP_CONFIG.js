@@ -10,10 +10,10 @@ module.exports = {
     service: "gmail",
     auth: {
       user: "info@starmyagent.com",
-      pass: "qyzxbfkradcdqdpl"
+      pass: "rslguioniyspbcrj"
     }
   },
-  adminEmail: "maidinhkhoa92@gmail.com",
+  adminEmail: "info@starmyagent.com",
   firebase: {
     apiKey: "AIzaSyDNzZis7J30BJSm479iLYAvDKh_co4EFOs",
     authDomain: "https://accounts.google.com/o/oauth2/auth",
