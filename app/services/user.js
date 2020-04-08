@@ -30,7 +30,7 @@ module.exports.register = body => {
       };
       transporter.sendMail(mailOptions, function(error) {
         if (err) {
-          reject(error);
+          reject({ code: 11 });
           return;
         }
 
@@ -194,7 +194,7 @@ module.exports.forgotPassword = email => {
       };
       transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
-          reject(error);
+          reject({ code: 11 });
           return;
         }
 

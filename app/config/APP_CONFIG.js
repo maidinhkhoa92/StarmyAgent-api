@@ -9,8 +9,8 @@ module.exports = {
   mail: {
     service: "gmail",
     auth: {
-      user: "maihungkhoa@gmail.com",
-      pass: "gldulrloiyijkrct"
+      user: "info@starmyagent.com",
+      pass: "qyzxbfkradcdqdpl"
     }
   },
   adminEmail: "maidinhkhoa92@gmail.com",

@@ -19,7 +19,7 @@ module.exports.create = (body, agent, twice = false) => {
 
       transporter.sendMail(mailOptions, function(error) {
         if (err) {
-          reject(error);
+          reject({ code: 11 });
           return;
         }
 

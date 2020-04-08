@@ -10,6 +10,7 @@ module.exports = {
   "8": "La cuenta no existe",
   "9": "El dígito no coincide",
   "10": "This account has been active",
+  "11": "There is an error when sending email. Please mail to us directly. info@starmyagent.com",
   "9997": "No token",
   "9998": "Token is not valid",
   "9999": "Nombre de usuario o contraseña incorrecta",

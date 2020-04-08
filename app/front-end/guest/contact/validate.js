@@ -1,7 +1,6 @@
 const { body } = require("express-validator");
 
 module.exports.create = [
-  body("message").isString(),
   body("lName")
     .not()
     .isEmpty()

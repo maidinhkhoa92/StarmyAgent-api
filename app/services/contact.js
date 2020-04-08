@@ -25,7 +25,7 @@ module.exports.sendEmail = body => {
     };
     transporter.sendMail(mailOptions, function(error) {
       if (error) {
-        reject(error);
+        reject({ code: 11 });
         return;
       }
 
@@ -44,7 +44,7 @@ module.exports.newAgency = body => {
     };
     transporter.sendMail(mailOptions, function(error) {
       if (error) {
-        reject(error);
+        reject({ code: 11 });
         return;
       }
 
