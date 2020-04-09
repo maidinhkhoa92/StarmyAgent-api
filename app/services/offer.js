@@ -14,7 +14,7 @@ module.exports.create = (body, agent, twice = false) => {
         from: body.email,
         to: agent.email,
         subject: EMAIL.offer.title,
-        text: twice ? EMAIL.offer.repeated(data) : EMAIL.offer.oneTime(data)
+        html: twice ? EMAIL.offer.repeated(data) : EMAIL.offer.oneTime(data)
       };
 
       transporter.sendMail(mailOptions, function(error) {

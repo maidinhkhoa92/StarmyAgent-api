@@ -26,7 +26,7 @@ module.exports.register = body => {
         from: APP_CONFIG.adminEmail,
         to: data.email,
         subject: EMAIL.register.title,
-        text: EMAIL.register.message({ link: APP_CONFIG.registerWebAppUrl })
+        html: data.type === 'agent' ? EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl }) : EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
       };
       transporter.sendMail(mailOptions, function(error) {
         if (err) {

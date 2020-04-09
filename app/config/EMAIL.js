@@ -2,8 +2,21 @@ const APP_CONFIG = require('./APP_CONFIG');
 
 module.exports = {
   register: {
-    title: "Your new account",
-    message: ({ link }) => `Your link: ${link}`
+    title: "Bienvenid@ a StarMyAgent,",
+    agent: ({ link }) => `
+      <p>Hola,</p>
+      <p>Tu prueba gratuita de 30 días comienza hoy una vez completes el registro. Una vez expire el periodo de prueba comenzarás a pagar por mes vencido de acuerdo a los clientes recibidos mensualmente. </p>
+      <p>Puedes cancelar en cualquier momento.</p>
+      <p>Cualquier duda nos dices.</p>
+      <p>Un saludo!</p>
+    `,
+    agency: ({link}) => `
+      <p>Hola,</p>
+      <p>La prueba gratuita de 30 días de tus agentes comienza hoy una vez completes el registro. Asegúrate que completen su perfil rápidamente. Una vez expire el periodo de prueba comenzarás a pagar en por mes vencido de acuerdo a los clientes recibidos mensualmente.</p>
+      <p>Puedes cancelar en cualquier momento.</p>
+      <p>Cualquier duda nos dices.</p>
+      <p>Un saludo!</p>
+    `
   },
   resetPassword: {
     title: "Reset password",
@@ -30,24 +43,57 @@ module.exports = {
 		`
   },
   offer: {
-    title: "New Offer",
+    title: "Contacto de cliente propietario",
     oneTime: body => `
-            Full Name: ${body.lName} ${body.fName},
-            Email: ${body.email},
-            Phone: ${body.telephone},
-            Type: ${body.type},
-            Address: ${body.address},
-            Message: ${body.message},
-        `,
+      <p>Hola,</p>
+      <p>Un cliente propietario te ha seleccionado para que comercialices su propiedad.</p>
+      <p>Ha llegado a ti a través del formulario de contacto por lo que no conoce tus datos.</p>
+      <p>Contáctale lo antes posible. Su mensaje es el siguiente:</p>
+      <p>Nombre: ${body.lName}</p>
+      <p>Apellido:${body.fName}</p>
+      <p>Email: ${body.email}</p>
+      <p>Teléfono: ${body.telephone}</p>
+      <p>${body.type === 'rent' ? 'Alquiler' : 'Ventas'}</p>
+      <p>Dirección exacta del inmueble:: ${body.address}</p>
+      <p>Mensaje: ${body.message}</p>
+      <p>Un saludo.</p>
+      <p>El equipo de StarMyAgent.<br/><small>*Este mensaje es automático. StarMyAgent no filtra los mensajes.</small></p>
+    `,
     repeated: body => `
-            We are sending this client repeated :
-            Full Name: ${body.lName} ${body.fName},
-            Email: ${body.email},
-            Phone: ${body.telephone},
-            Type: ${body.type},
-            Address: ${body.address},
-            Message: ${body.message},
-        `
+      <p>Hola, Estamos enviando este cliente repetido:</p>
+      <p>Un cliente propietario te ha seleccionado para que comercialices su propiedad.</p>
+      <p>Ha llegado a ti a través del formulario de contacto por lo que no conoce tus datos.</p>
+      <p>Contáctale lo antes posible. Su mensaje es el siguiente:</p>
+      <p>Nombre: ${body.lName}</p>
+      <p>Apellido:${body.fName}</p>
+      <p>Email: ${body.email}</p>
+      <p>Teléfono: ${body.telephone}</p>
+      <p>${body.type === 'rent' ? 'Alquiler' : 'Ventas'}</p>
+      <p>Dirección exacta del inmueble:: ${body.address}</p>
+      <p>Mensaje: ${body.message}</p>
+      <p>Un saludo.</p>
+      <p>El equipo de StarMyAgent.<br/><small>*Este mensaje es automático. StarMyAgent no filtra los mensajes.</small></p>
+    `
+  },
+  request: {
+    title: "Contacto de cliente buscador",
+    message: body => `
+      <p>Hola,</p>
+      <p>Un cliente buscador te ha seleccionado para que le encuentres un inmueble.</p>
+      <p>Ha llegado a ti a través del formulario de contacto por lo que no conoce tus datos.</p>
+      <p>Contáctale lo antes posible. Su mensaje es el siguiente:</p>
+      <p>Nombre:${body.fName}</p>
+      <p>Apellido:${body.lName}</p>
+      <p>Email:${body.email}</p>
+      <p>Teléfono:${body.budget}</p>
+      <p>${body.type === 'rent' ? 'Alquiler' : 'Ventas'}</p>
+      <p>Zona o distrito que le interesa:</p>
+      <p>Presupuesto máximo:${body.budget}</p>
+      <p>Mensaje:<br/>${body.message}</p>
+      <p>Un saludo.</p>
+      <p>El equipo de StarMyAgent.<br/>
+      <small>*Este mensaje es automático. StarMyAgent no filtra los mensajes.</small></p>
+		`
   },
   comment: {
     title: 'New confirm comment',
