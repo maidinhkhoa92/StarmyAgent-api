@@ -89,4 +89,9 @@ const guestRequest = require("./guest/request");
 const guestRequestValidate = require("./guest/request/validate");
 router.post("/request", guestRequestValidate.create, guestRequest.create);
 
+// Report
+const Report = require("./report");
+router.get("/report/:id", Token, Report.byAgentID);
+router.get("/report", Token, Report.report);
+
 module.exports = router;

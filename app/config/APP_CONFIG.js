@@ -24,5 +24,20 @@ module.exports = {
   registerWebAppUrl: "https://starmy-agent.web.app/register",
   uploadUrl: "http://127.0.0.1:8081/",
   resetPasswordUrl: "http://localhost:9000/reset-password/",
-  token: "token_starmyurget"
+  token: "token_starmyurget",
+  discount: (numberAgent) => {
+    if(numberAgent >= 2 && numberAgent <= 5) {
+      return 10
+    }
+    if(numberAgent >= 6 && numberAgent <= 12) {
+      return 15
+    }
+    if(numberAgent >= 13 && numberAgent <= 50) {
+      return 20
+    }
+    if(numberAgent > 50) {
+      return 25
+    }
+    return 0
+  }
 };

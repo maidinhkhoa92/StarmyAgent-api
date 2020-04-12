@@ -41,6 +41,18 @@ module.exports.findOne = query => {
   });
 };
 
+module.exports.report = body => {
+  return new Promise((resolve, reject) => {
+    Offer.count(body, (err, count) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(count)
+    });
+  });
+};
+
 const convertData = data => {
   var result = data;
   if (data === null || data === undefined) {

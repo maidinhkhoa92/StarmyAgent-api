@@ -27,6 +27,18 @@ module.exports.create = body => {
   });
 };
 
+module.exports.report = body => {
+  return new Promise((resolve, reject) => {
+    Request.count(body, (err, count) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(count)
+    });
+  });
+};
+
 const convertData = data => {
   var result = data;
   if (data === null || data === undefined) {

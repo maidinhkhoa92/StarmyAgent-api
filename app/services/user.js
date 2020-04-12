@@ -132,7 +132,7 @@ module.exports.list = (searchQuery, paged, limit) => {
         reject(err);
         return;
       }
-      if (result.docs === null) {
+      if (!result.docs) {
         reject({ code: 10000 });
         return;
       }
