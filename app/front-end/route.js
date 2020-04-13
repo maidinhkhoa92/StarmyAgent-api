@@ -7,6 +7,9 @@ const user = require("./user");
 const userValidate = require("./user/validate");
 
 router.post("/login", userValidate.login, user.login);
+router.post("/forgot-password", userValidate.forgotPassword, user.forgotPassword);
+router.post("/reset-password", Token, userValidate.resetPassword, user.resetPassword);
+
 // agency interface
 router.post("/agency/register", userValidate.registerAgency, user.register);
 router.post("/agency/agent", Token, userValidate.addingAgent, user.register);
@@ -19,13 +22,18 @@ router.post("/agent/register", userValidate.registerAgent, user.register);
 router.post("/agent/confirm", userValidate.agentConfirm, user.confirm);
 router.patch("/agent/:id", Token, userValidate.agentAddCard, user.update);
 router.put("/agent/:id", Token, userValidate.agentUpdating, user.update);
-router.patch("/agent/photo/:id", Token, userValidate.agentPhotoUpdating, user.update);
-router.patch("/agent/banner/:id", Token, userValidate.agentBannerUpdating, user.update);
+router.patch("/photo/:id", Token, userValidate.agentPhotoUpdating, user.update);
+router.patch("/banner/:id", Token, userValidate.agentBannerUpdating, user.update);
 
 // Payment
 const payment = require("./payment");
 const paymentValidate = require("./payment/validate");
 router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payment.create);
+
+// admin
+const admin = require("./admin");
+const adminValidate = require("./admin/validate")
+router.post("/admin", adminValidate.create, admin.create)
 
 // Property
 const property = require("./property");
@@ -72,6 +80,7 @@ router.get("/address", guestAddresses.list);
 const guestContact = require("./guest/contact");
 const guestContactValidate = require("./guest/contact/validate");
 router.post("/contact", guestContactValidate.create, guestContact.create);
+router.post("/send-email", guestContactValidate.sendEmail, guestContact.sendEmail)
 
 // Contact 
 const guestOffer = require("./guest/offer");

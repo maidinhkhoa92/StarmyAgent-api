@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const transporter = require("../helper/nodemailer");
 const APP_CONFIG = require("../config/APP_CONFIG");
 const _ = require("lodash");
+const EMAIL = require("../config/EMAIL");
 
 module.exports.register = body => {
   return new Promise((resolve, reject) => {
@@ -22,10 +23,10 @@ module.exports.register = body => {
         return;
       }
       const mailOptions = {
-        from: "admin@gmail.com",
+        from: APP_CONFIG.adminEmail,
         to: data.email,
-        subject: "Your new account",
-        text: "Your link: " + APP_CONFIG.registerWebAppUrl
+        subject: EMAIL.register.title,
+        text: EMAIL.register.message({ link: APP_CONFIG.registerWebAppUrl })
       };
       transporter.sendMail(mailOptions, function(error) {
         if (err) {
@@ -165,6 +166,40 @@ module.exports.find = query => {
         return;
       }
       resolve(convertData(res));
+    });
+  });
+};
+
+module.exports.forgotPassword = email => {
+  return new Promise((resolve, reject) => {
+    user.findOne({ email: email }, function(err, data) {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      if (!data) {
+        reject({ code: 8 });
+        return;
+      }
+
+      const token = jwt.sign({ email: data.email }, APP_CONFIG.token);
+      const link = APP_CONFIG.resetPasswordUrl + token;
+
+      let mailOptions = {
+        from: APP_CONFIG.adminEmail,
+        to: data.email,
+        subject: EMAIL.resetPassword.title,
+        html: EMAIL.resetPassword.message({ link })
+      };
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          reject(error);
+          return;
+        }
+
+        resolve(convertData(data));
+      });
     });
   });
 };

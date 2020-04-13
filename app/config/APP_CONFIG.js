@@ -13,6 +13,7 @@ module.exports = {
       pass: "gldulrloiyijkrct"
     }
   },
+  adminEmail: "maidinhkhoa92@gmail.com",
   firebase: {
     apiKey: "AIzaSyDNzZis7J30BJSm479iLYAvDKh_co4EFOs",
     authDomain: "https://accounts.google.com/o/oauth2/auth",
@@ -21,5 +22,6 @@ module.exports = {
   },
   registerWebAppUrl: "https://starmy-agent.web.app/register",
   uploadUrl: "http://127.0.0.1:8081/",
+  resetPasswordUrl: "http://localhost:9000/reset-password/",
   token: "token_starmyurget"
 };

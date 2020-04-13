@@ -1,4 +1,7 @@
 const Contact = require("../models/contact");
+const transporter = require("../helper/nodemailer");
+const APP_CONFIG = require("../config/APP_CONFIG");
+const EMAIL = require("../config/EMAIL");
 
 module.exports.create = body => {
   return new Promise((resolve, reject) => {
@@ -8,6 +11,25 @@ module.exports.create = body => {
         return;
       }
       resolve(convertData(data));
+    });
+  });
+};
+
+module.exports.sendEmail = body => {
+  return new Promise((resolve, reject) => {
+    const mailOptions = {
+      from: body.adminEmail,
+      to: APP_CONFIG.adminEmail,
+      subject: EMAIL.contact.title,
+      text: EMAIL.contact.message(body)
+    };
+    transporter.sendMail(mailOptions, function(error) {
+      if (error) {
+        reject(error);
+        return;
+      }
+
+      resolve({ status: 200 });
     });
   });
 };
