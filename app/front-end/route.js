@@ -10,6 +10,7 @@ router.post("/login", userValidate.login, user.login);
 router.post("/forgot-password", userValidate.forgotPassword, user.forgotPassword);
 router.post("/reset-password", Token, userValidate.resetPassword, user.resetPassword);
 
+
 // agency interface
 router.post("/agency/register", userValidate.registerAgency, user.register);
 router.post("/agency/agent", Token, userValidate.addingAgent, user.register);
@@ -29,6 +30,11 @@ router.patch("/banner/:id", Token, userValidate.agentBannerUpdating, user.update
 const payment = require("./payment");
 const paymentValidate = require("./payment/validate");
 router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payment.create);
+
+//admin
+const admin = require("./admin")
+const adminValidate = require("./admin/validate")
+router.post("/admin", Token, adminValidate.create, admin.create)
 
 // Property
 const property = require("./property");
