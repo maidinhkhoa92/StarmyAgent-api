@@ -1,9 +1,18 @@
 const User = require("../models/admin")
 const _ = require("lodash");
+const bcrypt = require("bcryptjs");
+
 
 module.exports.create = (body) => {
     return new Promise((resolve, reject) => {
-      Address.create(body, (err, data) => {
+      if (body.password) {
+        body.password = bcrypt.hashSync(
+          body.password,
+          bcrypt.genSaltSync(8),
+          null
+        );
+      }
+      User.create(body, (err, data) => {
         if (err) {
           reject(err);
           return;

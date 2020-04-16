@@ -33,7 +33,6 @@ module.exports.register = body => {
           reject({ code: 11 });
           return;
         }
-
         resolve(convertData(data));
       });
     });

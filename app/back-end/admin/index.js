@@ -8,10 +8,7 @@ module.exports.create = async (req, res, next) => {
       res.status(401).send({ errors: errors.array() });
       return;
     }
-  
     try {
-      const { id } = req.decoded;
-      req.body.agent = id;
       const data = await Admin.create(req.body);
       res.status(200).send(data);
     } catch (err) {

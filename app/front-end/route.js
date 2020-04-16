@@ -31,10 +31,7 @@ const payment = require("./payment");
 const paymentValidate = require("./payment/validate");
 router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payment.create);
 
-//admin
-const admin = require("./admin")
-const adminValidate = require("./admin/validate")
-router.post("/admin", Token, adminValidate.create, admin.create)
+
 
 // Property
 const property = require("./property");
