@@ -21,8 +21,20 @@ module.exports.create = (body) => {
       });
     });
   };
+
+  module.exports.fetch = () => {
+    return new Promise ((resolve, reject) => {
+      User.find((err, result) => {
+        if (err) {
+          reject(err)
+        } 
+        resolve(_.map(result, (item) => convertData(item) ))
+      })
+    })
+  }
+
   
-const convertData = (data) => {
+  const convertData = (data) => {
     var result = data;
     if (data === null || data === undefined) {
       return null;
@@ -35,3 +47,4 @@ const convertData = (data) => {
     delete result.__v;
     return result;
   };
+  
