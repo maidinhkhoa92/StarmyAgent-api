@@ -1,4 +1,5 @@
-const user = require("../models/admin")
+const admin = require("../models/admin")
+const user = require("../models/user")
 const _ = require("lodash");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -14,7 +15,7 @@ module.exports.create = (body) => {
           null
         );
       }
-      user.create(body, (err, data) => {
+      admin.create(body, (err, data) => {
         if (err) {
           reject(err);
           return;
@@ -25,11 +26,12 @@ module.exports.create = (body) => {
   };
 
   module.exports.fetch = () => {
-    return new Promise ((resolve, reject) => {
-      user.find((err, result) => {
+    return new Promise ( (resolve, reject) => {
+      user.find({type: 'agency'}, (err, result) => {
         if (err) {
           reject(err)
         } 
+        console.log(result)
         resolve(_.map(result, (item) => convertData(item) ))
       })
     })
@@ -37,17 +39,17 @@ module.exports.create = (body) => {
 
   module.exports.login = (email, password) => {
     return new Promise((resolve, reject) => {
-      user
-        .findOne({ email: email }, function(error, User) {
+      admin
+        .findOne({ email: email }, function(error, Admin) {
           if (error) {
             reject(error);
             return;
           }
-          if (User === null || User === undefined) {
+          if (Admin === null || Admin === undefined) {
             reject({ code: 8 });
             return;
           } 
-          bcrypt.compare(password, User.password, (err, resonse) => {
+          bcrypt.compare(password, Admin.password, (err, resonse) => {
             if (err) {
               reject(err);
               return;
@@ -57,13 +59,13 @@ module.exports.create = (body) => {
               reject({ code: 9999 });
               return;
             }
-            delete User.password;
+            delete Admin.password;
             const data = {
-              email: User.email,
-              id: User._id
+              email: Admin.email,
+              id: Admin._id
             };
             const token = jwt.sign(data, APP_CONFIG.token);
-            resolve({ ...convertData(User), token: token });
+            resolve({ ...convertData(Admin), token: token });
           });
         })
         .catch(() => {

@@ -1,4 +1,4 @@
-const user = require("../../services/admin");
+const admin = require("../../services/admin");
 const { validationResult } = require("express-validator");
 
 
@@ -9,7 +9,7 @@ module.exports.create = async (req, res, next) => {
       return;
     }
     try {
-      const data = await user.create(req.body);
+      const data = await admin.create(req.body);
       res.status(200).send(data);
     } catch (err) {
       next(err);
@@ -23,7 +23,7 @@ module.exports.fetch = async(req, res, next ) => {
     return;
   } 
   try {
-    const data = await user.fetch()
+    const data = await admin.fetch()
     res.status(200).send(data)
   } 
   catch (err) {
@@ -39,7 +39,7 @@ module.exports.login = async (req, res, next) => {
   }
   try {
     const {email, password} = req.body;
-    const data = await user.login(email, password);
+    const data = await admin.login(email, password);
     res.status(200).send(data)
   } 
   catch (err) {
