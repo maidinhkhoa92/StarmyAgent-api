@@ -1,6 +1,8 @@
-const User = require("../models/admin")
+const user = require("../models/admin")
 const _ = require("lodash");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const APP_CONFIG = require("../config/APP_CONFIG");
 
 
 module.exports.create = (body) => {
@@ -12,7 +14,7 @@ module.exports.create = (body) => {
           null
         );
       }
-      User.create(body, (err, data) => {
+      user.create(body, (err, data) => {
         if (err) {
           reject(err);
           return;
@@ -24,13 +26,50 @@ module.exports.create = (body) => {
 
   module.exports.fetch = () => {
     return new Promise ((resolve, reject) => {
-      User.find((err, result) => {
+      user.find((err, result) => {
         if (err) {
           reject(err)
         } 
         resolve(_.map(result, (item) => convertData(item) ))
       })
     })
+  }
+
+  module.exports.login = (email, password) => {
+    return new Promise((resolve, reject) => {
+      user
+        .findOne({ email: email }, function(error, User) {
+          if (error) {
+            reject(error);
+            return;
+          }
+          if (User === null || User === undefined) {
+            reject({ code: 8 });
+            return;
+          } 
+          bcrypt.compare(password, User.password, (err, resonse) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+
+            if (!resonse) {
+              reject({ code: 9999 });
+              return;
+            }
+            delete User.password;
+            const data = {
+              email: User.email,
+              id: User._id
+            };
+            const token = jwt.sign(data, APP_CONFIG.token);
+            resolve({ ...convertData(User), token: token });
+          });
+        })
+        .catch(() => {
+          reject({ msg: ERRORS[9999] });
+        });
+    });
   }
 
   
