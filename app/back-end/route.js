@@ -6,7 +6,7 @@ const Token = require('../helper/token');
 const admin = require("./admin")
 const adminValidate = require("./admin/validate")
 router.post("/admin", adminValidate.create, admin.create )
-router.get("/agency", admin.fetch )
 router.post("/login", adminValidate.create, admin.login)
+router.get("/agency", Token , admin.fetch )
 
 module.exports = router;
