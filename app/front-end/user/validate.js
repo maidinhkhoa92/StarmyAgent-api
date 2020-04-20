@@ -209,7 +209,13 @@ module.exports.agentUpdating = [
   body("social.facebook").isString(),
   body("social.linkedin").isString(),
   body("social.twitter").isString(),
-  body("social.youtube").isString()
+  body("social.youtube").isString(),
+  body("completed")
+    .isIn([false, true])
+    .withMessage("Completed must be false or true")
+    .not()
+    .isEmpty()
+    .withMessage("Status is required")
 ];
 
 module.exports.agentPhotoUpdating = [

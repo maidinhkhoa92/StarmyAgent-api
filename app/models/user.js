@@ -48,7 +48,12 @@ const schema = new Schema({
   agentCertificateDate: { type: String, default: "" },
   languages: { type: Array, default: [] },
   services: { type: Array, default: [] },
-  description: { type: String, default: "" }
+  description: { type: String, default: "" },
+  completed: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
 });
 
 schema
