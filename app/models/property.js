@@ -20,8 +20,8 @@ const schema = new Schema({
   bathRoom: { type: Number, default: 0 },
   area: { type: Number, default: 0 },
   city: { type: Schema.Types.ObjectId, ref: "city" },
-  district: { type: String, default: "" },
-  photo: { type: String, default: "" },
+  district: { type: Schema.Types.ObjectId, ref: "district" },
+  photo: { type: Array, default: [] },
   agent: { type: Schema.Types.ObjectId, ref: "user" }
 });
 

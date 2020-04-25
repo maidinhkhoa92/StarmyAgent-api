@@ -48,6 +48,10 @@ router.get("/agent/address", Token, address.list);
 const city = require("./city");
 router.get("/city", city.list);
 
+// district
+const district = require("./district");
+router.get("/district", district.list);
+
 /*
   ***** Guest Router ******
 */

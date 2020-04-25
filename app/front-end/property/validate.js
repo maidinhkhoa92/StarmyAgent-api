@@ -44,7 +44,7 @@ module.exports.create = [
     .not()
     .isEmpty()
     .withMessage("District is required"),
-  body("photo").isString()
+  body("photo").isArray()
 ];
 
 module.exports.get = [];
