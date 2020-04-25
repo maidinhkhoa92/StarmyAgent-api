@@ -7,6 +7,8 @@ const admin = require("./admin")
 const adminValidate = require("./admin/validate")
 router.post("/admin", adminValidate.create, admin.create )
 router.post("/login", adminValidate.create, admin.login)
-router.get("/agency", Token , admin.fetch )
 
+//user
+const user = require("./user")
+router.get("/user", Token , user.fetch )
 module.exports = router;
