@@ -33,6 +33,18 @@ module.exports.list = (searchQuery = {}, paged = 1, limit = 10) => {
   });
 };
 
+module.exports.detail = query => {
+  return new Promise((resolve, reject) => {
+    District.findOne(query, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    });
+  });
+};
+
 const convertData = (data) => {
   var result = data;
   if (data === null || data === undefined) {

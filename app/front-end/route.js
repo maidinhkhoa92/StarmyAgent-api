@@ -67,6 +67,7 @@ router.get("/comment", guestComment.list);
 const guestAgents = require("./guest/agents");
 router.get("/agent", guestAgents.list);
 router.get("/agent/:id", guestAgents.detail);
+router.get("/search-agent", guestAgents.search);
 
 // Properties
 const guestProperties = require("./guest/properties");

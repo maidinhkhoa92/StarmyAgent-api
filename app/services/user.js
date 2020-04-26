@@ -17,7 +17,7 @@ module.exports.register = body => {
         null
       );
     }
-    user.create(body, function(err, data) {
+    user.create(body, function (err, data) {
       if (err) {
         reject(err);
         return;
@@ -28,7 +28,7 @@ module.exports.register = body => {
         subject: EMAIL.register.title,
         html: data.type === 'agent' ? EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl }) : EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
       };
-      transporter.sendMail(mailOptions, function(error) {
+      transporter.sendMail(mailOptions, function (error) {
         if (err) {
           reject({ code: 11 });
           return;
@@ -43,7 +43,7 @@ module.exports.register = body => {
 module.exports.login = (email, password) => {
   return new Promise((resolve, reject) => {
     user
-      .findOne({ email: email }, function(error, User) {
+      .findOne({ email: email }, function (error, User) {
         if (error) {
           reject(error);
           return;
@@ -103,7 +103,7 @@ module.exports.update = (id, body) => {
       );
     }
 
-    user.findOneAndUpdate(query, body, { new: true }, function(err, data) {
+    user.findOneAndUpdate(query, body, { new: true }, function (err, data) {
       if (err) {
         reject(err);
       }
@@ -172,7 +172,7 @@ module.exports.find = query => {
 
 module.exports.forgotPassword = email => {
   return new Promise((resolve, reject) => {
-    user.findOne({ email: email }, function(err, data) {
+    user.findOne({ email: email }, function (err, data) {
       if (err) {
         reject(err);
         return;
@@ -192,7 +192,7 @@ module.exports.forgotPassword = email => {
         subject: EMAIL.resetPassword.title,
         html: EMAIL.resetPassword.message({ link })
       };
-      transporter.sendMail(mailOptions, function(error, info) {
+      transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           reject({ code: 11 });
           return;

@@ -14,6 +14,7 @@ const schema = new Schema({
   telephone: { type: String, default: "" },
   agency: { type: Schema.Types.ObjectId, ref: "user" },
   city: { type: Schema.Types.ObjectId, ref: "city" },
+  district: { type: Schema.Types.ObjectId, ref: "district" },
   card: Object,
   company: {
     owner: { type: String, default: "" },
