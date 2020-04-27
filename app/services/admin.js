@@ -20,7 +20,12 @@ module.exports.create = (body) => {
           reject(err);
           return;
         }
-        resolve(convertData(data));
+        const result = () => {
+          let infor = convertData(data);
+          delete infor.password
+          return infor
+        }
+        resolve(result());
       });
     });
   };
@@ -31,8 +36,7 @@ module.exports.create = (body) => {
         if (err) {
           reject(err)
         } 
-        console.log(result)
-        resolve(_.map(result, (item) => convertData(item) ))
+        resolve(_.map(result, (item) => convertData(item)))
       })
     })
   }
@@ -86,6 +90,7 @@ module.exports.create = (body) => {
     result.id = data._id;
     delete result._id;
     delete result.__v;
+    delete result.password;
     return result;
   };
   
