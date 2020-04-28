@@ -47,7 +47,6 @@ module.exports = {
     oneTime: body => `
       <p>Hola,</p>
       <p>Un cliente propietario te ha seleccionado para que comercialices su propiedad.</p>
-      <p>Ha llegado a ti a través del formulario de contacto por lo que no conoce tus datos.</p>
       <p>Contáctale lo antes posible. Su mensaje es el siguiente:</p>
       <p>Nombre: ${body.lName}</p>
       <p>Apellido:${body.fName}</p>
@@ -62,7 +61,6 @@ module.exports = {
     repeated: body => `
       <p>Hola, Estamos enviando este cliente repetido:</p>
       <p>Un cliente propietario te ha seleccionado para que comercialices su propiedad.</p>
-      <p>Ha llegado a ti a través del formulario de contacto por lo que no conoce tus datos.</p>
       <p>Contáctale lo antes posible. Su mensaje es el siguiente:</p>
       <p>Nombre: ${body.lName}</p>
       <p>Apellido:${body.fName}</p>

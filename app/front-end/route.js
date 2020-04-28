@@ -99,4 +99,7 @@ const Report = require("./report");
 router.get("/report/:id", Token, Report.byAgentID);
 router.get("/report", Token, Report.report);
 
+const Calculation = require("./calculation");
+router.post("/calculation", Calculation.result)
+
 module.exports = router;
