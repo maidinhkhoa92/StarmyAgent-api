@@ -51,6 +51,7 @@ router.get("/city", city.list);
 // district
 const district = require("./district");
 router.get("/district", district.list);
+router.get("/search-district", district.search)
 
 /*
   ***** Guest Router ******

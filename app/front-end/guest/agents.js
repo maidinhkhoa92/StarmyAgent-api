@@ -58,7 +58,7 @@ module.exports.search = async (req, res, next) => {
 
   try {
     const { key } = req.query;
-
+    
     const queryDistrict = { name: { $regex: key, $options: "g" } }
     const district = await District.detail(queryDistrict);
 
@@ -67,7 +67,6 @@ module.exports.search = async (req, res, next) => {
 
     res.status(200).send(data);
   } catch (err) {
-    console.log(err)
     next(err);
   }
 };
