@@ -28,13 +28,14 @@ module.exports.register = body => {
         subject: EMAIL.register.title,
         html: data.type === 'agent' ? EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl }) : EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
       };
-      transporter.sendMail(mailOptions, function(error) {
-        if (err) {
-          reject({ code: 11 });
-          return;
-        }
+      // transporter.sendMail(mailOptions, function(error) {
+      //   if (err) {
+      //     reject({ code: 11 });
+      //     return;
+      //   }
+      console.log(data)
         resolve(convertData(data));
-      });
+      // });
     });
   });
 };

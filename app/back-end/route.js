@@ -13,7 +13,7 @@ const user = require("./user")
 //get agency
 router.get("/user", Token , user.fetch )
 // post agent from agency
-router.post("/agency/agent", Token, user.register)
+router.post("/agency/register", Token, user.register)
 
 
 // city

@@ -9,6 +9,7 @@ module.exports.fetch = async(req, res, next ) => {
     } 
     try {
       const data = await user.list(req.query)
+      console.log(data.docs)
       res.status(200).send(data)
     } 
     catch (err) {
