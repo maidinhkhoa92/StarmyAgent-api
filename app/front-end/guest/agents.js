@@ -59,7 +59,7 @@ module.exports.search = async (req, res, next) => {
   try {
     const { key } = req.query;
     
-    const queryDistrict = { name: { $regex: key, $options: "g" } }
+    const queryDistrict = { name: { $regex: key, $options: "gi" } }
     const district = await District.detail(queryDistrict);
 
     const queryAgent = { city: district.city, type: 'agent' };

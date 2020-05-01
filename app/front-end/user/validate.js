@@ -210,6 +210,7 @@ module.exports.agentUpdating = [
   body("social.linkedin").isString(),
   body("social.twitter").isString(),
   body("social.youtube").isString(),
+  body("agency_name").isString(),
   body("completed")
     .isIn([false, true])
     .withMessage("Completed must be false or true")

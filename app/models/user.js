@@ -13,6 +13,7 @@ const schema = new Schema({
   lName: { type: String, default: "" },
   telephone: { type: String, default: "" },
   agency: { type: Schema.Types.ObjectId, ref: "user" },
+  agency_name: { type: String, default: "" },
   city: { type: Schema.Types.ObjectId, ref: "city" },
   district: { type: Schema.Types.ObjectId, ref: "district" },
   card: Object,
