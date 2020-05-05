@@ -10,6 +10,12 @@ module.exports = {
       <p>Cualquier duda nos dices.</p>
       <p>Un saludo!</p>
     `,
+    agencyAgent: ({ link }) => `
+      <p>Hola,</p>
+      <p>La agencia para la que trabajas nos ha contratado para incluirte en nuestra plataforma. Accede al siguiente link <a href="${link}">${link}</a> , completa tu perfil y empieza a recibir clientes.</p>
+      <p>Cualquier duda nos dices.</p>
+      <p>Un saludo!</p>
+    `,
     agency: ({link}) => `
       <p>Hola,</p>
       <p>La prueba gratuita de 30 días de tus agentes comienza hoy una vez completes el registro. Asegúrate que completen su perfil rápidamente. Una vez expire el periodo de prueba comenzarás a pagar en por mes vencido de acuerdo a los clientes recibidos mensualmente.</p>
@@ -94,7 +100,7 @@ module.exports = {
 		`
   },
   comment: {
-    title: 'New confirm comment',
+    title: 'Confirma tu reseña',
     message: token => `
       <p>Hola, gracias por tu reseña, ya para terminar valídala a través de tu mail. Un saludo</p>
       <a href="${APP_CONFIG.site_url}/review/${token}">Validar reseña</a>

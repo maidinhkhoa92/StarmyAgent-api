@@ -14,7 +14,7 @@ module.exports.list = async (req, res, next) => {
 module.exports.search = async (req, res, next) => {
   let { key } = req.query;
 
-  const query = { name: { $regex: key, $options: "g" } }
+  const query = { name: { $regex: key, $options: "gi" } }
   
   try {
     const data = await District.list(query, 1, 10);

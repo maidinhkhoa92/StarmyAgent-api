@@ -27,7 +27,7 @@ const create = body => {
         html: EMAIL.comment.message(token)
       };
       transporter.sendMail(mailOptions, function(error) {
-        if (err) {
+        if (error) {
           reject({ code: 11 });
           return;
         }

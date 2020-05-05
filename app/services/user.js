@@ -22,12 +22,23 @@ module.exports.register = body => {
         reject(err);
         return;
       }
-      const mailOptions = {
+      let mailOptions = {
         from: APP_CONFIG.adminEmail,
         to: data.email,
         subject: EMAIL.register.title,
-        html: data.type === 'agent' ? EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl }) : EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
+        html: null
       };
+
+      if (data.type === 'agent') {
+        if (body.password) {
+          mailOptions.html = EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl })
+        } else {
+          mailOptions.html = EMAIL.register.agencyAgent({ link: APP_CONFIG.registerWebAppUrl })
+        }
+      } else if (data.type === 'agency') {
+        mailOptions.html = EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
+      }
+
       transporter.sendMail(mailOptions, function (error) {
         if (err) {
           reject({ code: 11 });
