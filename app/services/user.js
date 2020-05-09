@@ -158,9 +158,25 @@ module.exports.detail = id => {
   });
 };
 
-module.exports.find = query => {
+module.exports.find = (query, isPopulate = false) => {
   return new Promise((resolve, reject) => {
-    user.findOne(query, (err, res) => {
+    const userQuery = user.findOne()
+    if (isPopulate) {
+      userQuery = userQuery.populate('city')
+    }
+    userQuery.exec(query, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    });
+  });
+};
+
+module.exports.delete = id => {
+  return new Promise((resolve, reject) => {
+    user.findByIdAndRemove(id, (err, res) => {
       if (err) {
         reject(err);
         return;
