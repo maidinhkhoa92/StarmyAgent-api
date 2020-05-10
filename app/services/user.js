@@ -28,14 +28,13 @@ module.exports.register = body => {
         subject: EMAIL.register.title,
         html: data.type === 'agent' ? EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl }) : EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
       };
-      // transporter.sendMail(mailOptions, function(error) {
-      //   if (err) {
-      //     reject({ code: 11 });
-      //     return;
-      //   }
-      console.log(data)
+      transporter.sendMail(mailOptions, function(error) {
+        if (err) {
+          reject({ code: 11 });
+          return;
+        }
         resolve(convertData(data));
-      // });
+      });
     });
   });
 };
@@ -160,10 +159,10 @@ module.exports.detail = id => {
 
 module.exports.find = (query, isPopulate = false) => {
   return new Promise((resolve, reject) => {
-    const userQuery = user.findOne()
+    let userQuery = user.findOne()
     if (isPopulate) {
       userQuery = userQuery.populate('city')
-    }
+    } 
     userQuery.exec(query, (err, res) => {
       if (err) {
         reject(err);
