@@ -8,31 +8,6 @@ const schema = new Schema({
 		unique: true
 	},
 	password: String,
-	digit: Array,
-	typeOfUser: {
-		type: String,
-		enum: ['director', 'staff', 'family'],
-		required: true,
-		default: 'family',
-	},
-	active: {
-		type: String,
-		enum: ['Pass confirmed', 'Digit confirmed', 'New'],
-		required: true,
-		default: 'New',
-	},
-	profile: Object,
-	directorId: { type: Schema.Types.ObjectId, ref: 'user' },
-	status: {
-		type: Boolean,
-		required: true,
-		default: true,
-	},
-	completed: {
-		type: Boolean,
-		required: true,
-		default: false,
-	},
 })
 
 schema.plugin(timestamp, {

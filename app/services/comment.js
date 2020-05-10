@@ -66,7 +66,7 @@ const detail = (id) => {
   });
 };
 
-const list = (query, paged, limit) => {
+const list = (query, paged, limit, detail) => {
   return new Promise((resolve, reject) => {
     let options = {};
 
@@ -79,8 +79,19 @@ const list = (query, paged, limit) => {
       limit = parseInt(paged);
       options.page = paged;
     }
-
-    Comment.paginate(query, options, (err, result) => {
+    if (detail) {
+      Comment.find().populate('address').exec((err, result) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(
+          result.map(item => convertData(item))
+        );
+      })
+    } else 
+    {
+      Comment.paginate(query, options, (err, result) => {
         if (err) {
           reject(err);
           return;
@@ -96,6 +107,7 @@ const list = (query, paged, limit) => {
           })
         });
       });
+    }
   });
 };
 
