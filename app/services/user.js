@@ -1,6 +1,7 @@
 "use strict";
 
 const user = require("../models/user");
+const Comment = require("../models/comment");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const transporter = require("../helper/nodemailer");
@@ -137,7 +138,7 @@ module.exports.list = (searchQuery, paged, limit) => {
       options.page = paged;
     }
 
-    user.paginate(searchQuery, options, (err, result) => {
+    user.paginate(searchQuery, options, async (err, result) => {
       if (err) {
         reject(err);
         return;
@@ -148,9 +149,12 @@ module.exports.list = (searchQuery, paged, limit) => {
       }
       resolve({
         ...result,
-        docs: _.map(result.docs, item => {
-          return convertData(item);
-        })
+        docs: await Promise.all(_.map(result.docs, async item => {
+          const comments = await Comment.find({ agent: item._id })
+          const formatComments = await comments.length === 0 ? [0] :_.map(comments, (item) => item.rate.sum)
+          const total = await _.reduce(formatComments, (sum, item) => (sum + item))
+          return {...convertData(item), total, comments: comments.length};
+        }))
       });
     });
   });
