@@ -15,7 +15,7 @@ router.get("/user", Token , user.list )
 // post Agency
 router.post("/agency/register", Token, user.register)
 // delete Agency
-router.post("/agency/:id", Token, user.delete)
+router.post("/user/:id", Token, user.delete)
 // get Agents inside Agency
 router.get("/user/:id", Token , user.list )
 // get Agent 
@@ -30,5 +30,11 @@ router.post("/comment/:id", Token, guestComment.update)
 // city
 const city = require("../front-end/city");
 router.get("/city", Token , city.list);
+
+// notes
+const notes = require("./notes/index")
+const notesValidate = require("./notes/validate")
+router.get("/notes/:id", Token, notes.list)
+router.post("/notes", Token, notesValidate.create, notes.create)
 
 module.exports = router;
