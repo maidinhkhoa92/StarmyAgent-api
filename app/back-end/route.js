@@ -12,8 +12,8 @@ router.post("/login", adminValidate.create, admin.login)
 const user = require("./user")
 // get agency
 router.get("/user", Token , user.list )
-// post Agency
-router.post("/agency/register", Token, user.register)
+// post (adding) Agency
+router.post("/user/register", Token, user.register)
 // delete Agency
 router.post("/user/:id", Token, user.delete)
 // get Agents inside Agency
