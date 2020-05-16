@@ -55,7 +55,6 @@ module.exports.list = async(req, res, next ) => {
     try {
       const { id } = req.params
       const data = await user.find({_id: id}, true);
-      console.log(data)
       res.status(200).send(data);
     } catch (err) {
       next(err);
