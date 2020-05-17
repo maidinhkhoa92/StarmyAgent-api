@@ -178,7 +178,7 @@ module.exports.detail = id => {
 
 module.exports.find = (query, isPopulate = false) => {
   return new Promise((resolve, reject) => {
-    let userQuery = user.findOne()
+    let userQuery = user.findOne(query)
     if (isPopulate) {
       userQuery = userQuery.populate('city')
     } 

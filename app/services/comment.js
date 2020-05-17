@@ -5,7 +5,7 @@ const EMAIL = require("../config/EMAIL");
 const APP_CONFIG = require("../config/APP_CONFIG");
 const jwt = require("jsonwebtoken");
 
-const create = body => {
+const create = (body) => {
   return new Promise((resolve, reject) => {
     Comment.create(body, (err, data) => {
       if (err) {
@@ -16,7 +16,7 @@ const create = body => {
       const verifyData = {
         email: data.email,
         id: data._id,
-      }
+      };
       const token = jwt.sign(verifyData, APP_CONFIG.token);
 
       // Send email
@@ -24,10 +24,10 @@ const create = body => {
         from: APP_CONFIG.adminEmail,
         to: data.email,
         subject: EMAIL.comment.title,
-        html: EMAIL.comment.message(token)
+        html: EMAIL.comment.message(token),
       };
-      transporter.sendMail(mailOptions, function(error) {
-        if (error) {
+      transporter.sendMail(mailOptions, function (error) {
+        if (err) {
           reject({ code: 11 });
           return;
         }
@@ -41,10 +41,10 @@ const create = body => {
 const update = (id, body) => {
   return new Promise((resolve, reject) => {
     const query = {
-      _id: id
+      _id: id,
     };
-    
-    Comment.findOneAndUpdate(query, body, { new: true }, function(err, data) {
+
+    Comment.findOneAndUpdate(query, body, { new: true }, function (err, data) {
       if (err) {
         reject(err);
       }
@@ -62,7 +62,7 @@ const detail = (id) => {
         return;
       }
       resolve(convertData(res));
-    })
+    });
   });
 };
 
@@ -79,39 +79,35 @@ const list = (query, paged, limit, detail) => {
       limit = parseInt(paged);
       options.page = paged;
     }
+
     if (detail) {
-      Comment.find().populate('address').exec((err, result) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        resolve(
-          result.map(item => convertData(item))
-        );
-      })
-    } else 
-    {
-      Comment.paginate(query, options, (err, result) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (result.docs === null) {
-          reject({ code: 10000 });
-          return;
-        }
-        resolve({
-          ...result,
-          docs: _.map(result.docs, item => {
-            return convertData(item);
-          })
-        });
-      });
+      options.populate = "address";
     }
+
+    if (paged && paged === -1) {
+      options.pagination = false
+    }
+
+    Comment.paginate(query, options, (err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      if (result.docs === null) {
+        reject({ code: 10000 });
+        return;
+      }
+      resolve({
+        ...result,
+        docs: _.map(result.docs, (item) => {
+          return convertData(item);
+        }),
+      });
+    });
   });
 };
 
-const convertData = data => {
+const convertData = (data) => {
   var result = data;
   if (data === null || data === undefined) {
     return null;
@@ -129,5 +125,5 @@ module.exports = {
   create,
   list,
   detail,
-  update
+  update,
 };

@@ -22,9 +22,39 @@ module.exports.create = body => {
             reject(err);
             return;
             }
-            resolve(convertData(data));
+            resolve(data.map(item => convertData(item)))
             }
       );
+    });
+  };
+
+  module.exports.delete = id => {
+    return new Promise((resolve, reject) => {
+      notes.findByIdAndRemove(id, (err, res) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(convertData(res));
+      });
+    });
+  };
+
+  module.exports.update = (id, body) => {
+    return new Promise((resolve, reject) => {
+      const query = {
+        _id: id
+      };
+      const params = {
+        msg: body.message
+      }
+      notes.findOneAndUpdate(query, params, {new: true}, function(err, data) {
+        if (err) {
+          reject(err);
+          return;
+        }
+        resolve(convertData(data));
+      });
     });
   };
 

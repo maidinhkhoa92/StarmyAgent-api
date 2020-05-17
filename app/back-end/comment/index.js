@@ -2,10 +2,12 @@ const comment = require("../../services/comment");
 
 module.exports.list = async (req, res, next) => {
     try {
-      let query = {};
+      let query = {
+        "status": { "$in": ['draft', 'public'] }
+      };
       const { paged, limit,  detail } = req.query;
       
-      const data = await comment.list(query, paged, limit, detail);
+      const data = await comment.list(query, -1, limit, detail);
       res.status(200).send(data);
     } catch (err) {
       next(err);
@@ -21,3 +23,5 @@ module.exports.list = async (req, res, next) => {
       next(err);
     }
   };
+
+  
