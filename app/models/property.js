@@ -22,7 +22,12 @@ const schema = new Schema({
   city: { type: Schema.Types.ObjectId, ref: "city" },
   district: { type: Schema.Types.ObjectId, ref: "district" },
   photo: { type: Array, default: [] },
-  agent: { type: Schema.Types.ObjectId, ref: "user" }
+  agent: { type: Schema.Types.ObjectId, ref: "user" },
+  disabled: {
+    type: Boolean,
+    required: true,
+    default: true
+  },
 });
 
 schema

@@ -138,6 +138,10 @@ module.exports.list = (searchQuery, paged, limit) => {
       options.page = paged;
     }
 
+    if (paged && paged === -1) {
+      options.pagination = false
+    }
+
     user.paginate(searchQuery, options, async (err, result) => {
       if (err) {
         reject(err);

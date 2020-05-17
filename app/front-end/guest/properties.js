@@ -13,6 +13,7 @@ module.exports.list = async (req, res, next) => {
     const { paged, limit, agent } = req.query;
 
     query.agent = agent
+    query.disabled = false
     
     const data = await Property.list(query, paged, limit);
     res.status(200).send(data);

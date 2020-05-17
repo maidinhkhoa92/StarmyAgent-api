@@ -24,6 +24,7 @@ module.exports.list = async (req, res, next) => {
     }
 
     query.type = 'agent';
+    query.disabled = false;
 
     const data = await user.list(query, paged, limit);
     res.status(200).send(data);
