@@ -26,7 +26,6 @@ module.exports.list = (query, paged, limit) => {
       limit = parseInt(paged);
       options.page = paged;
     }
-
     Property.paginate(query, options, (err, result) => {
       if (err) {
         reject(err);
