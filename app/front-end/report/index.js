@@ -1,59 +1,37 @@
-const Request = require('../../services/request');
-const Offer = require('../../services/offer');
+const Report = require('../../services/report');
 const User = require('../../services/user');
 const APP_CONFIG = require('../../config/APP_CONFIG');
-const _ = require('lodash');
+const { getCurrentMonthYear } = require("../../helper/moment");
 
-module.exports.byAgentID = async (req, res, next) => {
+module.exports.list = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const saleQuery = { agent: id, type: 'sale' };
-    const rentQuery = { agent: id, type: 'rent' };
+    const query = {
+      user: id
+    }
+    const data = await Report.list(query, -1)
 
-    const requestSale = await Request.report(saleQuery);
-    const requestRent = await Request.report(rentQuery);
-    const offerSale = await Offer.report(saleQuery);
-    const offerRent = await Offer.report(rentQuery);
-
-    res.status(200).send({
-      requestSale,
-      requestRent,
-      offerSale,
-      offerRent
-    });
+    res.status(200).send(data);
   } catch (err) {
     next(err);
   }
 };
 
-module.exports.report = async (req, res, next) => {
+module.exports.currentReport = async (req, res, next) => {
   try {
-    const { id } = req.decoded;
+    const { id } = req.params;
+    const time = await getCurrentMonthYear();
+    const data = await Report.detail(time, id);
 
-    const agents = await User.list({ agency: id, type: 'agent' }, -1);
-    const numberAgent = agents.totalDocs;
-    const discount = await APP_CONFIG.discount(numberAgent);
-    if (agents.length > 0) {
-      const saleQuery = await {
-        $and: [
-          { type: 'sale' },
-          { $or: _.map(agents.docs, item => ({ agent: item.id })) }
-        ]
-      }
+    if (data) {
+      const { requestRent, requestSale, offerRent, offerSale } = data;
 
-      const requestSale = await Request.report(saleQuery);
-      const offerSale = await Offer.report(saleQuery);
+      // get discount
+      const agents = await User.list({ agency: id, type: 'agent' }, -1);
+      const numberAgent = agents.totalDocs;
+      const discount = await APP_CONFIG.discount(numberAgent);
 
-      const rentQuery = await {
-        $and: [
-          { type: 'rent' },
-          { $or: _.map(agents.docs, item => ({ agent: item.id })) }
-        ]
-      }
-
-      const requestRent = await Request.report(rentQuery);
-      const offerRent = await Offer.report(rentQuery);
 
       const total = (requestRent * 2 + requestSale * 4 + offerRent * 5 + offerSale * 8) * discount / 100
 

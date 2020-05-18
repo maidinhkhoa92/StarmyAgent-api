@@ -41,6 +41,13 @@ router.post("/notes/update/:id", Token, notes.update)
 
 // property
 const property = require("./property");
+const propertyValidate = require("./property/validate")
 router.get("/property", Token , property.list);
+router.put("/property/:id", Token, propertyValidate.changeStatus, property.update)
+
+// Report
+const Report = require("./report");
+router.get("/report/:id", Token, Report.list);
+router.get("/current-report/:id", Token, Report.currentReport);
 
 module.exports = router;

@@ -29,12 +29,6 @@ const schema = new Schema({
         required: true,
         default: ''
     },
-    type: {
-        type: String,
-        enum: ["agent", "agency"],
-        required: true,
-        default: "agent"
-    },
     user: { type: Schema.Types.ObjectId, ref: "user" },
 });
 

@@ -100,8 +100,8 @@ router.post("/request", guestRequestValidate.create, guestRequest.create);
 
 // Report
 const Report = require("./report");
-router.get("/report/:id", Token, Report.byAgentID);
-router.get("/report", Token, Report.report);
+router.get("/report/:id", Token, Report.list);
+router.get("/current-report/:id", Token, Report.currentReport);
 
 const Calculation = require("./calculation");
 router.post("/calculation", Calculation.result)

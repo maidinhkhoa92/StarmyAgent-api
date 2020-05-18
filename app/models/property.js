@@ -23,10 +23,11 @@ const schema = new Schema({
   district: { type: Schema.Types.ObjectId, ref: "district" },
   photo: { type: Array, default: [] },
   agent: { type: Schema.Types.ObjectId, ref: "user" },
-  disabled: {
-    type: Boolean,
+  status: {
+    type: String,
+    enum: ["draft", "public"],
     required: true,
-    default: true
+    default: "draft"
   },
 });
 

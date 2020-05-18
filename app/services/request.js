@@ -2,7 +2,7 @@ const Request = require("../models/request");
 const EMAIL = require("../config/EMAIL");
 const transporter = require("../helper/nodemailer");
 
-module.exports.create = body => {
+module.exports.create = (body, agent) => {
   return new Promise((resolve, reject) => {
     Request.create(body, (err, data) => {
       if (err) {
@@ -11,9 +11,9 @@ module.exports.create = body => {
       }
       const mailOptions = {
         from: body.email,
-        to: APP_CONFIG.adminEmail,
+        to: agent.email,
         subject: EMAIL.request.title,
-        html: EMAIL.request.content(data)
+        html: EMAIL.request.message(data)
       };
       transporter.sendMail(mailOptions, function(error) {
         if (err) {
