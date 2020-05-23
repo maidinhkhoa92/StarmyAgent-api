@@ -104,6 +104,7 @@ router.get("/report/:id", Token, Report.list);
 router.get("/current-report/:id", Token, Report.currentReport);
 
 const Calculation = require("./calculation");
+router.get("/calculation", Calculation.data)
 router.post("/calculation", Calculation.result)
 
 module.exports = router;

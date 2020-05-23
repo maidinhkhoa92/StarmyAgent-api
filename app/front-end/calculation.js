@@ -1,3 +1,5 @@
+const CalculatedData = require('../services/calculatedData')
+
 module.exports.result = (req, res) => {
   const { operationType, area, propertyState, furnitureState, lift, sunLight, terrace, terraceArea, commonSpaces } = req.body;
   let price = 0;
@@ -149,4 +151,13 @@ const TerraceValue = (terrace, terraceArea) => {
 
 const CommonSpacesValue = (commonSpaces) => {
   return commonSpaces === 'true' ? 1.03 : 1;
+}
+
+module.exports.data = async (req, res, next) => {
+  try {
+    const data = await CalculatedData.list();
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
 }
