@@ -1,8 +1,9 @@
 const CalculatedData = require('../services/calculatedData')
 
 module.exports.result = (req, res) => {
-  const { operationType, area, propertyState, furnitureState, lift, sunLight, terrace, terraceArea, commonSpaces } = req.body;
+  const { districtValue, operationType, area, propertyState, furnished, furnitureState, lift, propertyFloorNumber, sunLight, terrace, terraceArea, commonSpaces } = req.body;
   let price = 0;
+  price = operationType === "rent" ? districtValue.rent : districtValue.sale
   price = price * AreaValue(area)
   price = price * PropertyStateValue(propertyState, operationType)
   price = price * FurnitureValue(furnished, furnitureState, operationType)
@@ -10,8 +11,7 @@ module.exports.result = (req, res) => {
   price = price * SunLightValue(sunLight)
   price = price * TerraceValue(terrace, terraceArea)
   price = price * CommonSpacesValue(commonSpaces)
-
-  res.status(200).send({ value: price })
+  res.status(200).send({ value: price.toFixed(2) })
 }
 
 const AreaValue = number => {
@@ -59,7 +59,6 @@ const PropertyStateValue = (propertyState, operationType) => {
 
 const FurnitureValue = (furniture, furnitureState, operationType) => {
   let value = 1;
-
   if (furniture) {
     if (operationType === 'rent') {
       switch (furnitureState) {
