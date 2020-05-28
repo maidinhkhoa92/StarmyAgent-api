@@ -11,7 +11,7 @@ module.exports.result = (req, res) => {
   price = price * SunLightValue(sunLight)
   price = price * TerraceValue(terrace, terraceArea)
   price = price * CommonSpacesValue(commonSpaces)
-  res.status(200).send({ value: price.toFixed(2) })
+  res.status(200).send({ value: Math.floor(price) })
 }
 
 const AreaValue = number => {
