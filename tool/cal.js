@@ -13,11 +13,11 @@ const schema = {
         type: String
     },
     'Alquiler': {
-        prop: 'sale',
+        prop: 'rent',
         type: Number
     },
     'Venta': {
-        prop: 'rent',
+        prop: 'sale',
         type: Number
     },
 }
