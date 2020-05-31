@@ -3,17 +3,14 @@ const _ = require("lodash");
 
 module.exports.list = () => {
   return new Promise((resolve, reject) => {
-
-    CalculatedData.find({}, (err, data) => {
+    CalculatedData.find({}).sort('city').exec((err, data) => {
       if (err) {
         reject(err)
         return;
       }
-      const result = _.map(data, item => {
+      resolve(_.map(data, item => {
         return convertData(item);
-      });
-
-      resolve(result);
+      }));
     })
   });
 };
