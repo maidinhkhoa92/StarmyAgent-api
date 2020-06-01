@@ -59,7 +59,7 @@ const PropertyStateValue = (propertyState, operationType) => {
 
 const FurnitureValue = (furniture, furnitureState, operationType) => {
   let value = 1;
-  if (furniture) {
+  if (furniture === true || furniture === 'true') {
     if (operationType === 'rent') {
       switch (furnitureState) {
         case 'Malo':
@@ -103,10 +103,10 @@ const PropertyFloorNumberValue = (liftControl, floorNumber) => {
       value = 0.97;
       break;
     case 'Primera o Segunda':
-      value = liftControl === 'true' ? 1.04 : 0.97;
+      value = liftControl === 'true' || liftControl === true ? 1.04 : 0.97;
       break;
     case 'Tercera planta o superior':
-      value = liftControl === 'true' ? 1.04 : 0.93;
+      value = liftControl === 'true' || liftControl === true ? 1.04 : 0.92;
       break;
   }
 
@@ -136,20 +136,26 @@ const SunLightValue = (sunLight) => {
 const TerraceValue = (terrace, terraceArea) => {
   const parseValue = Number(terraceArea)
   let value = 1;
-  if (terrace === 'true') {
-    value =
-      parseValue < 16
-        ? 1.03
-        : parseValue < 46
-          ? 1.05
-          : 1.04;
+  if (terrace === 'true' || terrace === true) {
+    if (parseValue > 5) {
+      value = 1.02
+    }
+    if (parseValue >= 5 && parseValue < 14.9) {
+      value = 1.03
+    }
+    if (parseValue >= 15 && parseValue < 45) {
+      value = 1.05
+    }
+    if (parseValue >= 45 ) {
+      value = 1.04
+    }
   }
 
   return value;
 }
 
 const CommonSpacesValue = (commonSpaces) => {
-  return commonSpaces === 'true' ? 1.03 : 1;
+  return commonSpaces === 'true' || commonSpaces === true ? 1.03 : 1;
 }
 
 module.exports.data = async (req, res, next) => {
