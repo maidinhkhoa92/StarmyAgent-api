@@ -1,9 +1,9 @@
 const city = require("../models/city");
 const _ = require("lodash");
 
-module.exports.list = (paged = 1, limit = 10) => {
+module.exports.list = (paged = 1, limit = 10, queryCity = {}) => {
   return new Promise((resolve, reject) => {
-    var query = city.find();
+    var query = city.find(queryCity);
     
     if (limit) {
       query = query.limit(limit);

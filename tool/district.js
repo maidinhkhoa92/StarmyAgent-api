@@ -27,7 +27,7 @@ const data = [
     { name: 'El Pilar', city: 'Albacete' },
     { name: 'San Pablo-Santa Teresa', city: 'Albacete' },
 
-    { name: 'Albufereta', city: 'Alicante' },
+    { name: 'Albufereta', city: 'Alicante', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FAlicante.jpg?alt=media&token=3feebf9f-3eba-41cd-82cf-c799638e4bd1', highlight: true },
     { name: 'Alipark', city: 'Alicante' },
     { name: 'Altozano-Conde Lumiares', city: 'Alicante' },
     { name: 'Benalúa', city: 'Alicante' },
@@ -95,7 +95,7 @@ const data = [
 
     { name: 'Barbastro', city: 'Barbastro' },
 
-    { name: 'Ciutat Vella,el Barri Gòtic', city: 'Barcelona' },
+    { name: 'Ciutat Vella,el Barri Gòtic', city: 'Barcelona', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FBarcelona.jpg?alt=media&token=e31f6728-2520-4276-a14c-52f70e8c152c', highlight: true },
     { name: 'Ciutat Vella,el Raval', city: 'Barcelona' },
     { name: 'Ciutat Vella,la Barceloneta', city: 'Barcelona' },
     { name: 'Ciutat Vella,Sant Pere i Santa Caterina i la Ribera', city: 'Barcelona' },
@@ -273,7 +273,7 @@ const data = [
 
     { name: 'Betanzos', city: 'Betanzos' },
 
-    { name: 'Casco Viejo', city: 'Bilbao' },
+    { name: 'Casco Viejo', city: 'Bilbao', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FBILBAO.jpg?alt=media&token=2d3e0425-3712-4c4e-9f87-470551cc14a7', highlight: true },
     { name: 'Ibaiondo', city: 'Bilbao' },
     { name: 'Begoña-Santutxu', city: 'Bilbao' },
     { name: 'Otxarkoaga - Txurdinaga', city: 'Bilbao' },
@@ -360,7 +360,7 @@ const data = [
     { name: 'Santa María-Pio XII', city: 'Ciudad Real' },
     { name: 'La Guija', city: 'Ciudad Real' },
 
-    { name: 'Centro-Casco histórico,Centro', city: 'Córdoba' },
+    { name: 'Centro-Casco histórico,Centro', city: 'Córdoba', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FCordoba.jpg?alt=media&token=ed6ec087-6781-4f08-b9a9-8996b21a68cd', highlight: true },
     { name: 'Centro-Casco histórico,Juderia-San Basilio', city: 'Córdoba' },
     { name: 'Centro-Casco histórico,Casco Histórico - Corredera - Ribera', city: 'Córdoba' },
     { name: 'Centro-Casco histórico,Casco Histórico - Ollerías - Marrubial', city: 'Córdoba' },
@@ -409,7 +409,7 @@ const data = [
     { name: 'Pabellón-Estación-Corte Inglés', city: 'El Ejido' },
     { name: 'Santo Domingo', city: 'El Ejido' },
 
-    { name: 'Centro', city: 'Elche' },
+    { name: 'Centro', city: 'Elche', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FElche.jpg?alt=media&token=0c1a7195-ad62-48ca-bcc3-61ee5c1d3d9e', highlight: true },
     { name: 'Pont Nou-Corazón de Jesús', city: 'Elche' },
     { name: 'Reina Victoria-Miguel Hernández', city: 'Elche' },
     { name: 'Plaza Crevillente-Juzgados', city: 'Elche' },
@@ -428,13 +428,13 @@ const data = [
 
     { name: 'Ferrol', city: 'Ferrol' },
 
-    { name: 'Centro', city: 'Gijón' },
+    { name: 'Centro', city: 'Gijón', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FGijo%CC%81n.jpg?alt=media&token=f92542b0-e8c4-4b71-a2b8-75f03c4a6af1', highlight: true },
     { name: 'Llano', city: 'Gijón' },
     { name: 'Sur', city: 'Gijón' },
     { name: 'Este', city: 'Gijón' },
     { name: 'Oeste', city: 'Gijón' },
 
-    { name: 'Migdia Casernes', city: 'Girona' },
+    { name: 'Migdia Casernes', city: 'Girona', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FGirona.jpg?alt=media&token=0efefb88-8e7f-4999-a5e0-a787e01189fd', highlight: true },
     { name: 'Eixample', city: 'Girona' },
     { name: 'Barri Vell', city: 'Girona' },
     { name: 'Sant Narcís', city: 'Girona' },
@@ -489,7 +489,7 @@ const data = [
     { name: `Figueres,Poble Nou-L'Oliva Gran`, city: 'Girona Costa Brava' },
     { name: `Figueres,Parc Bosc Castell`, city: 'Girona Costa Brava' },
 
-    { name: 'Centro,Gran Vía', city: 'Granada' },
+    { name: 'Centro,Gran Vía', city: 'Granada', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FGranada.jpg?alt=media&token=b2caad16-1222-4371-a544-c791abfa9852', highlight: true },
     { name: 'Centro,Gran Capitán', city: 'Granada' },
     { name: 'Centro,Jardín Botánico', city: 'Granada' },
     { name: 'Centro,Recogidas', city: 'Granada' },
@@ -525,7 +525,7 @@ const data = [
     { name: 'El Conquero', city: 'Huelva' },
     { name: 'Isla Chica', city: 'Huelva' },
 
-    { name: 'Sant Joan de Labritja-Portinatx', city: 'Ibiza' },
+    { name: 'Sant Joan de Labritja-Portinatx', city: 'Ibiza', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FIBIZA.jpg?alt=media&token=4f33f978-5b9c-4978-9a0c-f48df368bc51', highlight: true },
     { name: 'Sant Antoni de Portmany', city: 'Ibiza' },
     { name: 'Sant Josep de Sa Talaia,Sant Agustín-Cala de Bou', city: 'Ibiza' },
     { name: 'Sant Josep de Sa Talaia,Cala Vedella-Cala Tarida-Cala Conta', city: 'Ibiza' },
@@ -572,7 +572,7 @@ const data = [
     { name: 'El Rocío-La Milagrosa', city: 'Jerez de la Frontera' },
     { name: 'El Retiro-Parque Atlántico-Parque Este', city: 'Jerez de la Frontera' },
 
-    { name: 'Centro,Alcaravaneras', city: 'Las Palmas de Gran Canaria' },
+    { name: 'Centro,Alcaravaneras', city: 'Las Palmas de Gran Canaria', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FLas%20Palmas.jpg?alt=media&token=380c4d1f-f1e6-4b21-aa34-5c29a63455aa', highlight: true },
     { name: 'Centro,Ciudad Jardín', city: 'Las Palmas de Gran Canaria' },
     { name: 'Centro,Arenales - Lugo - Avda Marítima', city: 'Las Palmas de Gran Canaria' },
     { name: 'Mapa de Puerto - Canteras,Guanarteme', city: 'Las Palmas de Gran Canaria' },
@@ -625,7 +625,7 @@ const data = [
     { name: 'La Milagrosa-Piringalla', city: 'Lugo' },
     { name: 'Avenida de A Coruña', city: 'Lugo' },
 
-    { name: 'Arganzuela,Acacias', city: 'Madrid' },
+    { name: 'Arganzuela,Acacias', city: 'Madrid', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FMadrid.jpg?alt=media&token=0bae1cf2-5eab-4b30-aa43-dc2ac2e2f2ce', highlight: true },
     { name: 'Arganzuela,Atocha-Palos de Moguer', city: 'Madrid' },
     { name: 'Arganzuela,Chopera', city: 'Madrid' },
     { name: 'Arganzuela,Delicias', city: 'Madrid' },
@@ -783,7 +783,7 @@ const data = [
     { name: 'Getafe', city: 'Madrid Alrededores' },
     { name: 'Leganés', city: 'Madrid Alrededores' },
 
-    { name: 'Centro,La Trinidad', city: 'Málaga' },
+    { name: 'Centro,La Trinidad', city: 'Málaga', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FMalaga.jpg?alt=media&token=f71b7422-ba95-4b92-adfd-f3f797222fe0', highlight: true },
     { name: 'Centro,Perchel Norte', city: 'Málaga' },
     { name: 'Centro,Perchel Sur- El Bulto', city: 'Málaga' },
     { name: 'Centro,Ensanche Centro-Soho', city: 'Málaga' },
@@ -808,7 +808,7 @@ const data = [
     { name: 'Este,El Palo', city: 'Málaga' },
     { name: 'Este,El Candado', city: 'Málaga' },
 
-    { name: 'San Pedro Alcántara,Guadalmina Alta', city: 'Marbella' },
+    { name: 'San Pedro Alcántara,Guadalmina Alta', city: 'Marbella', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FMarbella.jpg?alt=media&token=6ee0fb48-1dea-45cf-a6fa-a017232357ae', highlight: true },
     { name: 'San Pedro Alcántara,Guadalmina Baja', city: 'Marbella' },
     { name: 'San Pedro Alcántara,San Pedro Pueblo', city: 'Marbella' },
     { name: 'San Pedro Alcántara,Linda Vista-Nueva Alcántara-Cortijo Blanco', city: 'Marbella' },
@@ -848,7 +848,7 @@ const data = [
     { name: 'Elviria-Cabopino,Reserva de Marbella', city: 'Marbella' },
     { name: 'Elviria-Cabopino,Cabopino-Artola', city: 'Marbella' },
 
-    { name: 'Alaior', city: 'Menorca' },
+    { name: 'Alaior', city: 'Menorca', highlight: true, banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FMenorca.jpg?alt=media&token=79995e7a-820b-4ffa-afc6-4d7fc554a695' },
     { name: 'Ciutadella de Menorca', city: 'Menorca' },
     { name: 'Es Castell', city: 'Menorca' },
     { name: 'Es Mercadal', city: 'Menorca' },
@@ -868,7 +868,7 @@ const data = [
 
     { name: 'Monzón', city: 'Monzón' },
 
-    { name: 'Centro', city: 'Murcia' },
+    { name: 'Centro', city: 'Murcia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FMurcia.jpg?alt=media&token=a6a6214c-58aa-47fd-8995-2774d68835af', highlight: true },
     { name: 'Norte', city: 'Murcia' },
     { name: 'Sur', city: 'Murcia' },
     { name: 'Pedanías Norte', city: 'Murcia' },
@@ -901,7 +901,7 @@ const data = [
     { name: 'San Antonio', city: 'Palencia' },
     { name: 'El Cristo-Tejera', city: 'Palencia' },
 
-    { name: 'Ciutat Antigua,La LLotja', city: 'Palma de Mallorca' },
+    { name: 'Ciutat Antigua,La LLotja', city: 'Palma de Mallorca', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FPalma%20de%20Mallorca.jpg?alt=media&token=18c11fec-453e-41e2-bff6-6f3655fcf360', highlight: true },
     { name: 'Ciutat Antigua,La Seu-Cort-Monti-Sion', city: 'Palma de Mallorca' },
     { name: 'Ciutat Antigua,Sant Jaume', city: 'Palma de Mallorca' },
     { name: 'Ciutat Antigua,Sindicat', city: 'Palma de Mallorca' },
@@ -1005,7 +1005,7 @@ const data = [
     { name: 'Las Mercedes-El Carmen', city: 'Puertollano' },
     { name: 'Pau 2 - 600', city: 'Puertollano' },
 
-    { name: 'Centro,Centro', city: 'Salamanca' },
+    { name: 'Centro,Centro', city: 'Salamanca', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSalamanca.jpg?alt=media&token=e4c71bdd-e25f-46f4-81d0-c4fa986b8a8b', highlight: true },
     { name: 'Centro,Sancti Spíritus-San Juan-San Vicente-Las Úrsulas-Universidad-Tenerías', city: 'Salamanca' },
     { name: 'Centro,San Esteban-San Cristóbal', city: 'Salamanca' },
     { name: 'Vidal', city: 'Salamanca' },
@@ -1019,7 +1019,7 @@ const data = [
     { name: 'Garrido', city: 'Salamanca' },
     { name: 'Rollo-Puente Ladrillo', city: 'Salamanca' },
 
-    { name: 'Centro-Miraconcha,Miraconcha', city: 'San Sebastián' },
+    { name: 'Centro-Miraconcha,Miraconcha', city: 'San Sebastián', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebastia%CC%81n.jpg?alt=media&token=e508aec2-2387-4c5e-9bab-00fc2910ab24', highlight: true },
     { name: 'Centro-Miraconcha,Amara Zaharra-Arbaizenea', city: 'San Sebastián' },
     { name: 'Centro-Miraconcha,Área Romántica', city: 'San Sebastián' },
     { name: 'Antiguo', city: 'San Sebastián' },
@@ -1066,7 +1066,7 @@ const data = [
     { name: 'Plaza de Toros', city: 'Segovia' },
     { name: 'El Carmen', city: 'Segovia' },
 
-    { name: 'Centro,Encarnación-Las Setas', city: 'Sevilla' },
+    { name: 'Centro,Encarnación-Las Setas', city: 'Sevilla', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSevilla.jpg?alt=media&token=7978cb72-75f4-4533-9022-d005a0dac1f9', highlight: true },
     { name: 'Centro,Plaza de la Gavidia-San Lorenzo', city: 'Sevilla' },
     { name: 'Centro,San Vicente', city: 'Sevilla' },
     { name: 'Centro,Arenal-Museo', city: 'Sevilla' },
@@ -1144,7 +1144,7 @@ const data = [
     { name: 'Torrelavega', city: 'Torrelavega' },
 
     { name: 'Tudela', city: 'Tudela' },
-    { name: 'Ciutat Vella,El Mercat', city: 'Valencia' },
+    { name: 'Ciutat Vella,El Mercat', city: 'Valencia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FValencia.jpg?alt=media&token=81466c11-7115-4bfb-ad48-623a53a06577', highlight: true },
     { name: 'Ciutat Vella,La Seu', city: 'Valencia' },
     { name: 'Ciutat Vella,El Carme', city: 'Valencia' },
     { name: 'Ciutat Vella,El Pilar', city: 'Valencia' },
@@ -1204,7 +1204,7 @@ const data = [
     { name: 'Benicalap,Ciutat Fallera', city: 'Valencia' },
     { name: 'Campanar', city: 'Valencia' },
 
-    { name: 'Centro', city: 'Valladolid' },
+    { name: 'Centro', city: 'Valladolid', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FValladolid.jpg?alt=media&token=ce9606b4-1449-48be-9f84-73842e99f092', highlight: true },
     { name: 'Rondilla-Santa Clara', city: 'Valladolid' },
     { name: 'Hospital-San Juan-Circular-Vadillos', city: 'Valladolid' },
     { name: 'Campo Grande-Arco Ladrillo', city: 'Valladolid' },
@@ -1219,7 +1219,7 @@ const data = [
     { name: 'Arcas Reales-Pinar del Jalón-Hospital Nuevo', city: 'Valladolid' },
     { name: 'Belén-Pilarica-Bo España', city: 'Valladolid' },
 
-    { name: 'Centro-Areal', city: 'Vigo' },
+    { name: 'Centro-Areal', city: 'Vigo', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FVigo.jpg?alt=media&token=a70c9cd1-8e9b-430b-bbaf-6a045ee57cfd', highlight: true },
     { name: 'Casco Vello', city: 'Vigo' },
     { name: 'Plaza España-Corte Inglés', city: 'Vigo' },
     { name: 'Fátima-Travesia de Vigo-San Xoán', city: 'Vigo' },
@@ -1245,7 +1245,7 @@ const data = [
 
     { name: 'Vinarós', city: 'Vinarós' },
 
-    { name: 'Casco Viejo', city: 'Vitoria' },
+    { name: 'Casco Viejo', city: 'Vitoria', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FVitoria.jpg?alt=media&token=ef785db1-833b-4244-bdcb-5646269a765f', highlight: true },
     { name: 'Coronación', city: 'Vitoria' },
     { name: 'Centro', city: 'Vitoria' },
     { name: 'Judimendi-Santa Lucía-Santiago-El Anglo', city: 'Vitoria' },
@@ -1269,7 +1269,7 @@ const data = [
     { name: 'Las Vegas-La Feria', city: 'Zamora' },
     { name: 'San Lázaro', city: 'Zamora' },
 
-    { name: 'Torrero- La Paz-Pinares de Venecia', city: 'Zaragoza' },
+    { name: 'Torrero- La Paz-Pinares de Venecia', city: 'Zaragoza', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FZaragoza.jpg?alt=media&token=d6f8f08b-1ddd-4ae5-b3e5-013d2f967f95', highlight: true },
     { name: 'Parque Venecia', city: 'Zaragoza' },
     { name: 'Arrabal-Barrio Jesús', city: 'Zaragoza' },
     { name: 'Actur', city: 'Zaragoza' },
@@ -1308,7 +1308,17 @@ const importData = async () => {
         try {
             const row = data[index];
             if (city_name !== row.city) {
-                const newCity = await City.create({ name: row.city, banner: '' });
+                let params = {
+                    name: row.city,
+                    banner: ''
+                }
+                if(row.highlight) {
+                    params.highlight = row.highlight
+                }
+                if(row.banner) {
+                    params.banner = row.banner
+                }
+                const newCity = await City.create(params);
                 city_name = newCity.name;
                 city_id = newCity.id;
             }

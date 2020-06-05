@@ -8,7 +8,11 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  banner: String
+  banner: String,
+  highlight: {
+    type: Boolean,
+    default: false
+  }
 });
 
 schema.plugin(timestamp, {

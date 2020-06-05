@@ -50,6 +50,7 @@ router.get("/agent/address", Token, address.list);
 // city
 const city = require("./city");
 router.get("/city", city.list);
+router.get("/city-home", city.listHome);
 
 // district
 const district = require("./district");
