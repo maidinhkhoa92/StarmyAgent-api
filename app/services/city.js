@@ -47,6 +47,18 @@ module.exports.detail = query => {
   });
 };
 
+module.exports.create = (body) => {
+  return new Promise((resolve, reject) => {
+    city.create(body, (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(data));
+    });
+  });
+};
+
 const convertData = (data) => {
   var result = data;
   if (data === null || data === undefined) {
