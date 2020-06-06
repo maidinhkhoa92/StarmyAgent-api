@@ -86,12 +86,11 @@ const FurnitureValue = (furniture, furnitureState, operationType) => {
       }
     }
   } else {
-    // if (operationType === 'rent') {
+    if (operationType === 'rent') {
       value = 0.94;
-    // } 
-    // else {
-    //   value = 0.97;
-    // }
+    } else {
+      value = 0.97;
+    }
   }
 
   return value;
@@ -140,12 +139,9 @@ const TerraceValue = (terrace, terraceArea) => {
   if (terrace === 'true' || terrace === true) {
     // take into account the value of terrace
     if (parseValue < 5) {
-      value = 1.01
-    }
-    if (parseValue > 5) {
       value = 1.02
     }
-    if (parseValue >= 5 && parseValue < 14.9) {
+    if (parseValue >= 5 && parseValue < 15) {
       value = 1.03
     }
     if (parseValue >= 15 && parseValue < 45) {
