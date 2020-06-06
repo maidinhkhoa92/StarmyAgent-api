@@ -86,12 +86,11 @@ const FurnitureValue = (furniture, furnitureState, operationType) => {
       }
     }
   } else {
-    // if (operationType === 'rent') {
+    if (operationType === 'rent') {
       value = 0.94;
-    // } 
-    // else {
-    //   value = 0.97;
-    // }
+    } else {
+      value = 0.97;
+    }
   }
 
   return value;
