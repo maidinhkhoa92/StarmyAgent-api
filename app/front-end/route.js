@@ -39,6 +39,7 @@ const propertyValidate = require("./property/validate");
 router.post("/agent/property", Token, propertyValidate.create, property.create);
 router.put("/agent/property/:id", Token, propertyValidate.create, property.update);
 router.get("/agent/property", Token, propertyValidate.get, property.list);
+router.get("/agent/property/:id", propertyValidate.detail, property.detail);
 
 // Property
 const address = require("./address");
