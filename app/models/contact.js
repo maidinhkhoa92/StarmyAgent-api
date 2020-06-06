@@ -10,6 +10,7 @@ const schema = new Schema({
     telephone: { type: String, default: ''},
     message: { type: String, default: ''},
 	agent: { type: Schema.Types.ObjectId, ref: "user" },
+	property: { type: Schema.Types.ObjectId, ref: "property" },
 })
 
 schema.plugin(timestamp, {

@@ -20,6 +20,10 @@ module.exports.create = [
   body("agent")
     .not()
     .isEmpty()
+    .withMessage("Agent is required"),
+  body("property")
+    .not()
+    .isEmpty()
     .withMessage("Agent is required")
 ];
 
