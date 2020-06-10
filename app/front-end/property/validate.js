@@ -48,3 +48,6 @@ module.exports.create = [
 ];
 
 module.exports.get = [];
+
+module.exports.detail = [];
+
