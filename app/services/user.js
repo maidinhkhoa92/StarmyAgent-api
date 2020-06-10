@@ -18,34 +18,50 @@ module.exports.register = body => {
         null
       );
     }
-    user.create(body, function (err, data) {
-      if (err) {
-        reject(err);
+
+    let mailOptions = {
+      from: APP_CONFIG.adminEmail,
+      to: body.email,
+      subject: EMAIL.register.title,
+      html: null
+    };
+
+    // Send email to user
+    transporter.sendMail(mailOptions, function (error) {
+      if (error) {
+        reject({ code: 11 });
         return;
       }
-      let mailOptions = {
-        from: APP_CONFIG.adminEmail,
-        to: data.email,
-        subject: EMAIL.register.title,
-        html: null
-      };
-
-      if (data.type === 'agent') {
-        if (body.password) {
-          mailOptions.html = EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl })
-        } else {
-          mailOptions.html = EMAIL.register.agencyAgent({ link: APP_CONFIG.registerWebAppUrl })
-        }
-      } else if (data.type === 'agency') {
-        mailOptions.html = EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
-      }
-
-      transporter.sendMail(mailOptions, function (error) {
+      user.create(body, function (err, data) {
         if (err) {
-          reject({ code: 11 });
+          reject(err);
           return;
         }
-        resolve(convertData(data));
+        
+
+        if (data.type === 'agent') {
+          if (body.password) {
+            mailOptions.html = EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl })
+          } else {
+            mailOptions.html = EMAIL.register.agencyAgent({ link: APP_CONFIG.registerWebAppUrl })
+          }
+        } else if (data.type === 'agency') {
+          mailOptions.html = EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
+        }
+
+        const mailOptionToAdmin = {
+          from: body.email,
+          to: APP_CONFIG.adminEmail,
+          subject: 'New user',
+          html: EMAIL.register.newUser(data)
+        };
+        transporter.sendMail(mailOptionToAdmin, function (e) {
+          if (e) {
+            reject({ code: 11 });
+            return;
+          }
+          resolve(convertData(data));
+        })
       });
     });
   });

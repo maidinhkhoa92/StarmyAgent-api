@@ -22,6 +22,12 @@ module.exports = {
       <p>Puedes cancelar en cualquier momento.</p>
       <p>Cualquier duda nos dices.</p>
       <p>Un saludo!</p>
+    `,
+    newUser: body => `
+      <p>Name: ${body.fName} ${body.lName}</p>
+      <p>Email: ${body.email}</p>
+      <p>Type: ${body.type}</p>
+      <p>Telephone: ${body.telephone}</p>
     `
   },
   resetPassword: {
