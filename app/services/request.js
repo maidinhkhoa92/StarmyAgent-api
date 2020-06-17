@@ -27,6 +27,18 @@ module.exports.create = (body, agent) => {
   });
 };
 
+module.exports.findOne = (query) => {
+  return new Promise((resolve, reject) => {
+    Request.findOne(query, (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(data));
+    });
+  });
+};
+
 module.exports.report = body => {
   return new Promise((resolve, reject) => {
     Request.count(body, (err, count) => {

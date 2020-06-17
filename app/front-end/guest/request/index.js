@@ -12,7 +12,17 @@ module.exports.create = async (req, res, next) => {
   }
 
   try {
-    const { agent, type } = req.body
+    const { agent, type, email } = req.body
+
+    // check if client applied
+    const oldRequestQuery = {
+      email,
+      agent
+    }
+    const oldRequest = await request.findOne(oldRequestQuery)
+    if (oldRequest) {
+      throw ({ code: 12 })
+    }
 
     // Check if Agent exist
     const Agent = await user.detail(agent);
@@ -69,7 +79,6 @@ module.exports.create = async (req, res, next) => {
     const data = await request.create(req.body, Agent);
     res.status(200).send(data);
   } catch (err) {
-    console.log(err)
     next(err);
   }
 };

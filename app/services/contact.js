@@ -15,6 +15,18 @@ module.exports.create = body => {
   });
 };
 
+module.exports.findOne = (query) => {
+  return new Promise((resolve, reject) => {
+    Contact.findOne(query, (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(data));
+    });
+  });
+};
+
 module.exports.sendEmail = body => {
   return new Promise((resolve, reject) => {
     const mailOptions = {

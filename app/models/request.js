@@ -12,6 +12,7 @@ const schema = new Schema({
 	budget: { type: String, default: ''},
     message: { type: String, default: ''},
 	agent: { type: Schema.Types.ObjectId, ref: "user" },
+	property: { type: Schema.Types.ObjectId, ref: "property" },
 	type: {
 		type: String,
 		enum: ['rent', 'sale'],

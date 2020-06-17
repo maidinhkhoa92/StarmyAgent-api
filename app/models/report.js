@@ -24,16 +24,6 @@ const schema = new Schema({
         required: true,
         default: 0
     },
-    contactSale: {
-        type: Number,
-        required: true,
-        default: 0
-    },
-    contactRent: {
-        type: Number,
-        required: true,
-        default: 0
-    },
     date: {
         type: String,
         required: true,

@@ -15,6 +15,16 @@ module.exports.create = async (req, res, next) => {
     const { agent, email, telephone } = req.body;
     let twice = false;
 
+    // check if client applied
+    const oldRequestQuery = {
+      email,
+      agent
+    }
+    const oldRequest = await request.findOne(oldRequestQuery)
+    if (oldRequest) {
+      throw ({ code: 12 })
+    }
+
     // Check if Agent exist
     const Agent = await user.detail(agent);
     if (!Agent) {
