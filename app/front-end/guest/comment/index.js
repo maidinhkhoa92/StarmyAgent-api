@@ -9,6 +9,12 @@ module.exports.create = async (req, res, next) => {
   }
 
   try {
+    const reqBody = req.body;
+
+    if (reqBody.address === 'others') {
+      delete reqBody.address;
+    }
+
     const data = await comment.create(req.body);
     res.status(200).send(data);
   } catch (err) {
