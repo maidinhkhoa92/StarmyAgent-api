@@ -57,6 +57,7 @@ module.exports.list = async (req, res, next) => {
 
     if (agent) {
       query.agent = agent;
+      query.status = 'public';
     }
 
     const data = await comment.list(query, paged, limit);
