@@ -68,7 +68,9 @@ const detail = (id) => {
 
 const list = (query, paged, limit, detail) => {
   return new Promise((resolve, reject) => {
-    let options = {};
+    let options = {
+      sort: { createdName: -1 }
+    };
 
     if (limit) {
       limit = parseInt(limit);
