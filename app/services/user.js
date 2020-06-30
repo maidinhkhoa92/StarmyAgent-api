@@ -170,7 +170,7 @@ module.exports.list = (searchQuery, paged, limit) => {
       resolve({
         ...result,
         docs: await Promise.all(_.map(result.docs, async item => {
-          const comments = await Comment.find({ agent: item._id });
+          const comments = await Comment.find({ agent: item._id, status: 'public' });
           const validComments = await _.filter(comments, item => item.address);
           const formatComments = await validComments.length === 0 ? [0] :_.map(validComments, (item) => item.address ? item.rate.sum : 0)
           const total = await _.reduce(formatComments, (sum, item) => (sum + item))
