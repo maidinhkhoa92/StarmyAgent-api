@@ -20,10 +20,10 @@ module.exports = {
     databaseURL: "https://childschool-webapp.firebaseio.com",
     projectId: "childschool-webapp"
   },
-  site_url: "https://starmy-agent.web.app",
-  registerWebAppUrl: "https://starmy-agent.web.app/register",
+  site_url: "https://www.starmyagent.com",
+  registerWebAppUrl: "https://www.starmyagent.com/register",
   uploadUrl: "http://127.0.0.1:8081/",
-  resetPasswordUrl: "http://localhost:9000/reset-password/",
+  resetPasswordUrl: "https://www.starmyagent.com/reset-password/",
   token: "token_starmyurget",
   discount: (numberAgent) => {
     if(numberAgent >= 2 && numberAgent <= 5) {
