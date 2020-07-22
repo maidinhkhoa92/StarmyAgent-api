@@ -111,5 +111,8 @@ module.exports = {
       <p>Hola, gracias por tu reseña, ya para terminar valídala a través de tu mail. Un saludo</p>
       <a href="${APP_CONFIG.site_url}/review/${token}">Validar reseña</a>
     `
+  },
+  share : {
+    title: 'Hola'
   }
 };

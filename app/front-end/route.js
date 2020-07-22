@@ -109,4 +109,9 @@ const Calculation = require("./calculation");
 router.get("/calculation", Calculation.data)
 router.post("/calculation", Calculation.result)
 
+// Sharing 
+const shareRequest = require("./guest/share");
+const shareRequestValidate = require("./guest/share/validate");
+router.post("/share", shareRequestValidate.sendEmail, shareRequest.sendEmail);
+
 module.exports = router;
