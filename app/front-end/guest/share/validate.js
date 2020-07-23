@@ -5,7 +5,7 @@ module.exports.sendEmail = [
   body("link")
     .not()
     .isEmpty()
-    .withMessage("Link is required"),,
+    .withMessage("Link is required"),
   body("fromEmail")
     .not()
     .isEmpty()
