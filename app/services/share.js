@@ -7,7 +7,7 @@ module.exports.shareEmail = body => {
       from: body.fromEmail,
       to: body.toEmail,
       subject: EMAIL.share.title,
-      html: body.content
+      html: EMAIL.share.message(body.link)
     };
 
     transporter.sendMail(mailOptions, function (error) {

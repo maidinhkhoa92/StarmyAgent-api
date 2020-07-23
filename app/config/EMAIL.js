@@ -113,6 +113,11 @@ module.exports = {
     `
   },
   share : {
-    title: 'Hola'
+    title: 'Mírate este perfil de agente',
+    message: link => `
+      <p>Hola,</p>
+      <p>Échale un vistazo a este agente que te envío ${link}.</p>
+      <p>Un saludo !</p>
+    `
   }
 };
