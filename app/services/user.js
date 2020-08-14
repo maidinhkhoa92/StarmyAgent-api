@@ -26,6 +26,16 @@ module.exports.register = body => {
       html: null
     };
 
+    if (body.type === 'agent') {
+      if (body.password) {
+        mailOptions.html = EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl })
+      } else {
+        mailOptions.html = EMAIL.register.agencyAgent({ link: APP_CONFIG.registerWebAppUrl })
+      }
+    } else if (body.type === 'agency') {
+      mailOptions.html = EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
+    }
+
     // Send email to user
     transporter.sendMail(mailOptions, function (error) {
       if (error) {
@@ -37,30 +47,32 @@ module.exports.register = body => {
           reject(err);
           return;
         }
-        
-
-        if (data.type === 'agent') {
-          if (body.password) {
-            mailOptions.html = EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl })
-          } else {
-            mailOptions.html = EMAIL.register.agencyAgent({ link: APP_CONFIG.registerWebAppUrl })
-          }
-        } else if (data.type === 'agency') {
-          mailOptions.html = EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
-        }
-
-        const mailOptionToAdmin = {
-          from: body.email,
-          to: APP_CONFIG.adminEmail,
-          subject: 'New user',
-          html: EMAIL.register.newUser(data)
-        };
-        transporter.sendMail(mailOptionToAdmin, function (e) {
-          if (e) {
-            reject({ code: 11 });
+        user.findOne({_id: data._id}).populate('city').exec(function (er, User) {
+          if (er) {
+            reject(er);
             return;
           }
-          resolve(convertData(data));
+          const mailOptionToAdmin = {
+            from: body.email,
+            to: APP_CONFIG.adminEmail,
+            subject: 'Nuevo registro de agencia',
+            html: null
+          };
+  
+          if (body.type === 'agent') {
+            mailOptionToAdmin.subject = 'Nuevo registro de agentes';
+            mailOptionToAdmin.html = EMAIL.register.agencyAgent(User)
+          } else if (body.type === 'agency') {
+            mailOptionToAdmin.html = EMAIL.register.newAgencyUser(User)
+          }
+  
+          transporter.sendMail(mailOptionToAdmin, function (e) {
+            if (e) {
+              reject({ code: 11 });
+              return;
+            }
+            resolve(convertData(data));
+          })
         })
       });
     });

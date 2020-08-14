@@ -23,11 +23,18 @@ module.exports = {
       <p>Cualquier duda nos dices.</p>
       <p>Un saludo!</p>
     `,
-    newUser: body => `
-      <p>Name: ${body.fName} ${body.lName}</p>
+    newAgencyUser: body => `
+      <p>Ciudad: ${body.city.name}</>
+      <p>Nombre y apellidos: ${body.fName} ${body.lName}</p>
+      <p>Nombre de agencia: ${body.company.name}</>
       <p>Email: ${body.email}</p>
-      <p>Type: ${body.type}</p>
-      <p>Telephone: ${body.telephone}</p>
+      <p>Teléfono: ${body.telephone}</p>
+    `,
+    newAgentUser: body => `
+      <p>Ciudad: ${body.city.name}</>
+      <p>Nombre y apellidos: ${body.fName} ${body.lName}</p>
+      <p>Email: ${body.email}</p>
+      <p>Teléfono: ${body.telephone}</p>
     `
   },
   resetPassword: {
@@ -35,12 +42,12 @@ module.exports = {
     message: ({ link }) => `Reset link: ${link}`
   },
   contact: {
-    title: "New user contacted",
+    title: "Nuevo contacto a través de web",
     message: body => `
-			Fullname: ${body.fullName}
-			Telephone: ${body.telephone}
-			Email: ${body.email}
-			Content: ${body.content}
+      <p>Nombre y apellidos: ${body.fullName}</p>
+			<p>Teléfono: ${body.telephone}</p>
+			<p>Email: ${body.email}</p>
+			<p>Mensaje: ${body.content}</p>
 		`
   },
   newAgency: {
