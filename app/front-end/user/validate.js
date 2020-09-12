@@ -265,3 +265,19 @@ module.exports.resetPassword = [
     .isEmpty()
     .withMessage("Password is required")
 ];
+
+module.exports.sendVerifyCode = [
+  body("email")
+    .isEmail()
+    .withMessage("Invalid email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
+];
+
+module.exports.confirmVerifyCode = [
+  body("verifyCode")
+    .not()
+    .isEmpty()
+    .withMessage("Verify Code is required"),
+];

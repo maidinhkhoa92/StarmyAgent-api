@@ -32,7 +32,8 @@
     "mongoose-timestamp-plugin": "0.0.1",
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.6",
-    "read-excel-file": "^4.0.6"
+    "read-excel-file": "^4.0.6",
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

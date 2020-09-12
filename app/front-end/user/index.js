@@ -1,5 +1,7 @@
 const user = require("../../services/user");
 const { validationResult } = require("express-validator");
+const EMAIL = require("../../config/EMAIL");
+const { v4: uuidv4 } = require('uuid');
 
 module.exports.login = async (req, res, next) => {
   const errors = validationResult(req);
@@ -133,6 +135,61 @@ module.exports.resetPassword = async (req, res, next) => {
     const User = await user.find({ email });
 
     const data = await user.update(User.id, {password});
+    
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.sendVerifyCode = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    const { email } = req.body;
+
+    const User = await user.find({ email });
+
+    if (email !== User.email) {
+      throw ({code: 11})
+    }
+
+    // generate mail content
+    const verifyCode = uuidv4();
+    const mailOptions = {
+      to: email,
+      subject: EMAIL.verify.title,
+      html: EMAIL.verify.message(verifyCode),
+    }
+    await user.sendEmail(mailOptions);
+    const data = user.update(User.id, { verifyCode })
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.confirmVerifyCode = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    const { verifyCode } = req.body;
+
+    const User = await user.find({ email });
+
+    if (verifyCode !== User.verifyCode) {
+      throw ({code: 13})
+    }
+
+    const data = user.update(User.id, { verified: true })
     
     res.status(200).send(data);
   } catch (err) {

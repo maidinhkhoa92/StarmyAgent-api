@@ -267,6 +267,22 @@ module.exports.forgotPassword = email => {
   });
 };
 
+module.exports.sendEmail = ({ from = APP_CONFIG.adminEmail, to, subject, html }) => {
+  return new Promise((resolve, reject) => {
+    const mailOptions = {
+      from, to, subject, html
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        reject({ code: 11 });
+        return;
+      }
+
+      resolve(convertData(data));
+    });
+  })
+}
+
 const convertData = (data, password = true) => {
   var result = data;
   if (data === null || data === undefined) {
@@ -278,6 +294,9 @@ const convertData = (data, password = true) => {
   result.id = data._id;
   if (password) {
     delete result.password;
+  }
+  if (result.verifyCode) {
+    delete result.verifyCode;
   }
   delete result._id;
   delete result.__v;

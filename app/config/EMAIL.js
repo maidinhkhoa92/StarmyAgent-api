@@ -126,5 +126,13 @@ module.exports = {
       <p>Échale un vistazo a este agente que te envío ${link}.</p>
       <p>Un saludo !</p>
     `
+  },
+  verify: {
+    title: "Your verify code",
+    message: verifyCode => `
+      <p>Hola,</p>
+      <p>Your code is ${verifyCode}.</p>
+      <p>Un saludo !</p>
+    `
   }
 };

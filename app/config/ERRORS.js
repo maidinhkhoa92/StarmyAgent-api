@@ -12,6 +12,7 @@ module.exports = {
   "10": "This account has been active",
   "11": "No podemos verificar tu email, por favor envíanos un correo directamente a info@starmyagent.com",
   "12": "You applied this before",
+  "13": "Your verify code is incorrect",
   "9997": "No token",
   "9998": "Token is not valid",
   "9999": "Nombre de usuario o contraseña incorrecta",

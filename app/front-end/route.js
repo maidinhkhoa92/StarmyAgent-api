@@ -7,6 +7,8 @@ const user = require("./user");
 const userValidate = require("./user/validate");
 
 router.post("/login", userValidate.login, user.login);
+router.post("/send-verify-code", userValidate.sendVerifyCode, user.sendVerifyCode);
+router.post("/confirm-verify-code", userValidate.confirmVerifyCode, user.confirmVerifyCode);
 router.post("/forgot-password", userValidate.forgotPassword, user.forgotPassword);
 router.post("/reset-password", Token, userValidate.resetPassword, user.resetPassword);
 

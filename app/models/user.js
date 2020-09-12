@@ -56,6 +56,15 @@ const schema = new Schema({
     required: true,
     default: false
   },
+  verifyCode: {
+    type: String,
+    default: ''
+  },
+  verified: {
+    type: Boolean,
+    required: true,
+    default: false
+  },
 });
 
 schema
