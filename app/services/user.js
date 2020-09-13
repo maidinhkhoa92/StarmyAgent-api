@@ -205,18 +205,18 @@ module.exports.detail = id => {
   });
 };
 
-module.exports.find = (query, isPopulate = false) => {
+module.exports.find = (query, isPopulate = false, isVerifyCode = false) => {
   return new Promise((resolve, reject) => {
     let userQuery = user.findOne(query)
     if (isPopulate) {
       userQuery = userQuery.populate('city')
     } 
     userQuery.exec(query, (err, res) => {
-      if (err) {
-        reject(err);
+      if (err || !res) {
+        reject({code: 11000});
         return;
       }
-      resolve(convertData(res));
+      resolve(isVerifyCode ? res : convertData(res));
     });
   });
 };
@@ -273,13 +273,12 @@ module.exports.sendEmail = ({ from = APP_CONFIG.adminEmail, to, subject, html })
       from, to, subject, html
     };
     transporter.sendMail(mailOptions, function (error, info) {
-      console.log(error, info)
       if (error) {
         reject({ code: 11 });
         return;
       }
 
-      resolve(convertData(data));
+      resolve(convertData(info));
     });
   })
 }

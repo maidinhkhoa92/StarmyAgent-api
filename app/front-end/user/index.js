@@ -166,7 +166,7 @@ module.exports.sendVerifyCode = async (req, res, next) => {
       html: EMAIL.verify.message(verifyCode),
     }
     await user.sendEmail(mailOptions);
-    const data = user.update(User.id, { verifyCode })
+    const data = await user.update(User.id, { verifyCode })
     res.status(200).send(data);
   } catch (err) {
     next(err);
@@ -181,17 +181,15 @@ module.exports.confirmVerifyCode = async (req, res, next) => {
   }
 
   try {
-    const { verifyCode } = req.body;
-
-    const User = await user.find({ email });
-
+    const { verifyCode, email } = req.body;
+    const User = await user.find({ email }, false, true);
     if (verifyCode !== User.verifyCode) {
       throw ({code: 13})
     }
 
-    const data = user.update(User.id, { verified: true })
+    await user.update(User.id, { verified: true })
     
-    res.status(200).send(data);
+    res.status(200).send('Success');
   } catch (err) {
     next(err);
   }

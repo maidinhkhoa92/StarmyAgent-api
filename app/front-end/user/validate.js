@@ -276,6 +276,12 @@ module.exports.sendVerifyCode = [
 ];
 
 module.exports.confirmVerifyCode = [
+  body("email")
+    .isEmail()
+    .withMessage("Invalid email")
+    .not()
+    .isEmpty()
+    .withMessage("Email is required"),
   body("verifyCode")
     .not()
     .isEmpty()

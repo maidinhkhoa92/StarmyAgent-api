@@ -18,12 +18,12 @@ module.exports = {
     port: 465,
     secure: true,
     auth: {
-        type: 'OAuth2',
-        user: 'user@example.com',
-        clientId: '000000000000-xxx0.apps.googleusercontent.com',
-        clientSecret: 'XxxxxXXxX0xxxxxxxx0XXxX0',
-        refreshToken: '1/XXxXxsss-xxxXXXXXxXxx0XXXxxXXx0x00xxx',
-        accessToken: 'ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x'
+      type: 'OAuth2',
+      user: 'maidinhkhoa92@gmail.com',
+      clientId: '989923814210-30g3gb6vf0iln2fsrn4sushmjumt6t0j.apps.googleusercontent.com',
+      clientSecret: '0eBNigMBcoR3GoJmDqKQxzK8',
+      refreshToken: '1//04-mYLqZX6e9nCgYIARAAGAQSNwF-L9IrtJ9YiA6MzFdUHyKsvAzSGoQofEjR2LI721WH9u9uml1HhvvZLk5x5vQhfRmT_i8SXC4',
+      accessToken: 'ya29.a0AfH6SMCONoTmvOcaHZEUh6gfeGrZ_yq0IIDvUXcG5QuiAMaU4IChlM6ujOryVDeE1EUzwsSVjrR-iWljFIDEn09HGYkJl0fWsRC6uu99BeU1y02nK11F9vcYyL0cjXYgEwB7kH8VzkBz1QXkO3gC-pFpzDvnUvKCDQo'
     }
   },
   adminEmail: "info@starmyagent.com",
