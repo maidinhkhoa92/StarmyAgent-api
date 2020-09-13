@@ -9,12 +9,12 @@ module.exports.update = async (req, res, next) => {
   }
 
   try {
-    const { id : agent_id } = req.decoded;
+    const { id : user_id } = req.decoded;
     const { id : address_id } = req.params;
     
     const item = await Address.detail(address_id);
     
-    if((item.agent).toString() !== agent_id) {
+    if((item.agent).toString() !== user_id) {
       throw ({code: 10001})
     }
 
@@ -52,13 +52,11 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { id, type } = req.decoded;
+    const { id } = req.decoded;
     const { paged, limit } = req.query;
 
-    if (type === "agent") {
-      query = {
-        agent: id
-      }
+    query = {
+      agent: id
     }
     
     const data = await Address.list(query, paged, limit);

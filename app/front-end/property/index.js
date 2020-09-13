@@ -52,13 +52,11 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { id, type } = req.decoded;
+    const { id } = req.decoded;
     const { paged, limit } = req.query;
 
-    if (type === "agent") {
-      query = {
-        agent: id
-      }
+    query = {
+      agent: id
     }
     
     const data = await property.list(query, paged, limit);

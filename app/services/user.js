@@ -273,6 +273,7 @@ module.exports.sendEmail = ({ from = APP_CONFIG.adminEmail, to, subject, html })
       from, to, subject, html
     };
     transporter.sendMail(mailOptions, function (error, info) {
+      console.log(error, info)
       if (error) {
         reject({ code: 11 });
         return;
@@ -295,9 +296,8 @@ const convertData = (data, password = true) => {
   if (password) {
     delete result.password;
   }
-  if (result.verifyCode) {
-    delete result.verifyCode;
-  }
+  
+  delete result.verifyCode;
   delete result._id;
   delete result.__v;
   return result;

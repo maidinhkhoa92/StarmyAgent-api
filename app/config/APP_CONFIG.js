@@ -1,16 +1,29 @@
 module.exports = {
+  // database: {
+  //   host: "85.208.20.53",
+  //   port: 27017,
+  //   db: "starmyagent",
+  //   username: "alexAdmin",
+  //   password: "H7JSJNaGysrhRX59"
+  // },
   database: {
-    host: "85.208.20.53",
+    host: "cluster0-0mjj1.mongodb.net",
     port: 27017,
     db: "starmyagent",
-    username: "alexAdmin",
-    password: "H7JSJNaGysrhRX59"
+    username: "childschool",
+    password: "YbsBGKftwKpciEEJ"
   },
   mail: {
-    service: "gmail",
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
-      user: "info@starmyagent.com",
-      pass: "rslguioniyspbcrj"
+        type: 'OAuth2',
+        user: 'user@example.com',
+        clientId: '000000000000-xxx0.apps.googleusercontent.com',
+        clientSecret: 'XxxxxXXxX0xxxxxxxx0XXxX0',
+        refreshToken: '1/XXxXxsss-xxxXXXXXxXxx0XXXxxXXx0x00xxx',
+        accessToken: 'ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x'
     }
   },
   adminEmail: "info@starmyagent.com",

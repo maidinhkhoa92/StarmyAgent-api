@@ -23,6 +23,7 @@ const schema = new Schema({
   district: { type: Schema.Types.ObjectId, ref: "district" },
   photo: { type: Array, default: [] },
   agent: { type: Schema.Types.ObjectId, ref: "user" },
+  characteristic: { type: Array, default: [] },
   status: {
     type: String,
     enum: ["draft", "public"],

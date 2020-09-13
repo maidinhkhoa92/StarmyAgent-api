@@ -177,7 +177,7 @@ module.exports.agentAddCard = [
     .withMessage("Code is required")
 ];
 
-module.exports.agentUpdating = [
+module.exports.updateInformation = [
   body("agentCertificateDate")
     .not()
     .isEmpty()
@@ -219,14 +219,14 @@ module.exports.agentUpdating = [
     .withMessage("Status is required")
 ];
 
-module.exports.agentPhotoUpdating = [
+module.exports.userPhotoUpdating = [
   body("photo")
     .not()
     .isEmpty()
     .withMessage("Photo is required")
 ];
 
-module.exports.agentBannerUpdating = [
+module.exports.userBannerUpdating = [
   body("banner")
     .not()
     .isEmpty()

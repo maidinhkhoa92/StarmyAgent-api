@@ -12,7 +12,7 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { paged, limit, city, services } = req.query;
+    const { paged, limit, city, services, type, agency } = req.query;
 
     if (city) {
       cityRespond = await City.detail({ name: city })
@@ -23,7 +23,14 @@ module.exports.list = async (req, res, next) => {
       query.services = { "$in": [services] }
     }
 
-    query.type = 'agent';
+    if (type) {
+      query.type = type;
+    }
+
+    if (agency) {
+      query.agency = agency
+    }
+
     query.disabled = false;
 
     const data = await user.list(query, paged, limit);

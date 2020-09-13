@@ -19,6 +19,15 @@ const schema = new Schema({
 		sum: Number,
 		options: { type: Array, default: [0,0,0,0,0]}
 	},
+	reply_message: {
+		type: String,
+		default: ''
+	},
+	replied: {
+		type: Boolean,
+    required: true,
+    default: false
+	},
 	type: {
 		type: String,
 		enum: ['Seller', 'Buyer', 'Renter', 'Tenant'],

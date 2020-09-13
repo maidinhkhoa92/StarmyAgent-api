@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Token = require("../helper/token");
 
-// user
+/*
+  ***** user Router ******
+*/
 const user = require("./user");
 const userValidate = require("./user/validate");
 
@@ -11,44 +13,47 @@ router.post("/send-verify-code", userValidate.sendVerifyCode, user.sendVerifyCod
 router.post("/confirm-verify-code", userValidate.confirmVerifyCode, user.confirmVerifyCode);
 router.post("/forgot-password", userValidate.forgotPassword, user.forgotPassword);
 router.post("/reset-password", Token, userValidate.resetPassword, user.resetPassword);
-
-
-// agency interface
+router.put("/user/:id", Token, userValidate.updateInformation, user.update);
+router.patch("/photo/:id", Token, userValidate.userPhotoUpdating, user.update);
+router.patch("/banner/:id", Token, userValidate.userBannerUpdating, user.update);
 router.post("/agency/register", userValidate.registerAgency, user.register);
-router.post("/agency/agent", Token, userValidate.addingAgent, user.register);
-router.patch("/agency/agent/:id", Token, userValidate.changeAgentStatus, user.update);
-router.put("/agency/agent/:id", Token, userValidate.updateAgent, user.update);
-router.get("/agency/agent", Token, userValidate.getAgent, user.list);
-
-// agent interface
 router.post("/agent/register", userValidate.registerAgent, user.register);
 router.post("/agent/confirm", userValidate.agentConfirm, user.confirm);
-router.patch("/agent/:id", Token, userValidate.agentAddCard, user.update);
-router.put("/agent/:id", Token, userValidate.agentUpdating, user.update);
-router.patch("/photo/:id", Token, userValidate.agentPhotoUpdating, user.update);
-router.patch("/banner/:id", Token, userValidate.agentBannerUpdating, user.update);
 
-// Payment
-const payment = require("./payment");
-const paymentValidate = require("./payment/validate");
-router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payment.create);
-
-
-
-// Property
+// Property tab
 const property = require("./property");
 const propertyValidate = require("./property/validate");
-router.post("/agent/property", Token, propertyValidate.create, property.create);
-router.put("/agent/property/:id", Token, propertyValidate.create, property.update);
-router.get("/agent/property", Token, propertyValidate.get, property.list);
-router.get("/agent/property/:id", propertyValidate.detail, property.detail);
+router.post("/user/property", Token, propertyValidate.create, property.create);
+router.put("/user/property/:id", Token, propertyValidate.create, property.update);
+router.get("/user/property", Token, propertyValidate.get, property.list);
+router.get("/user/property/:id", propertyValidate.detail, property.detail);
 
-// Property
+// Historical Tab
 const address = require("./address");
 const addressValidate = require("./address/validate");
 router.post("/agent/address", Token, addressValidate.create, address.create);
 router.put("/agent/address/:id", Token, addressValidate.create, address.update);
 router.get("/agent/address", Token, address.list);
+
+// Agents tab (agency only)
+router.post("/agency/agent", Token, userValidate.addingAgent, user.register);
+router.patch("/agency/agent/:id", Token, userValidate.changeAgentStatus, user.update);
+router.put("/agency/agent/:id", Token, userValidate.updateAgent, user.update);
+router.get("/agency/agent", Token, userValidate.getAgent, user.list);
+
+// Comment tab
+const comment = require("./comment");
+const commentValidate = require("./comment/validate");
+router.put("/user/comment/:id", Token, commentValidate.reply, comment.reply);
+router.get("/user/comment", Token, commentValidate.get, comment.list);
+
+// add
+router.patch("/agent/:id", Token, userValidate.agentAddCard, user.update);
+
+// Payment
+const payment = require("./payment");
+const paymentValidate = require("./payment/validate");
+router.post("/agency/payment", Token, paymentValidate.agencySubmitPayment, payment.create);
 
 // city
 const city = require("./city");
