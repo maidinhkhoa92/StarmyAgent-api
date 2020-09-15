@@ -28,15 +28,15 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { paged, limit, agent } = req.query;
+    const { id } = req.decoded;
+    const { paged, limit } = req.query;
 
-    if (agent) {
-      query.agent = agent;
-    }
+    query.agent = id;
 
     const data = await comment.list(query, paged, limit);
     res.status(200).send(data);
   } catch (err) {
+    console.log(err)
     next(err);
   }
 };

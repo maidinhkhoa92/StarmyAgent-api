@@ -1,4 +1,4 @@
-const { body, query } = require("express-validator");
+const { body } = require("express-validator");
 
 module.exports.reply = [
   body("reply_message")
@@ -8,8 +8,4 @@ module.exports.reply = [
 ];
 
 module.exports.get = [
-  query("agent")
-    .not()
-    .isEmpty()
-    .withMessage("Agent is required")
 ];
