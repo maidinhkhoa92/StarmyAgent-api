@@ -40,6 +40,7 @@ module.exports.update = async (req, res, next) => {
     const data = await comment.update(id, {status: 'draft'});
     res.status(200).send(data);
   } catch (err) {
+    console.log(err)
     next(err);
   }
 }

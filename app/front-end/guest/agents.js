@@ -65,12 +65,24 @@ module.exports.search = async (req, res, next) => {
   }
 
   try {
-    const { key } = req.query;
-    
-    const queryDistrict = { name: { $regex: key, $options: "gi" } }
-    const district = await District.detail(queryDistrict);
+    const { key, type } = req.query;
+    let queryAgent = {}
 
-    const queryAgent = { city: district.city, type: 'agent' };
+    if (type) {
+      queryAgent = { 
+        type: type,
+        $or: [
+          { fName: { $regex: key, $options: "gi" } },
+          { lName: { $regex: key, $options: "gi" } }
+        ] 
+      };
+    } else {
+      const queryDistrict = { name: { $regex: key, $options: "gi" } }
+      const district = await District.detail(queryDistrict);
+
+      queryAgent = { city: district.city, type: { $in: ['agent', 'agency'] } };
+    }
+
     const data = await user.list(queryAgent);
 
     res.status(200).send(data);
