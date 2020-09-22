@@ -1,6 +1,7 @@
 const Offer = require("../models/offer");
 const EMAIL = require("../config/EMAIL");
 const transporter = require("../helper/nodemailer");
+const _ = require('lodash');
 
 module.exports.create = (body, agent, twice = false) => {
   return new Promise((resolve, reject) => {
@@ -49,6 +50,41 @@ module.exports.report = body => {
         return;
       }
       resolve(count)
+    });
+  });
+};
+
+module.exports.list = (query = {}, paged = -1, limit = 10) => {
+  return new Promise((resolve, reject) => {
+    let options = {};
+
+    if (limit) {
+      limit = parseInt(limit);
+      options.limit = limit;
+    }
+
+    if (paged) {
+      limit = parseInt(paged);
+      options.page = paged;
+    }
+
+    if (paged && paged === -1) {
+      options.pagination = false
+    }
+
+    Offer.paginate(query, options, async (err, result) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      if (!result.docs) {
+        reject({ code: 10000 });
+        return;
+      }
+      resolve({
+        ...result,
+        docs: _.map(result.docs, item => convertData(item))
+      });
     });
   });
 };

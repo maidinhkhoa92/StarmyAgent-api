@@ -20,7 +20,7 @@ module.exports.create = async (req, res, next) => {
       email,
       agent
     }
-    const oldRequest = await request.findOne(oldRequestQuery)
+    const oldRequest = await offer.findOne(oldRequestQuery)
     if (oldRequest) {
       throw ({ code: 12 })
     }
@@ -88,6 +88,27 @@ module.exports.create = async (req, res, next) => {
     }
 
     const data = await offer.create(req.body, Agent, twice);
+    res.status(200).send(data);
+  } catch (err) {
+    console.log(err)
+    next(err);
+  }
+};
+
+module.exports.list = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    let query = {};
+    const { id } = req.decoded;
+
+    query.agent = id
+
+    const data = await offer.list(query);
     res.status(200).send(data);
   } catch (err) {
     console.log(err)

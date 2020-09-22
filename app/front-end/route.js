@@ -101,11 +101,13 @@ router.post("/new-agency", guestContactValidate.newAgency, guestContact.newAgenc
 const guestOffer = require("./guest/offer");
 const guestOfferValidate = require("./guest/offer/validate");
 router.post("/offer", guestOfferValidate.create, guestOffer.create);
+router.get("/offer", Token, guestOffer.list);
 
 // Contact 
 const guestRequest = require("./guest/request");
 const guestRequestValidate = require("./guest/request/validate");
 router.post("/request", guestRequestValidate.create, guestRequest.create);
+router.get("/request", Token, guestRequest.list);
 
 // Report
 const Report = require("./report");

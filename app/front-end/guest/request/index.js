@@ -82,3 +82,23 @@ module.exports.create = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.list = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    let query = {};
+    const { id } = req.decoded;
+
+    query.agent = id
+
+    const data = await request.list(query);
+    res.status(200).send(data);
+  } catch (err) {
+    next(err);
+  }
+};
