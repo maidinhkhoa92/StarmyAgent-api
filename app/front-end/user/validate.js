@@ -28,12 +28,6 @@ module.exports.registerAgency = [
     .not()
     .isEmpty()
     .withMessage("Company name is required"),
-  body("company.numberAgent")
-    .isNumeric()
-    .withMessage("The number of agent must be number")
-    .not()
-    .isEmpty()
-    .withMessage("The number of agent is required"),
   body("telephone")
     .not()
     .isEmpty()
