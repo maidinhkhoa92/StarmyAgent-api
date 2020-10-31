@@ -27,12 +27,12 @@ module.exports.up_premium_level = async (req, res, next) => {
       await user.update(id, { stripe_customer_id: customer.id });
       stripe_customer_id = customer.id
     }
-    
+
     // generate items
     const hash = `${time}_${type}`;
-    let items = [{ price: APP_CONFIG[hash], quantity: 1}];
+    let items = [{ price: APP_CONFIG[hash], quantity: 1 }];
     if (type === 'agency') {
-      const agentLength = user.count(id);
+      const agentLength = await user.count(id);
       items = [
         ...items,
         { price: APP_CONFIG[`${time}_agent`], quantity: agentLength }
@@ -55,7 +55,7 @@ module.exports.up_premium_level = async (req, res, next) => {
     } else {
       response = await stripe.create_subscriptions(stripe_customer_id, items, coupon);
     }
-    
+
     res.status(200).send(response);
   } catch (err) {
     console.log(err)
@@ -77,8 +77,41 @@ module.exports.down_premium_level = async (req, res, next) => {
 
     const response = await stripe.delete_subscriptions(User.stripe_subcription_id);
     await user.update(id, { stripe_subscription_id: '', level: 'basic' })
-    
+
     res.status(200).send(response);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports.update_subscriptions = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(401).send({ errors: errors.array() });
+    return;
+  }
+
+  try {
+    const { id } = req.decoded;
+    const User = await user.detail(id);
+
+    if (User.stripe_subscription_id && User.stripe_subscription_id === '') {
+      res.status(200).send({});
+    } else {
+      const Subscription = await stripe.retrieve_subscriptions(User.stripe_subscription_id)
+      const agentLength = await user.count(id);
+      items = _.map(
+        Subscription.items.data, eq => ({ 
+          price: eq.price.id,
+          quantity: eq.price.id === APP_CONFIG.monthly_agent || eq.price.id === APP_CONFIG.yearly_agent ? agentLength : eq.quantity
+        })
+      );
+      await stripe.update_subscriptions(User.stripe_subscription_id, items)
+
+      res.status(200).send({});
+
+    }
+
   } catch (err) {
     next(err);
   }
@@ -96,11 +129,11 @@ module.exports.stripe_hooks = async (req, res, next) => {
     const User = await user.find({ stripe_customer_id: data.customer })
 
     if (!User) {
-      throw ({code: 11})
+      throw ({ code: 11 })
     }
 
     if (User.stripe_subscription_id && User.stripe_subscription_id !== '' && User.stripe_subscription_id !== data.subscription) {
-      throw ({code: 11})
+      throw ({ code: 11 })
     }
 
     if (data.paid && data.status === 'paid') {

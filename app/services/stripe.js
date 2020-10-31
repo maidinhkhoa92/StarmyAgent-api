@@ -114,3 +114,15 @@ module.exports.delete_subscriptions = (id) => {
       });
   })
 }
+
+// Get subscription by id
+module.exports.retrieve_subscriptions = (id) => {
+  return new Promise((resolve, reject) => {
+    stripe.subscriptions.retrieve(id)
+      .then(response => {
+        resolve(response)
+      }).catch(err => {
+        reject(err);
+      });
+  })
+}

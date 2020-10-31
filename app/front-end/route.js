@@ -127,6 +127,7 @@ router.post("/share", shareRequestValidate.sendEmail, shareRequest.sendEmail);
 const premiumRequest = require("./premium");
 const premiumRequestValidate = require("./premium/validate");
 router.post("/premium", Token, premiumRequestValidate.upPremium, premiumRequest.up_premium_level);
+router.put("/premium", Token, premiumRequest.update_subscriptions);
 router.delete("/premium", Token, premiumRequest.down_premium_level);
 router.post("/stripe-hook", premiumRequest.stripe_hooks);
 
