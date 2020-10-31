@@ -123,4 +123,11 @@ const shareRequest = require("./guest/share");
 const shareRequestValidate = require("./guest/share/validate");
 router.post("/share", shareRequestValidate.sendEmail, shareRequest.sendEmail);
 
+// Premium
+const premiumRequest = require("./premium");
+const premiumRequestValidate = require("./premium/validate");
+router.post("/premium", Token, premiumRequestValidate.upPremium, premiumRequest.up_premium_level);
+router.delete("/premium", Token, premiumRequest.down_premium_level);
+router.post("/stripe-hook", premiumRequest.stripe_hooks);
+
 module.exports = router;

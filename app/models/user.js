@@ -65,6 +65,20 @@ const schema = new Schema({
     required: true,
     default: false
   },
+  level: {
+    type: String,
+    enum: ["basic", "premium"],
+    required: true,
+    default: "basic"
+  },
+  stripe_customer_id: {
+    type: String,
+    default: ''
+  },
+  stripe_subscription_id: {
+    type: String,
+    default: ''
+  },
 });
 
 schema

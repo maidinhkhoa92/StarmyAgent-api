@@ -52,5 +52,13 @@ module.exports = {
       return 25
     }
     return 0
-  }
+  },
+  stripe_key: 'sk_test_51HfjfmGFRjF05vupobsZG5Wp9VXTyqBejWsYyerbIH4FlmHINpdvGdOBfdXS2pDUNyqIatAnEq8QEQb3PH6XrKUo00eFugpim0',
+  monthly_agent: 'price_1Hg5BDGFRjF05vupuauwrA7f',
+  yearly_agent: 'price_1Hg5R2GFRjF05vupaPVg2Hc2',
+  yearly_agency: 'price_1Hg5PzGFRjF05vupuywiydxQ',
+  monthly_agency: 'price_1Hg5CEGFRjF05vupHSce5LZm',
+  monthly_coupon_agency: '6bD3zXVJ',
+  yearly_coupon_agency: 'Dm5bSmBW',
+  currency: 'EUR'
 };

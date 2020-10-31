@@ -283,6 +283,18 @@ module.exports.sendEmail = ({ from = APP_CONFIG.adminEmail, to, subject, html })
   })
 }
 
+module.exports.count = id => {
+  return new Promise((resolve, reject) => {
+    user.count({ agency: id, disabled: false }, (err, number) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(number);
+    });
+  });
+};
+
 const convertData = (data, password = true) => {
   var result = data;
   if (data === null || data === undefined) {
