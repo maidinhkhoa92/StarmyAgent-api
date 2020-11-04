@@ -2,6 +2,7 @@ const user = require("../../services/user");
 const City = require("../../services/city");
 const District = require("../../services/district");
 const { validationResult } = require("express-validator");
+const _ = require("lodash");
 
 module.exports.list = async (req, res, next) => {
   const errors = validationResult(req);
@@ -12,7 +13,7 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { paged, limit, city, services, type, agency } = req.query;
+    const { paged, limit, city, services, type, agency, order } = req.query;
 
     if (city) {
       cityRespond = await City.detail({ name: city })
@@ -33,7 +34,16 @@ module.exports.list = async (req, res, next) => {
 
     query.disabled = false;
 
-    const data = await user.list(query, paged, limit);
+    let data = await user.list(query, paged, limit);
+    
+    // sort
+    if (order && order === 'Mejor puntuación') {
+      data.docs = _.orderBy(data.docs, ['total'], ['desc']);
+    }
+    if (order && order === 'Más reseñas') {
+      data.docs = _.orderBy(data.docs, ['comments'], ['desc']);
+    }
+    
     res.status(200).send(data);
   } catch (err) {
     next(err);
