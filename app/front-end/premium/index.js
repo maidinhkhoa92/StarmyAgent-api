@@ -74,12 +74,12 @@ module.exports.down_premium_level = async (req, res, next) => {
     const { id } = req.decoded;
 
     const User = await user.detail(id);
-
-    const response = await stripe.delete_subscriptions(User.stripe_subcription_id);
+    const response = await stripe.delete_subscriptions(User.stripe_subscription_id);
     await user.update(id, { stripe_subscription_id: '', level: 'basic' })
 
     res.status(200).send(response);
   } catch (err) {
+    console.log(err)
     next(err);
   }
 };
