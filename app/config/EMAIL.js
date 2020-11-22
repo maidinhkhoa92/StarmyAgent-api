@@ -134,5 +134,75 @@ module.exports = {
       <p>Your code is ${verifyCode}.</p>
       <p>Un saludo !</p>
     `
-  }
+  },
+  registerBasic: {
+    title: "Bienvenid@ a StarMyAgent",
+    message: `
+      <p>Hola,</p>
+      <p>Comienza ya a solicitar reseñas a tus clientes favoritos.  Desde tu perfil puedes acceder a todas las características básicas de la plataforma:</p>
+      <p>Publicación de perfil en la plataforma</p>
+      <p>Links directos a web corporativa y redes sociales</p>
+      <p>Reseñas ilimitadas</p>
+      <p>Solicitudes de reseña ilimitadas</p>
+      <p>Publicación de reseñas en las redes sociales de StarMyAgent</p>
+      <p>Cualquier duda estamos a tu disposición en <a href="mailto:info@starmyagent.com">info@starmyagent.com</a></p>
+      <p>Un saludo.</p>
+    `
+  },
+  registerAgentPremium: {
+    title: "Bienvenid@ a StarMyAgent",
+    message: `
+      <p>Hola,</p>
+      <p>¡Enhorabuena! Eres un agente Premium. Eso significa que además de las básicas desde ya puedes acceder a todas las características Premium para agentes:</p>
+      <p>Respuestas a reseñas ilimitadas</p>
+      <p>Publica propiedades ilimitadas</p>
+      <p>Recibe clientes propietarios y buscadores ilimitados</p>
+      <p>Gestiona los clientes desde tu perfil</p>
+      <p>Mejor posicionamiento dentro de la plataforma</p>
+      <p>Cualquier duda estamos a tu disposición en <a href="mailto:info@starmyagent.com">info@starmyagent.com</a></p>
+      <p>Un saludo.</p>
+    `
+  },
+  registerAgencyPremium: {
+    title: "Bienvenid@ a StarMyAgent",
+    message: `
+      <p>Hola,</p>
+      <p>¡Enhorabuena! Eres una agencia Premium. Eso significa que además de las básicas desde ya puedes acceder a todas las características Premium para agencias:</p>
+      <p>Añade agentes ilimitados x 5.99€ por agente/mes</p>
+      <p>Respuestas a reseñas ilimitadas</p>
+      <p>Publica propiedades ilimitadas</p>
+      <p>Recibe clientes propietarios y buscadores ilimitados</p>
+      <p>Mejor posicionamiento dentro de la plataforma</p>
+      <p>Cualquier duda estamos a tu disposición en <a href="mailto:info@starmyagent.com">info@starmyagent.com</a></p>
+      <p>Un saludo.</p>
+    `
+  },
+  upgradeAgentPremium: {
+    title: "Enhorabuena por mejorar tu perfil",
+    message: `
+      <p>Hola,</p>
+      <p>A partir de ahora disfruta de todas las características Premium para agentes:</p>
+      <p>Respuestas a reseñas ilimitadas</p>
+      <p>Publica propiedades ilimitadas</p>
+      <p>Recibe clientes propietarios y buscadores ilimitados</p>
+      <p>Gestiona los clientes desde tu perfil</p>
+      <p>Mejor posicionamiento dentro de la plataforma</p>
+      <p>Cualquier duda estamos a tu disposición en <a href="mailto:info@starmyagent.com">info@starmyagent.com</a></p>
+      <p>Un saludo.</p>
+    `
+  },
+  upgradeAgencyPremium: {
+    title: "Enhorabuena por mejorar tu perfil",
+    message: `
+      <p>Hola,</p>
+      <p>A partir de ahora disfruta de todas las características Premium para agencias:</p>
+      <p>Añade agentes ilimitados x 5.99€ por agente/mes</p>
+      <p>Respuestas a reseñas ilimitadas</p>
+      <p>Publica propiedades ilimitadas</p>
+      <p>Recibe clientes propietarios y buscadores ilimitados</p>
+      <p>Mejor posicionamiento dentro de la plataforma</p>
+      <p>Cualquier duda estamos a tu disposición en <a href="mailto:info@starmyagent.com">info@starmyagent.com</a></p>
+      <p>Un saludo.</p>
+    `
+  },
 };

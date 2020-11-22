@@ -1,6 +1,7 @@
 const user = require("../../services/user");
 const stripe = require("../../services/stripe");
 const APP_CONFIG = require("../../config/APP_CONFIG");
+const EMAIL = require("../../config/EMAIL");
 const { validationResult } = require("express-validator");
 const _ = require("lodash");
 
@@ -126,8 +127,12 @@ module.exports.stripe_hooks = async (req, res, next) => {
 
   try {
     const data = req.body.data.object;
-    const User = await user.find({ stripe_customer_id: data.customer })
-
+    let mailOptions = {
+      from: APP_CONFIG.adminEmail,
+      to: data.email,
+    };
+    const User = await user.find({ stripe_customer_id: data.customer });
+    
     if (!User) {
       throw ({ code: 11 })
     }
@@ -137,7 +142,32 @@ module.exports.stripe_hooks = async (req, res, next) => {
     }
 
     if (data.paid && data.status === 'paid') {
-      await user.update(User.id, { stripe_subscription_id: data.subscription, level: 'premium' })
+      await user.update(User.id, { stripe_subscription_id: data.subscription, level: 'premium' });
+      
+      // if agent 
+      if (User.type === "agent") {
+        // if upgrade
+        if (User.level === "basic") {
+          mailOptions.title = EMAIL.upgradeAgentPremium.title;
+          mailOptions.html = EMAIL.upgradeAgentPremium.message;
+        } else if (User.level === "pending") {
+          // register
+          mailOptions.title = EMAIL.registerAgentPremium.title;
+          mailOptions.html = EMAIL.registerAgentPremium.message;
+        }
+      } else if (User.type === "agency") { //agency
+        // if upgrade
+        if (User.level === "basic") {
+          mailOptions.title = EMAIL.upgradeAgencyPremium.title;
+          mailOptions.html = EMAIL.upgradeAgencyPremium.message;
+        } else if (User.level === "pending") {
+          // register
+          mailOptions.title = EMAIL.registerAgencyPremium.title;
+          mailOptions.html = EMAIL.registerAgencyPremium.message;
+        }
+      }
+
+      await transporter.sendMail(mailOptions)
     } else {
       await user.update(User.id, { stripe_subscription_id: '', level: 'basic' })
     }

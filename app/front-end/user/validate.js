@@ -46,7 +46,11 @@ module.exports.registerAgency = [
     .withMessage("Password is required"),
   body("type")
     .equals("agency")
-    .withMessage("This user must be agency")
+    .withMessage("This user must be agency"),
+  body("level")
+    .not()
+    .isEmpty()
+    .withMessage("Level is required"),
 ];
 
 module.exports.addingAgent = [
@@ -117,7 +121,11 @@ module.exports.registerAgent = [
     .withMessage("Password is required"),
   body("type")
     .equals("agent")
-    .withMessage("This user must be agent")
+    .withMessage("This user must be agent"),
+  body("level")
+    .not()
+    .isEmpty()
+    .withMessage("Level is required"),
 ];
 
 module.exports.changeAgentStatus = [

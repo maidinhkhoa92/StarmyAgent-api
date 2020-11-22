@@ -2,6 +2,8 @@ const user = require("../../services/user");
 const { validationResult } = require("express-validator");
 const EMAIL = require("../../config/EMAIL");
 const { v4: uuidv4 } = require('uuid');
+const transporter = require("../../helper/nodemailer");
+const APP_CONFIG = require("../../config/APP_CONFIG");
 
 module.exports.login = async (req, res, next) => {
   const errors = validationResult(req);
@@ -28,8 +30,21 @@ module.exports.register = async (req, res, next) => {
 
   try {
     const data = await user.register(req.body);
+
+    // send email
+    if (data.level === 'basic') {
+      const mailOptions = {
+        from: APP_CONFIG.adminEmail,
+        to: data.email,
+        subject: EMAIL.registerBasic.title,
+        html: EMAIL.registerBasic.message
+      };
+      await transporter.sendMail(mailOptions);
+    }
+
     res.status(200).send(data);
   } catch (err) {
+    console.log(err)
     next(err);
   }
 };

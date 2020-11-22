@@ -67,7 +67,7 @@ const schema = new Schema({
   },
   level: {
     type: String,
-    enum: ["basic", "premium"],
+    enum: ["basic", "premium", "pending"],
     required: true,
     default: "basic"
   },

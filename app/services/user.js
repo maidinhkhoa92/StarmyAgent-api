@@ -19,62 +19,38 @@ module.exports.register = body => {
       );
     }
 
-    let mailOptions = {
-      from: APP_CONFIG.adminEmail,
-      to: body.email,
-      subject: EMAIL.register.title,
-      html: null
-    };
-
-    if (body.type === 'agent') {
-      if (body.password) {
-        mailOptions.html = EMAIL.register.agent({ link: APP_CONFIG.registerWebAppUrl })
-      } else {
-        mailOptions.html = EMAIL.register.agencyAgent({ link: APP_CONFIG.registerWebAppUrl })
-      }
-    } else if (body.type === 'agency') {
-      mailOptions.html = EMAIL.register.agency({ link: APP_CONFIG.registerWebAppUrl })
-    }
-
-    // Send email to user
-    transporter.sendMail(mailOptions, function (error) {
-      if (error) {
-        reject({ code: 11 });
+    user.create(body, function (err, data) {
+      if (err) {
+        reject(err);
         return;
       }
-      user.create(body, function (err, data) {
-        if (err) {
-          reject(err);
+      user.findOne({ _id: data._id }).populate('city').exec(function (er, User) {
+        if (er) {
+          reject(er);
           return;
         }
-        user.findOne({_id: data._id}).populate('city').exec(function (er, User) {
-          if (er) {
-            reject(er);
+        const mailOptionToAdmin = {
+          from: body.email,
+          to: APP_CONFIG.adminEmail,
+          subject: 'Nuevo registro de agencia',
+          html: null
+        };
+
+        if (body.type === 'agent') {
+          mailOptionToAdmin.subject = 'Nuevo registro de agentes';
+          mailOptionToAdmin.html = EMAIL.register.agencyAgent(User)
+        } else if (body.type === 'agency') {
+          mailOptionToAdmin.html = EMAIL.register.newAgencyUser(User)
+        }
+
+        transporter.sendMail(mailOptionToAdmin, function (e) {
+          if (e) {
+            reject({ code: 11 });
             return;
           }
-          const mailOptionToAdmin = {
-            from: body.email,
-            to: APP_CONFIG.adminEmail,
-            subject: 'Nuevo registro de agencia',
-            html: null
-          };
-  
-          if (body.type === 'agent') {
-            mailOptionToAdmin.subject = 'Nuevo registro de agentes';
-            mailOptionToAdmin.html = EMAIL.register.agencyAgent(User)
-          } else if (body.type === 'agency') {
-            mailOptionToAdmin.html = EMAIL.register.newAgencyUser(User)
-          }
-  
-          transporter.sendMail(mailOptionToAdmin, function (e) {
-            if (e) {
-              reject({ code: 11 });
-              return;
-            }
-            resolve(convertData(data));
-          })
+          resolve(convertData(data));
         })
-      });
+      })
     });
   });
 };
@@ -184,9 +160,9 @@ module.exports.list = (searchQuery, paged, limit) => {
         docs: await Promise.all(_.map(result.docs, async item => {
           const comments = await Comment.find({ agent: item._id, status: 'public' });
           const validComments = await _.filter(comments, item => item.address);
-          const formatComments = await validComments.length === 0 ? [0] :_.map(validComments, (item) => item.address ? item.rate.sum : 0)
+          const formatComments = await validComments.length === 0 ? [0] : _.map(validComments, (item) => item.address ? item.rate.sum : 0)
           const total = await _.reduce(formatComments, (sum, item) => (sum + item))
-          return {...convertData(item), total, comments: comments.length, validComments: validComments.length};
+          return { ...convertData(item), total, comments: comments.length, validComments: validComments.length };
         }))
       });
     });
@@ -210,10 +186,10 @@ module.exports.find = (query, isPopulate = false, isVerifyCode = false) => {
     let userQuery = user.findOne(query)
     if (isPopulate) {
       userQuery = userQuery.populate('city')
-    } 
+    }
     userQuery.exec(query, (err, res) => {
       if (err || !res) {
-        reject({code: 11000});
+        reject({ code: 11000 });
         return;
       }
       resolve(isVerifyCode ? res : convertData(res));
@@ -307,7 +283,7 @@ const convertData = (data, password = true) => {
   if (password) {
     delete result.password;
   }
-  
+
   delete result.verifyCode;
   delete result._id;
   delete result.__v;
