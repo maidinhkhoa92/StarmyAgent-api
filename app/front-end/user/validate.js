@@ -180,32 +180,20 @@ module.exports.agentAddCard = [
 ];
 
 module.exports.updateInformation = [
-  body("agentCertificateDate")
-    .not()
-    .isEmpty()
-    .withMessage("Cert date is required"),
+  body("agentCertificateDate").isString(),
   body("languages")
     .isArray()
-    .withMessage("Languages must be array")
-    .not()
-    .isEmpty()
-    .withMessage("languages is required"),
+    .withMessage("Languages must be array"),
   body("services")
     .isArray()
-    .withMessage("Services must be array")
-    .not()
-    .isEmpty()
-    .withMessage("Services is required"),
+    .withMessage("Services must be array"),
   body("email")
     .isEmail()
     .withMessage("Invalid email")
     .not()
     .isEmpty()
     .withMessage("Email is required"),
-  body("telephone")
-    .not()
-    .isEmpty()
-    .withMessage("Telephone is required"),
+  body("telephone").isString(),
   body("description").isString(),
   body("social.website").isString(),
   body("social.facebook").isString(),
@@ -216,9 +204,6 @@ module.exports.updateInformation = [
   body("completed")
     .isIn([false, true])
     .withMessage("Completed must be false or true")
-    .not()
-    .isEmpty()
-    .withMessage("Status is required")
 ];
 
 module.exports.userPhotoUpdating = [

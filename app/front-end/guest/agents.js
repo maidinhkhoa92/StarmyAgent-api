@@ -16,7 +16,7 @@ module.exports.list = async (req, res, next) => {
     const { paged, limit, city, services, type, agency, order } = req.query;
 
     if (city) {
-      cityRespond = await City.detail({ name: city })
+      cityRespond = await City.detail({ _id: city })
       query.city = cityRespond.id
     }
 

@@ -10,10 +10,14 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { paged, limit, agent } = req.query;
+    const { paged, limit, agent, type } = req.query;
 
     query.agent = agent
     query.status = 'public'
+
+    if (type) {
+      query.type === type
+    }
     
     const data = await Property.list(query, paged, limit);
     res.status(200).send(data);

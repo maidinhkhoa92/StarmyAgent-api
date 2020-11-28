@@ -15,7 +15,6 @@ module.exports.list = async (req, res, next) => {
     if (city) {
       query.city = city;
     }
-    
     query.type = 'agent';
     
     const data = await user.list(query, paged, limit);
