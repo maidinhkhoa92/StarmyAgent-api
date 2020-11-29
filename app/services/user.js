@@ -162,7 +162,8 @@ module.exports.list = (searchQuery, paged, limit) => {
           const validComments = await _.filter(comments, item => item.address);
           const formatComments = await validComments.length === 0 ? [0] : _.map(validComments, (item) => item.address ? item.rate.sum : 0)
           const total = await _.reduce(formatComments, (sum, item) => (sum + item))
-          return { ...convertData(item), total, comments: comments.length, validComments: validComments.length };
+          const agentLength = await this.count(item.id);
+          return { ...convertData(item), total, comments: comments.length, validComments: validComments.length, agentLength };
         }))
       });
     });
@@ -263,7 +264,7 @@ module.exports.count = id => {
   return new Promise((resolve, reject) => {
     user.count({ agency: id, disabled: false }, (err, number) => {
       if (err) {
-        reject(err);
+        reject(0);
         return;
       }
       resolve(number);
