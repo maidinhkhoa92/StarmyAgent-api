@@ -1,18 +1,18 @@
 module.exports = {
-  // database: {
-  //   host: "85.208.20.53",
-  //   port: 27017,
-  //   db: "starmyagent",
-  //   username: "alexAdmin",
-  //   password: "H7JSJNaGysrhRX59"
-  // },
   database: {
-    host: "cluster0-0mjj1.mongodb.net",
+    host: "85.208.20.53",
     port: 27017,
     db: "starmyagent",
-    username: "childschool",
-    password: "YbsBGKftwKpciEEJ"
+    username: "alexAdmin",
+    password: "H7JSJNaGysrhRX59"
   },
+  // database: {
+  //   host: "cluster0-0mjj1.mongodb.net",
+  //   port: 27017,
+  //   db: "starmyagent",
+  //   username: "childschool",
+  //   password: "YbsBGKftwKpciEEJ"
+  // },
   mail: {
     host: 'smtp.gmail.com',
     port: 465,
