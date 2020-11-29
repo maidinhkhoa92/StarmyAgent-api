@@ -6,8 +6,8 @@ const Mongoose = require("mongoose");
 // Configurations
 const APP_CONFIG = require("./APP_CONFIG");
 Mongoose.connect(
-  // `mongodb://${APP_CONFIG.database.username}:${APP_CONFIG.database.password}@${APP_CONFIG.database.host}:${APP_CONFIG.database.port}/${APP_CONFIG.database.db}?authSource=admin&readPreference=primary&ssl=false`,
-  `mongodb+srv://${APP_CONFIG.database.username}:${APP_CONFIG.database.password}@${APP_CONFIG.database.host}/${APP_CONFIG.database.db}?retryWrites=true&w=majority`,
+  `mongodb://${APP_CONFIG.database.username}:${APP_CONFIG.database.password}@${APP_CONFIG.database.host}:${APP_CONFIG.database.port}/${APP_CONFIG.database.db}?authSource=admin&readPreference=primary&ssl=false`,
+  // `mongodb+srv://${APP_CONFIG.database.username}:${APP_CONFIG.database.password}@${APP_CONFIG.database.host}/${APP_CONFIG.database.db}?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
