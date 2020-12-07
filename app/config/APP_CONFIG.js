@@ -19,11 +19,11 @@ module.exports = {
     secure: true,
     auth: {
       type: 'OAuth2',
-      user: 'maidinhkhoa92@gmail.com',
-      clientId: '989923814210-30g3gb6vf0iln2fsrn4sushmjumt6t0j.apps.googleusercontent.com',
-      clientSecret: '0eBNigMBcoR3GoJmDqKQxzK8',
-      refreshToken: '1//04-mYLqZX6e9nCgYIARAAGAQSNwF-L9IrtJ9YiA6MzFdUHyKsvAzSGoQofEjR2LI721WH9u9uml1HhvvZLk5x5vQhfRmT_i8SXC4',
-      accessToken: 'ya29.a0AfH6SMCONoTmvOcaHZEUh6gfeGrZ_yq0IIDvUXcG5QuiAMaU4IChlM6ujOryVDeE1EUzwsSVjrR-iWljFIDEn09HGYkJl0fWsRC6uu99BeU1y02nK11F9vcYyL0cjXYgEwB7kH8VzkBz1QXkO3gC-pFpzDvnUvKCDQo'
+      user: 'info@starmyagent.com',
+      clientId: '627802836661-osvvchcokr5ttrsbdga7264nnaucbbja.apps.googleusercontent.com',
+      clientSecret: 'OPjxa7gSDZiNDmOwfLl7st59',
+      refreshToken: '1//04z-PjyD_DpG0CgYIARAAGAQSNwF-L9IrdNoJ42u7KwkkRr1l1HCzP_69ta9LXRZTySz1WJgGPzbVA8E4OxNkwQbuPqbCw8uivww',
+      accessToken: 'ya29.a0AfH6SMA3WNACAcLIX7kNZOs-CGOjTauwk4_LD-1h7h2LRpjNyhd9TDVgl43WAcv0pzQ1CIxJ_nyquUi5XOgFOzone8xZrLrmAQJwtSsggZuAPvOGQmTQAGQvhGdX0bso8Sjlm4oZiGptzYU3EChZq77mbz3s6J7szZKbm_szfQc'
     }
   },
   adminEmail: "info@starmyagent.com",
