@@ -38,7 +38,7 @@ module.exports.register = body => {
 
         if (body.type === 'agent') {
           mailOptionToAdmin.subject = 'Nuevo registro de agentes';
-          mailOptionToAdmin.html = EMAIL.register.agencyAgent(User)
+          mailOptionToAdmin.html = EMAIL.register.newAgentUser(User)
         } else if (body.type === 'agency') {
           mailOptionToAdmin.html = EMAIL.register.newAgencyUser(User)
         }
