@@ -16,7 +16,7 @@ module.exports.list = async (req, res, next) => {
     query.status = 'public'
 
     if (type) {
-      query.type === type
+      query.type = type
     }
     
     const data = await Property.list(query, paged, limit);
