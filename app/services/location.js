@@ -1,0 +1,74 @@
+const location = require("../models/location");
+const _ = require("lodash");
+
+module.exports.list = (paged = 1, limit = 10, queryCity = {}) => {
+  return new Promise((resolve, reject) => {
+    var query = location.find(queryCity);
+    
+    if (limit) {
+      query = query.limit(limit);
+    }
+
+    if (paged) {
+      const skiped = (paged - 1) * limit;
+      query = query.skip(skiped);
+    }
+
+    query.sort('name').exec(function(err, data) {
+      if (err) {
+        reject(err);
+      }
+      if (data === null) {
+        reject({ code: 10000 });
+      }
+      const result = _.map(data, item => {
+        return convertData(item);
+      });
+
+      resolve({
+        total: result.length,
+        limit: limit,
+        paged: paged,
+        data: result
+      });
+    });
+  });
+};
+
+module.exports.detail = query => {
+  return new Promise((resolve, reject) => {
+    location.findOne(query, (err, res) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(res));
+    });
+  });
+};
+
+module.exports.create = (body) => {
+  return new Promise((resolve, reject) => {
+    location.create(body, (err, data) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(convertData(data));
+    });
+  });
+};
+
+const convertData = (data) => {
+  var result = data;
+  if (data === null || data === undefined) {
+    return null;
+  }
+  if (data.toObject) {
+    result = data.toObject();
+  }
+  result.id = data._id;
+  delete result._id;
+  delete result.__v;
+  return result;
+};

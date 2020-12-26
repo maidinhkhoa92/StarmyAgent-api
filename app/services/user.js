@@ -172,7 +172,7 @@ module.exports.list = (searchQuery, paged, limit) => {
 
 module.exports.detail = id => {
   return new Promise((resolve, reject) => {
-    user.findById(id, (err, res) => {
+    user.findById(id).populate('locations').exec((err, res) => {
       if (err) {
         reject(err);
         return;

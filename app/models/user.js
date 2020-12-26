@@ -79,6 +79,7 @@ const schema = new Schema({
     type: String,
     default: ''
   },
+  locations: [{ type: Schema.Types.ObjectId, ref: "location" }],
 });
 
 schema
