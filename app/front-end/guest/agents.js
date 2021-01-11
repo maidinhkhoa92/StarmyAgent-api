@@ -13,7 +13,7 @@ module.exports.list = async (req, res, next) => {
 
   try {
     let query = {};
-    const { paged, limit, city, services, type, agency, order } = req.query;
+    const { paged, limit, city, services, type, agency, order, locations } = req.query;
 
     if (city) {
       cityRespond = await City.detail({ _id: city })
@@ -30,6 +30,10 @@ module.exports.list = async (req, res, next) => {
 
     if (agency) {
       query.agency = agency
+    }
+
+    if (locations) {
+      query.locations = { "$in": [locations] };
     }
 
     query.disabled = false;
