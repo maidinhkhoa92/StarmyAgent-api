@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 
 const schema = new Schema({
 	name: { type: String, required: true},
+	city: { type: Schema.Types.ObjectId, ref: "city" },
 })
 
 schema.plugin(timestamp, {

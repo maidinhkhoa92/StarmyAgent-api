@@ -12,6 +12,10 @@ const schema = new Schema({
   highlight: {
     type: Boolean,
     default: false
+  },
+  isDelete: {
+    type: Boolean,
+    default: false
   }
 });
 

@@ -1,102 +1,73 @@
 require('../app/config/database');
-const District = require('../app/models/city');
+const City = require('../app/models/city');
+const Location = require("../app/models/location");
+const readXlsxFile = require('read-excel-file/node');
 
-const data = [
-    { name: 'A Coruña', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Albacete', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Alicante', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Almería', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Avilés', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Badajoz', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Barbastro', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Barcelona', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Barcelona Alrededores', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Benicarló', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Betanzos', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Bilbao', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Burgos', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Cáceres', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Cádiz', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Cartagena', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Castellón de la Plana', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Ciudad Real', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Córdoba', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Cuenca', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Denia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Don Benito', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'El Ejido', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Elche', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Ferrol', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Gijón', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Girona', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Girona Costa Brava', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Granada', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Guadalajara', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Huelva', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Ibiza', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Irún', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Jaén', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Jávea', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Jerez de la Frontera', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Las Palmas de Gran Canaria', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'León', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Lleida', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Logroño', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Lugo', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Madrid', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Madrid Alrededores', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Málaga', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Marbella', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Menorca', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Mérida', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Miranda de Ebro', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Monzón', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Murcia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Orense', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Oviedo', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Palencia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Palma de Mallorca', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Palma de Mallorca Alrededores', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Pamplona', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Peñíscola', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Ponferrada', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Portugalete', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Puertollano', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Salamanca', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'San Sebastián', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Sanlúcar de Barrameda', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Santander', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Santiago de Compostela', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Segovia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Sevilla', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Soria', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Talavera de la Reina', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Tarragona', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Tarragona Alrededores', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Teruel', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Toledo', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Tomelloso', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Torrelavega', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Tudela', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Valencia', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Valladolid', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Vigo', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Villareal', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Villarobledo', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Vinarós', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Vitoria', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Zamora', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' },
-    { name: 'Zaragoza', banner: 'https://firebasestorage.googleapis.com/v0/b/starmy-agent.appspot.com/o/cities%2FSan%20Sebasti%C3%A1n.jpg?alt=media&token=8aa617e2-872a-4e42-900b-4b93d10fdac4' }
-]
+const schema = {
+    'city': {
+        prop: 'city',
+        type: String
+    },
+    'location': {
+        prop: 'location',
+        type: String
+    },
+}
 
 const importData = () => {
-    District.insertMany(data, function (err, docs) {
-        if (err) {
-            return console.error(err);
-        } else {
-            console.log("Multiple documents inserted to Collection");
-        }
-    });
+    try {
+        readXlsxFile('./locations.xlsx', { schema }).then(async ({ rows, errors }) => {
+            rows.forEach(data => {
+                City.findOne({ name: data.city}, (err, res) => {
+                    if (err) {
+                        console.log(1, err)
+                    }
+                    console.log(7, res)
+                    if (res) {
+                        Location.findOne({ name: data.location}, (er, loc) => {
+                            if (er) {
+                                console.log(2, er)
+                            }
+                            console.log(8, loc)
+                            if (!loc) {
+                                Location.create({ name: data.location, city: res._id }, (error, location) => {
+                                    if (error) {
+                                        console.log(3, error)
+                                    }
+                                    console.log(location._id, location.name);
+                                });
+                            }
+                        });
+                        
+                    } else {
+                        City.create({ name: data.city }, (e, city) => {
+                            if (e) {
+                                console.log(4, e)
+                            }
+                            console.log(9, city)
+                            Location.findOne({ name: data.location}, (er, loc) => {
+                                if (er) {
+                                    console.log(5, er)
+                                }
+                                console.log(10, loc)
+                                if (!loc) {
+                                    Location.create({ name: data.location, city: city._id }, (error, location) => {
+                                        if (error) {
+                                            console.log(6, error)
+                                        }
+                                        console.log(location._id, location.name);
+                                    });
+                                }
+                            });
+                        });
+                    }
+                })
+            });
+            
+        })
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 importData()

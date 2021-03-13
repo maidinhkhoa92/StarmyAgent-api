@@ -1,11 +1,15 @@
 const location = require("../services/location");
 
 module.exports.list = async (req, res, next) => {
-  let { limit, paged } = req.query;
+  let { limit, paged, city } = req.query;
   paged = parseInt(paged);
   limit = parseInt(limit);
+
+  const query = {
+    city
+  }
   try {
-    const data = await location.list(paged, limit);
+    const data = await location.list(paged, limit, query);
     res.status(200).send(data);
   } catch (err) {
     next(err);
